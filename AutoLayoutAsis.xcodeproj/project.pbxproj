@@ -7,23 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21A68B9078A3BD2166A7EDAC /* Pods_AutoLayoutAsis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FB332453DDF9B4BC8FD309 /* Pods_AutoLayoutAsis.framework */; };
+		4F1A5406297EC6C8003566F1 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A5405297EC6C8003566F1 /* MenuTableViewCell.swift */; };
 		4FFB91FA297E6B1900B19260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91F9297E6B1900B19260 /* AppDelegate.swift */; };
 		4FFB91FC297E6B1900B19260 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91FB297E6B1900B19260 /* SceneDelegate.swift */; };
 		4FFB91FE297E6B1900B19260 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91FD297E6B1900B19260 /* ViewController.swift */; };
-		4FFB9201297E6B1900B19260 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FFB91FF297E6B1900B19260 /* Main.storyboard */; };
 		4FFB9203297E6B1B00B19260 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FFB9202297E6B1B00B19260 /* Assets.xcassets */; };
 		4FFB9206297E6B1B00B19260 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FFB9204297E6B1B00B19260 /* LaunchScreen.storyboard */; };
+		4FFB9235297E7E0B00B19260 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FFB9234297E7E0B00B19260 /* GoogleService-Info.plist */; };
+		4FFB9237297E94BC00B19260 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB9236297E94BB00B19260 /* HomeViewController.swift */; };
+		4FFB923E297EA09500B19260 /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB923D297EA09500B19260 /* AppNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E55F6D99355AE0F3A6311F1 /* Pods-AutoLayoutAsis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLayoutAsis.release.xcconfig"; path = "Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis.release.xcconfig"; sourceTree = "<group>"; };
+		34FB332453DDF9B4BC8FD309 /* Pods_AutoLayoutAsis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AutoLayoutAsis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F1A5405297EC6C8003566F1 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		4FFB91F6297E6B1900B19260 /* AutoLayoutAsis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLayoutAsis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FFB91F9297E6B1900B19260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FFB91FB297E6B1900B19260 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4FFB91FD297E6B1900B19260 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4FFB9200297E6B1900B19260 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4FFB9202297E6B1B00B19260 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FFB9205297E6B1B00B19260 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4FFB9207297E6B1B00B19260 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FFB9234297E7E0B00B19260 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4FFB9236297E94BB00B19260 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4FFB923D297EA09500B19260 /* AppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
+		6C9A80F6C01A31D44E7446B0 /* Pods-AutoLayoutAsis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLayoutAsis.debug.xcconfig"; path = "Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +41,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A68B9078A3BD2166A7EDAC /* Pods_AutoLayoutAsis.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F1A5407297ECBDE003566F1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		4FFB91ED297E6B1900B19260 = {
 			isa = PBXGroup;
 			children = (
 				4FFB91F8297E6B1900B19260 /* AutoLayoutAsis */,
 				4FFB91F7297E6B1900B19260 /* Products */,
+				EB9DF1F5817E8710DD3841AF /* Pods */,
+				9EEF2DB4CCD3B6A3315661F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +76,36 @@
 		4FFB91F8297E6B1900B19260 /* AutoLayoutAsis */ = {
 			isa = PBXGroup;
 			children = (
+				4F1A5407297ECBDE003566F1 /* Models */,
 				4FFB91F9297E6B1900B19260 /* AppDelegate.swift */,
 				4FFB91FB297E6B1900B19260 /* SceneDelegate.swift */,
 				4FFB91FD297E6B1900B19260 /* ViewController.swift */,
-				4FFB91FF297E6B1900B19260 /* Main.storyboard */,
+				4FFB9236297E94BB00B19260 /* HomeViewController.swift */,
+				4FFB923D297EA09500B19260 /* AppNavigationController.swift */,
+				4F1A5405297EC6C8003566F1 /* MenuTableViewCell.swift */,
 				4FFB9202297E6B1B00B19260 /* Assets.xcassets */,
 				4FFB9204297E6B1B00B19260 /* LaunchScreen.storyboard */,
 				4FFB9207297E6B1B00B19260 /* Info.plist */,
+				4FFB9234297E7E0B00B19260 /* GoogleService-Info.plist */,
 			);
 			path = AutoLayoutAsis;
+			sourceTree = "<group>";
+		};
+		9EEF2DB4CCD3B6A3315661F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34FB332453DDF9B4BC8FD309 /* Pods_AutoLayoutAsis.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB9DF1F5817E8710DD3841AF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6C9A80F6C01A31D44E7446B0 /* Pods-AutoLayoutAsis.debug.xcconfig */,
+				0E55F6D99355AE0F3A6311F1 /* Pods-AutoLayoutAsis.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +115,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4FFB920A297E6B1B00B19260 /* Build configuration list for PBXNativeTarget "AutoLayoutAsis" */;
 			buildPhases = (
+				E61D06315814AFDCE142FB2D /* [CP] Check Pods Manifest.lock */,
 				4FFB91F2297E6B1900B19260 /* Sources */,
 				4FFB91F3297E6B1900B19260 /* Frameworks */,
 				4FFB91F4297E6B1900B19260 /* Resources */,
+				50E14F9C6955EEF07406B7D2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,11 +170,53 @@
 			files = (
 				4FFB9206297E6B1B00B19260 /* LaunchScreen.storyboard in Resources */,
 				4FFB9203297E6B1B00B19260 /* Assets.xcassets in Resources */,
-				4FFB9201297E6B1900B19260 /* Main.storyboard in Resources */,
+				4FFB9235297E7E0B00B19260 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		50E14F9C6955EEF07406B7D2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E61D06315814AFDCE142FB2D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AutoLayoutAsis-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4FFB91F2297E6B1900B19260 /* Sources */ = {
@@ -139,22 +224,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FFB91FE297E6B1900B19260 /* ViewController.swift in Sources */,
+				4FFB923E297EA09500B19260 /* AppNavigationController.swift in Sources */,
+				4F1A5406297EC6C8003566F1 /* MenuTableViewCell.swift in Sources */,
 				4FFB91FA297E6B1900B19260 /* AppDelegate.swift in Sources */,
 				4FFB91FC297E6B1900B19260 /* SceneDelegate.swift in Sources */,
+				4FFB9237297E94BC00B19260 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4FFB91FF297E6B1900B19260 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4FFB9200297E6B1900B19260 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4FFB9204297E6B1B00B19260 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,6 +362,7 @@
 		};
 		4FFB920B297E6B1B00B19260 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C9A80F6C01A31D44E7446B0 /* Pods-AutoLayoutAsis.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -292,7 +373,8 @@
 				INFOPLIST_FILE = AutoLayoutAsis/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,6 +392,7 @@
 		};
 		4FFB920C297E6B1B00B19260 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E55F6D99355AE0F3A6311F1 /* Pods-AutoLayoutAsis.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -320,7 +403,8 @@
 				INFOPLIST_FILE = AutoLayoutAsis/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
