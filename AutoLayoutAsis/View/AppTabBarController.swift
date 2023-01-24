@@ -14,16 +14,16 @@ class AppTabBarController: UITabBarController {
         
         let homeVC = UINavigationController(rootViewController: HomeViewController())
         homeVC.title = "Anasayfa"
-        homeVC.tabBarItem = UITabBarItem.init(title: "Anasayfa", image: UIImage(systemName: ""), tag: 0)
+        homeVC.tabBarItem = UITabBarItem.init(title: "Anasayfa", image: UIImage(systemName: "house"), tag: 0)
         let whereVC = WhereMyBusViewController()
         whereVC.title = "Otobüsüm Nerede?"
-        whereVC.tabBarItem = UITabBarItem.init(title: "Otobüsüm Nerede?", image: UIImage(systemName: ""), tag: 1)
+        whereVC.tabBarItem = UITabBarItem.init(title: "Otobüsüm Nerede?", image: UIImage(systemName: "bus.fill"), tag: 1)
         let stationsVC = StationsViewController()
         stationsVC.title = "Duraklar"
-        stationsVC.tabBarItem = UITabBarItem.init(title: "Duraklar", image: UIImage(systemName: ""), tag: 3)
+        stationsVC.tabBarItem = UITabBarItem.init(title: "Duraklar", image: UIImage(systemName: "mappin.circle"), tag: 3)
         let views: [UIViewController] = [homeVC, whereVC, stationsVC]
         self.viewControllers = views
-        self.tabBarController?.tabBar.tintColor = .white
+        tabBar.backgroundColor = .white
     }
     
     

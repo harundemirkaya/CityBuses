@@ -7,20 +7,26 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate{
     
+    // Map
     let mapView: MKMapView = {
         let map = MKMapView()
         map.overrideUserInterfaceStyle = .dark
         return map
     }()
+    var locationManager: CLLocationManager!
+    var latitude: Double?
+    var longitude: Double?
     
+    // SideBar
     var isSlideMenuPresented = false
     
     lazy var slideInMenuPadding: CGFloat = self.view.frame.width * 0.30
     
-    lazy var menuBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "sidebar.leading")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped))
+    lazy var menuBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.grid.3x3.middle.filled")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped))
     
     lazy var menuView: UIView = {
         let view = UIView()
@@ -33,14 +39,39 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return view
     }()
     
+    
+    // HomePage
     lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled(){
+            locationManager.startUpdatingLocation()
+        }
+        
         return view
     }()
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations[0] as CLLocation
+        latitude = userLocation.coordinate.latitude
+        longitude = userLocation.coordinate.longitude
+        let location = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+        let region = MKCoordinateRegion(center: location, span: span)
+        mapView.setRegion(region, animated: true)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        mapView.addAnnotation(annotation)
+    }
+    
+    // SideBar Table
     let tableView = UITableView()
     var menuItem = [
         "Anasayfa",
@@ -62,11 +93,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        menuBarButtonItem.tintColor = .white
         navigationItem.setLeftBarButton(menuBarButtonItem, animated: false)
         setMenuItems()
         menuView.pinMenuTo(view, with: slideInMenuPadding)
         containerView.edgeTo(view)
         setMapConstrainst()
+        
         
         
     }
@@ -76,6 +109,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.frame = view.bounds
     }
     
+    
+    // SideBar and Menu Table
     @objc func menuBarButtonItemTapped(){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0) {
             self.containerView.frame.origin.x = self.isSlideMenuPresented ? 0 : self.containerView.frame.width - self.slideInMenuPadding
@@ -105,6 +140,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    
+    // MAP
     func setMapConstrainst(){
         containerView.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -116,6 +153,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
 }
 
+//Constraints
 public extension UIView {
     func edgeTo(_ view: UIView) {
         view.addSubview(self)

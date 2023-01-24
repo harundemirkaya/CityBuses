@@ -10,37 +10,46 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
-    var txtFieldUserName: UITextField!
-    var txtFieldPassword: UITextField!
-    var btnLogin: UIButton!
-    var btnRegister: UIButton!
+    var txtFieldUserName: UITextField = {
+        let txtField = UITextField()
+        txtField.placeholder = "E-Mail"
+        txtField.borderStyle = .bezel
+        return txtField
+    }()
+    var txtFieldPassword: UITextField = {
+        let txtField = UITextField()
+        txtField.placeholder = "Password"
+        txtField.borderStyle = .bezel
+        return txtField
+    }()
+    var btnLogin: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Login", for: .normal)
+        btn.backgroundColor = .gray
+        return btn
+    }()
+    var btnRegister: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Register", for: .normal)
+        btn.backgroundColor = .gray
+        return btn
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        txtFieldUserName = UITextField()
-        txtFieldUserName.placeholder = "E-Mail"
-        txtFieldUserName.borderStyle = .bezel
         txtFieldUserName.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(txtFieldUserName)
         
-        txtFieldPassword = UITextField()
-        txtFieldPassword.placeholder = "Password"
-        txtFieldPassword.borderStyle = .bezel
         txtFieldPassword.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(txtFieldPassword)
         
-        btnLogin = UIButton()
-        btnLogin.setTitle("Login", for: .normal)
-        btnLogin.backgroundColor = .gray
         btnLogin.addTarget(self, action: #selector(btnLoginTarget), for: .touchUpInside)
         btnLogin.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(btnLogin)
         
-        btnRegister = UIButton()
-        btnRegister.setTitle("Register", for: .normal)
-        btnRegister.backgroundColor = .gray
+
         btnRegister.addTarget(self, action: #selector(btnRegisterTarget), for: .touchUpInside)
         btnRegister.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(btnRegister)

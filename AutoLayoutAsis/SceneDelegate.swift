@@ -28,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             // Burası ayarlanacak
             window?.rootViewController = AppTabBarController()
         }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
