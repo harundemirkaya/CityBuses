@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -21,6 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = AppNavigationController()
         window?.makeKeyAndVisible()
+        
+        let currentUser = Auth.auth().currentUser
+        if currentUser != nil{
+            // Burası ayarlanacak
+            window?.rootViewController = AppTabBarController()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

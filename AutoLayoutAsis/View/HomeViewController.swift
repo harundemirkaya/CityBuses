@@ -6,9 +6,16 @@
 //
 
 import UIKit
+import MapKit
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-
+    
+    let mapView: MKMapView = {
+        let map = MKMapView()
+        map.overrideUserInterfaceStyle = .dark
+        return map
+    }()
+    
     var isSlideMenuPresented = false
     
     lazy var slideInMenuPadding: CGFloat = self.view.frame.width * 0.30
@@ -22,14 +29,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .systemGray5
-        
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
         return view
     }()
     
     lazy var containerView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
+        
         return view
     }()
     
@@ -42,7 +50,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         "Bakiye Sorgula",
         "Ayarlar",
         "Uygulamayı Paylaş",
-        "Dili Değiştir"
+        "Dili Değiştir",
+        "Giriş Yap / Kayıt Ol"
         ]
     var menuItems = [MenuItems]()
     
@@ -53,12 +62,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         view.backgroundColor = .white
-
         navigationItem.setLeftBarButton(menuBarButtonItem, animated: false)
-        
         setMenuItems()
         menuView.pinMenuTo(view, with: slideInMenuPadding)
         containerView.edgeTo(view)
+        setMapConstrainst()
         
         
     }
@@ -91,13 +99,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func setMenuItems(){
-        for i in 0...7{
+        for i in 0...8{
             let item = MenuItems(id: i, name: menuItem[i])
             menuItems.append(item)
         }
     }
     
-    
+    func setMapConstrainst(){
+        containerView.addSubview(mapView)
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        mapView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        mapView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        mapView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+    }
     
 }
 

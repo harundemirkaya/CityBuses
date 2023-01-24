@@ -8,21 +8,23 @@
 import UIKit
 
 class AppTabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let homeVC = UINavigationController(rootViewController: HomeViewController())
         homeVC.title = "Anasayfa"
-        homeVC.tabBarItem = UITabBarItem.init(title: "Anasayfa", image: UIImage(systemName: ""), tag: 1)
+        homeVC.tabBarItem = UITabBarItem.init(title: "Anasayfa", image: UIImage(systemName: ""), tag: 0)
         let whereVC = WhereMyBusViewController()
         whereVC.title = "Otobüsüm Nerede?"
-        whereVC.tabBarItem = UITabBarItem.init(title: "Otobüsüm Nerede?", image: UIImage(systemName: ""), tag: 2)
-        let loginVC = LoginViewController()
-        loginVC.title = "Giriş Yap"
-        loginVC.tabBarItem = UITabBarItem.init(title: "Giriş Yap", image: UIImage(systemName: ""), tag: 3)
-        
-        let views: [UIViewController] = [homeVC, whereVC, loginVC]
+        whereVC.tabBarItem = UITabBarItem.init(title: "Otobüsüm Nerede?", image: UIImage(systemName: ""), tag: 1)
+        let stationsVC = StationsViewController()
+        stationsVC.title = "Duraklar"
+        stationsVC.tabBarItem = UITabBarItem.init(title: "Duraklar", image: UIImage(systemName: ""), tag: 3)
+        let views: [UIViewController] = [homeVC, whereVC, stationsVC]
         self.viewControllers = views
+        self.tabBarController?.tabBar.tintColor = .white
     }
+    
+    
 }
