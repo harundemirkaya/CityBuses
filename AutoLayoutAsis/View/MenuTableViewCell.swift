@@ -8,12 +8,12 @@
 import UIKit
 
 class MenuTableViewCell: UITableViewCell {
-
+    
     static let identifier = "MenuTableViewCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .systemGray5
+        contentView.backgroundColor = .white
         
     }
     

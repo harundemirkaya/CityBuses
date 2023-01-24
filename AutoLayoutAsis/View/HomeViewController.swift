@@ -30,11 +30,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     lazy var menuView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = .white
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .systemGray5
+        tableView.backgroundColor = .white
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
         return view
     }()

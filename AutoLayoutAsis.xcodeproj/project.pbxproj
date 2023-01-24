@@ -18,6 +18,8 @@
 		4F6BA125297FB7AA0010C8C2 /* ShareAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA124297FB7AA0010C8C2 /* ShareAppViewController.swift */; };
 		4F6BA127297FB7CC0010C8C2 /* ChangeLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA126297FB7CC0010C8C2 /* ChangeLanguageViewController.swift */; };
 		4F6BA129297FC29E0010C8C2 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA128297FC29E0010C8C2 /* AppTabBarController.swift */; };
+		4F6BA12C298006830010C8C2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA12B298006830010C8C2 /* NetworkManager.swift */; };
+		4F6BA12E29800B6C0010C8C2 /* StationResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA12D29800B6C0010C8C2 /* StationResponseModel.swift */; };
 		4FFB91FA297E6B1900B19260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91F9297E6B1900B19260 /* AppDelegate.swift */; };
 		4FFB91FC297E6B1900B19260 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91FB297E6B1900B19260 /* SceneDelegate.swift */; };
 		4FFB91FE297E6B1900B19260 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91FD297E6B1900B19260 /* LoginViewController.swift */; };
@@ -41,6 +43,8 @@
 		4F6BA124297FB7AA0010C8C2 /* ShareAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareAppViewController.swift; sourceTree = "<group>"; };
 		4F6BA126297FB7CC0010C8C2 /* ChangeLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageViewController.swift; sourceTree = "<group>"; };
 		4F6BA128297FC29E0010C8C2 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
+		4F6BA12B298006830010C8C2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4F6BA12D29800B6C0010C8C2 /* StationResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationResponseModel.swift; sourceTree = "<group>"; };
 		4FFB91F6297E6B1900B19260 /* AutoLayoutAsis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLayoutAsis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FFB91F9297E6B1900B19260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FFB91FB297E6B1900B19260 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				4F1A540A297ED18F003566F1 /* MenuItems.swift */,
+				4F6BA12D29800B6C0010C8C2 /* StationResponseModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -93,6 +98,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4F6BA12A298005A00010C8C2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4F6BA12B298006830010C8C2 /* NetworkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		4FFB91ED297E6B1900B19260 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +127,7 @@
 		4FFB91F8297E6B1900B19260 /* AutoLayoutAsis */ = {
 			isa = PBXGroup;
 			children = (
+				4F6BA12A298005A00010C8C2 /* Services */,
 				4F6BA113297FB1150010C8C2 /* View */,
 				4F1A5407297ECBDE003566F1 /* Models */,
 				4FFB91F9297E6B1900B19260 /* AppDelegate.swift */,
@@ -262,6 +276,7 @@
 				4F6BA11D297FB6570010C8C2 /* StationsViewController.swift in Sources */,
 				4F6BA125297FB7AA0010C8C2 /* ShareAppViewController.swift in Sources */,
 				4F6BA129297FC29E0010C8C2 /* AppTabBarController.swift in Sources */,
+				4F6BA12C298006830010C8C2 /* NetworkManager.swift in Sources */,
 				4FFB923E297EA09500B19260 /* AppNavigationController.swift in Sources */,
 				4F6BA11F297FB67B0010C8C2 /* DealersViewController.swift in Sources */,
 				4F6BA119297FB5CE0010C8C2 /* MenuTableViewCell.swift in Sources */,
@@ -272,6 +287,7 @@
 				4FFB91FC297E6B1900B19260 /* SceneDelegate.swift in Sources */,
 				4F6BA121297FB6A30010C8C2 /* BalanceViewController.swift in Sources */,
 				4FFB9237297E94BC00B19260 /* HomeViewController.swift in Sources */,
+				4F6BA12E29800B6C0010C8C2 /* StationResponseModel.swift in Sources */,
 				4F6BA123297FB7750010C8C2 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
