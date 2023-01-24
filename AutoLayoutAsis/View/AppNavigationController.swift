@@ -12,7 +12,7 @@ class AppNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewControllers = [ViewController()]
+        viewControllers = [AppTabBarController()]
         
     }
 

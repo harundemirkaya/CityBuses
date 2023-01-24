@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     var txtFieldUserName: UITextField!
     var txtFieldPassword: UITextField!
@@ -17,7 +17,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
         
         txtFieldUserName = UITextField()
@@ -69,14 +68,7 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        let currentUser = Auth.auth().currentUser
-        if currentUser != nil{
-            let homeVC = HomeViewController()
-            navigationController?.pushViewController(homeVC, animated: false)
-        }
-    }
+
 
     @objc func btnRegisterTarget(){
         if txtFieldUserName.text != "" && txtFieldPassword.text != ""{
@@ -88,7 +80,6 @@ class ViewController: UIViewController {
                 else{
                     let homeVC = HomeViewController()
                     self.navigationController?.pushViewController(homeVC, animated: true)
-                    
                 }
             }
         } else{
@@ -116,6 +107,5 @@ class ViewController: UIViewController {
             alertMessage.addAction(okButton)
             self.present(alertMessage, animated: true)
     }
-
 }
 

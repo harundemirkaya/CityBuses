@@ -22,19 +22,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .systemGray5
+        
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
         return view
     }()
     
     lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         return view
     }()
     
     let tableView = UITableView()
-
-    var menuItems = [
+    var menuItem = [
         "Anasayfa",
         "Otobüsüm Nerede?",
         "Duraklar",
@@ -44,15 +44,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         "Uygulamayı Paylaş",
         "Dili Değiştir"
         ]
+    var menuItems = [MenuItems]()
+    
+    var selectedItem: Int?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
-        title = "Home Page"
+
         navigationItem.setLeftBarButton(menuBarButtonItem, animated: false)
         
-        
+        setMenuItems()
         menuView.pinMenuTo(view, with: slideInMenuPadding)
         containerView.edgeTo(view)
         
@@ -73,14 +77,28 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return menuItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
-        cell.textLabel?.text = menuItems[indexPath.row]
+        cell.textLabel?.text = menuItems[indexPath.row].name
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedItem = menuItems[indexPath.row].id
+    }
+    
+    func setMenuItems(){
+        for i in 0...7{
+            let item = MenuItems(id: i, name: menuItem[i])
+            menuItems.append(item)
+        }
+    }
+    
+    
+    
 }
 
 public extension UIView {
