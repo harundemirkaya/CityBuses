@@ -27,7 +27,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
     }
     
-    
+    var direction = 0
     var userLatitude: Double?
     var userLongitude: Double?
     var busLocation: [CLLocation] = [] {
@@ -44,7 +44,6 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -59,13 +58,31 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         setAnnotation()
         drawRoute(routeData: routeCoordinates)
         
+        let btnChangeDirection = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(changeDirection))
+        navigationItem.rightBarButtonItems = [btnChangeDirection]
+        
+    }
+    
+    @objc func changeDirection(){
+        if direction + 1 < routes!.count{
+            direction += 1
+        } else{
+            direction = 0
+        }
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        self.mapView.removeOverlays(self.mapView.overlays)
+        routeCoordinates.removeAll()
+        setAnnotation()
+        busAnnotation()
+        drawRoute(routeData: routeCoordinates)
         
     }
     
     func setAnnotation(){
-        for i in 0...(routes?[1].points?.count ?? 0)-1{
-            routeLatitude = Double(routes?[1].points?[i].latitude ?? "0.0")
-            routeLongitude = Double(routes?[1].points?[i].longitude ?? "0.0")
+        for i in 0...(routes?[direction].points?.count ?? 0)-1{
+            routeLatitude = Double(routes?[direction].points?[i].latitude ?? "0.0")
+            routeLongitude = Double(routes?[direction].points?[i].longitude ?? "0.0")
             let location = CLLocationCoordinate2D(latitude: routeLatitude!, longitude: routeLongitude!)
             let loc = CLLocation(latitude: routeLatitude!, longitude: routeLongitude!)
             routeCoordinates.append(loc)
