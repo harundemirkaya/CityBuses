@@ -31,11 +31,10 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         tableView.backgroundColor = .white
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
+        
         networkManager.fetchStations { result in
             self.stations = result.value?.stops
         }
-       
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -61,10 +60,8 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         stationMapVC.longitude = selectedLongitude
         stationMapVC.latitude = selectedLatitude
-        print(selectedLatitude)
         if selectedLatitude != nil{
             self.navigationController?.pushViewController(stationMapVC, animated: true)
-            
         }
     }
 }

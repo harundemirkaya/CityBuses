@@ -1,5 +1,5 @@
 //
-//  StationMapViewController.swift
+//  BusMapViewController.swift
 //  AutoLayoutAsis
 //
 //  Created by Harun Demirkaya on 25.01.2023.
@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class StationMapViewController: UIViewController {
+class BusMapViewController: UIViewController {
     
     let mapView: MKMapView = {
         let map = MKMapView()
@@ -25,7 +25,6 @@ class StationMapViewController: UIViewController {
         
         setMapConstrainst()
         setAnnotation()
-        
     }
     
     func setAnnotation(){

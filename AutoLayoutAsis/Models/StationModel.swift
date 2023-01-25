@@ -6,7 +6,7 @@
 import Foundation
 
 // MARK: - Station
-struct StationResponseModel: Codable {
+struct StationModel: Codable {
     let lastUpdated: Int?
     let stops: [Stop]?
 

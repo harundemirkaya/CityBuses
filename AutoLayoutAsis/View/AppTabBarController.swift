@@ -15,7 +15,7 @@ class AppTabBarController: UITabBarController {
         let homeVC = UINavigationController(rootViewController: HomeViewController())
         homeVC.title = "Anasayfa"
         homeVC.tabBarItem = UITabBarItem.init(title: "Anasayfa", image: UIImage(systemName: "house"), tag: 0)
-        let whereVC = WhereMyBusViewController()
+        let whereVC = UINavigationController(rootViewController: WhereMyBusViewController())
         whereVC.title = "Otobüsüm Nerede?"
         whereVC.tabBarItem = UITabBarItem.init(title: "Otobüsüm Nerede?", image: UIImage(systemName: "bus.fill"), tag: 1)
         let stationsVC = UINavigationController(rootViewController: StationsViewController())

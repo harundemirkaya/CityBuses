@@ -11,9 +11,15 @@ import SwiftyJSON
 
 class NetworkManager {
     
-    public func fetchStations(resultHandler: @escaping (_ result: DataResponse<StationResponseModel, AFError>) -> Void) {
-        AF.request("https://tfe-opendata.com/api/v1/stops").responseDecodable(of: StationResponseModel.self) { response in
-            resultHandler(response)
+    public func fetchStations(completion: @escaping (_ result: DataResponse<StationModel, AFError>) -> Void) {
+        AF.request("https://tfe-opendata.com/api/v1/stops").responseDecodable(of: StationModel.self) { response in
+            completion(response)
+        }
+    }
+    
+    public func fetchBus(completion: @escaping (_ result: DataResponse<BusModel, AFError>) -> Void) {
+        AF.request("https://tfe-opendata.com/api/v1/vehicle_locations").responseDecodable(of: BusModel.self) { response in
+            completion(response)
         }
     }
 }
