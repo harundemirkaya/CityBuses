@@ -58,6 +58,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return view
     }()
     
+    // MAP
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations[0] as CLLocation
         latitude = userLocation.coordinate.latitude
@@ -104,6 +105,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    // Table
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds

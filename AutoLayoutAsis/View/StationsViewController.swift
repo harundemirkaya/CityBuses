@@ -10,11 +10,18 @@ import Alamofire
 
 class StationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var stations: [Stop]?
+    var stations: [Stop]? {
+        didSet{
+            tableView.reloadData()
+        }
+    }
     
     let tableView = UITableView()
     
     let networkManager = NetworkManager()
+    
+    var selectedLatitude: Double?
+    var selectedLongitude: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +34,7 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         networkManager.fetchStations { result in
             self.stations = result.value?.stops
         }
+       
         
     }
     
@@ -36,12 +44,27 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stations!.count
+        return stations?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
-        cell.textLabel?.text = stations?[indexPath.row].name
+        cell.textLabel?.text = String(indexPath.row + 1) + "- " + (stations?[indexPath.row].name ?? "")
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let stationMapVC = StationMapViewController()
+        networkManager.fetchStations { result in
+            self.selectedLatitude = result.value?.stops?[indexPath.row].latitude
+            self.selectedLongitude = result.value?.stops?[indexPath.row].longitude
+        }
+        stationMapVC.longitude = selectedLongitude
+        stationMapVC.latitude = selectedLatitude
+        print(selectedLatitude)
+        if selectedLatitude != nil{
+            self.navigationController?.pushViewController(stationMapVC, animated: true)
+            
+        }
     }
 }
