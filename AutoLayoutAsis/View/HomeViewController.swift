@@ -58,24 +58,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return view
     }()
     
-    // MAP
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation = locations[0] as CLLocation
-        latitude = userLocation.coordinate.latitude
-        longitude = userLocation.coordinate.longitude
-        let location = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
-        let region = MKCoordinateRegion(center: location, span: span)
-        mapView.setRegion(region, animated: true)
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = location
-        mapView.addAnnotation(annotation)
-    }
-    
     // SideBar Table
     let tableView = UITableView()
     var menuItem = [
-        "Anasayfa",
         "Otobüsüm Nerede?",
         "Duraklar",
         "Bayiler",
@@ -133,10 +118,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedItem = menuItems[indexPath.row].id
+        if selectedItem == 0{
+            tabBarController?.selectedIndex = 1
+        } else if selectedItem == 1{
+            tabBarController?.selectedIndex = 2
+        } else if selectedItem == 2{
+            let dealersVC = DealersViewController()
+            
+            self.navigationController?.pushViewController(dealersVC, animated: true)
+        }
     }
     
     func setMenuItems(){
-        for i in 0...8{
+        for i in 0...7{
             let item = MenuItems(id: i, name: menuItem[i])
             menuItems.append(item)
         }
@@ -153,6 +147,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         mapView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations[0] as CLLocation
+        latitude = userLocation.coordinate.latitude
+        longitude = userLocation.coordinate.longitude
+        let location = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+        let region = MKCoordinateRegion(center: location, span: span)
+        mapView.setRegion(region, animated: true)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        mapView.addAnnotation(annotation)
+    }
 }
 
 //Constraints

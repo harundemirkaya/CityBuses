@@ -26,6 +26,7 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self

@@ -17,8 +17,14 @@ class NetworkManager {
         }
     }
     
-    public func fetchBus(completion: @escaping (_ result: DataResponse<BusModel, AFError>) -> Void) {
-        AF.request("https://tfe-opendata.com/api/v1/vehicle_locations").responseDecodable(of: BusModel.self) { response in
+    public func fetchServices(completion: @escaping (_ result: DataResponse<ServiceModel, AFError>) -> Void) {
+        AF.request("https://tfe-opendata.com/api/v1/services").responseDecodable(of: ServiceModel.self) { response in
+            completion(response)
+        }
+    }
+    
+    public func fetchLiveVehicles(completion: @escaping (_ result: DataResponse<VehicleModel, AFError>) -> Void) {
+        AF.request("https://tfe-opendata.com/api/v1/vehicle_locations").responseDecodable(of: VehicleModel.self) { response in
             completion(response)
         }
     }

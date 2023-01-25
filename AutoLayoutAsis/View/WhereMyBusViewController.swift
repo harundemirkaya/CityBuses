@@ -6,21 +6,22 @@
 //
 
 import UIKit
+import Alamofire
 
 class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     let tableView = UITableView()
     
-    let networkManager = NetworkManager()
-    
-    var bus: [Vehicle]? {
+    var services: [Service]? {
         didSet{
             tableView.reloadData()
         }
     }
     
-    var selectedLatitude: Double?
-    var selectedLongitude: Double?
+    let networkManager = NetworkManager()
+    
+    var selectedRoute: [Route]?
+    var selectedServiceName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +30,11 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .white
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
-        networkManager.fetchBus{ result in
-            self.bus = result.value?.vehicles
+        
+        networkManager.fetchServices{ result in
+            self.services = result.value?.services
         }
     }
     
@@ -41,27 +44,25 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bus?.count ?? 0
+        return services?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
-        cell.textLabel?.text = String(indexPath.row + 1) + "- " + (bus?[indexPath.row].vehicleID ?? "")
+        cell.textLabel?.text = String(indexPath.row + 1) + "- " + (services?[indexPath.row].description ?? "")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let busMapVC = BusMapViewController()
-        networkManager.fetchBus { result in
-            self.selectedLatitude = result.value?.vehicles?[indexPath.row].latitude
-            self.selectedLongitude = result.value?.vehicles?[indexPath.row].longitude
+        let serviceMapVC = ServiceMapViewController()
+        networkManager.fetchServices { result in
+            self.selectedRoute = result.value?.services?[indexPath.row].routes
+            self.selectedServiceName = result.value?.services?[indexPath.row].name
         }
-        busMapVC.latitude = selectedLatitude
-        busMapVC.longitude = selectedLongitude
-        if selectedLatitude != nil{
-            self.navigationController?.pushViewController(busMapVC, animated: true)
+        serviceMapVC.routes = selectedRoute
+        serviceMapVC.serviceName = selectedServiceName
+        if selectedRoute != nil{
+            self.navigationController?.pushViewController(serviceMapVC, animated: true)
         }
-        
     }
-    
 }
