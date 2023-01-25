@@ -76,6 +76,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         setAnnotation()
         busAnnotation()
         drawRoute(routeData: routeCoordinates)
+        getBus()
         
     }
     
@@ -168,8 +169,10 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         let busCount = vehicles?.count ?? 0
         for i in 0...busCount-1{
             if vehicles?[i].serviceName == serviceName{
-                let loc = CLLocation(latitude: vehicles![i].latitude ?? 0.0, longitude: vehicles![i].longitude ?? 0.0)
-                busLocation.append(loc)
+                if vehicles?[i].destination == routes?[direction].destination{
+                    let loc = CLLocation(latitude: vehicles![i].latitude ?? 0.0, longitude: vehicles![i].longitude ?? 0.0)
+                    busLocation.append(loc)
+                }
             }
         }
     }
