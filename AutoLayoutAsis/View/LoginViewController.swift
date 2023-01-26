@@ -52,6 +52,9 @@ class LoginViewController: UIViewController {
         btnRegister.addTarget(self, action: #selector(btnRegisterTarget), for: .touchUpInside)
         view.addSubview(btnRegister)
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         
         let constraints = [
             txtFieldUserName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -112,5 +115,10 @@ class LoginViewController: UIViewController {
             alertMessage.addAction(okButton)
             self.present(alertMessage, animated: true)
     }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
 }
 

@@ -27,6 +27,7 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     var selectedLatitude: Double?
     var selectedLongitude: Double?
     
+    let searchController = UISearchController()
     var searchBar: UISearchBar = UISearchBar()
     var stationsName: [String] = []
     var filteredStations: [String] = []
@@ -36,6 +37,7 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         self.view.backgroundColor = .white
         pageTitle.text = "Duraklar"
+        
         view.addSubview(tableView)
         tableView.addSubview(searchBar)
         tableView.delegate = self
@@ -56,7 +58,6 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         searchBar.backgroundImage = UIImage()
         searchBar.delegate = self
         searchBar.sizeToFit()
-        view.addSubview(searchBar)
         
         navigationItem.titleView = pageTitle
         
@@ -64,16 +65,25 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         navigationItem.rightBarButtonItem = searchButton
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.async {
+            self.searchController.searchBar.becomeFirstResponder()
+        }
+    }
+    
     @objc func openSearch(){
+        view.addSubview(searchBar)
         UIView.animate(withDuration: 0.5) {
             self.searchBar.frame = CGRect(x:0, y:0, width:300, height:20)
         }
         navigationItem.titleView = searchBar
         searchBar.showsCancelButton = true
+        navigationItem.rightBarButtonItem?.isHidden = true
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         navigationItem.titleView = pageTitle
+        navigationItem.rightBarButtonItem?.isHidden = false
     }
     
     override func viewDidLayoutSubviews() {
