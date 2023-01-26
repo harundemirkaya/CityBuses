@@ -43,7 +43,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     var networkManager = NetworkManager()
     
-    
+    var gameTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +63,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         let btnChangeDirection = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(changeDirection))
         navigationItem.rightBarButtonItems = [btnChangeDirection]
         
+        Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(reload), userInfo: nil, repeats: true)
     }
     
     @objc func changeDirection(){
@@ -77,15 +78,19 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         } else{
             direction = 0
         }
+        reload()
+        
+    }
+    
+    @objc func reload(){
         let allAnnotations = self.mapView.annotations
         self.mapView.removeAnnotations(allAnnotations)
         self.mapView.removeOverlays(self.mapView.overlays)
         routeCoordinates.removeAll()
         setAnnotation()
+        getBus()
         busAnnotation()
         drawRoute(routeData: routeCoordinates)
-        getBus()
-        
     }
     
     func setAnnotation(){
@@ -122,18 +127,19 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
         for i in 0...(routes?[direction].points?.count ?? 0)-1{
             if(annotation.title == routes?[direction].points?[i].stopID){
-                annotationView?.image = UIImage(systemName: "rectangle.roundedbottom.fill")
+                annotationView?.image = UIImage(systemName: "rectangle")
                 annotationView?.displayPriority = .defaultHigh
+                annotationView?.backgroundColor = .yellow
             }
         }
         
-        var busCount = vehicles?.count ?? 0
-        if busCount == 0{
-            busCount = 1
-        }
-        for i in 0...(busCount-1){
-            if(annotation.title == vehicles?[i].vehicleID){
-                annotationView?.image = UIImage(systemName: "bus")
+        let busCount = vehicles?.count ?? 0
+        if busCount != 0{
+            for i in 0...busCount-1{
+                if(annotation.title == vehicles?[i].vehicleID){
+                    annotationView?.image = UIImage(systemName: "location")
+                    annotationView?.backgroundColor = .white
+                }
             }
         }
         return annotationView
@@ -184,7 +190,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     
     func filterServiceBus(){
-        var busCount = vehicles?.count ?? 0
+        let busCount = vehicles?.count ?? 0
         if busCount != 0{
             for i in 0...busCount-1{
                 if vehicles?[i].serviceName == serviceName{
@@ -206,3 +212,4 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
     }
 }
+

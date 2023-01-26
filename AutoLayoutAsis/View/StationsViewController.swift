@@ -8,10 +8,14 @@
 import UIKit
 import Alamofire
 
-class StationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class StationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     var stations: [Stop]? {
         didSet{
+            for i in 0...(stations?.count ?? 0)-1{
+                stationsName.append(stations![i].name!)
+            }
+            filteredStations = stationsName
             tableView.reloadData()
         }
     }
@@ -23,11 +27,16 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     var selectedLatitude: Double?
     var selectedLongitude: Double?
     
+    var searchBar: UISearchBar = UISearchBar()
+    var stationsName: [String] = []
+    var filteredStations: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
         view.addSubview(tableView)
+        tableView.addSubview(searchBar)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .white
@@ -36,6 +45,17 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         networkManager.fetchStations { result in
             self.stations = result.value?.stops
         }
+        
+        searchBar.searchBarStyle = UISearchBar.Style.prominent
+        searchBar.placeholder = " Search..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.backgroundImage = UIImage()
+        searchBar.delegate = self
+        searchBar.sizeToFit()
+        view.addSubview(searchBar)
+        navigationItem.titleView = searchBar
+        filteredStations = stationsName
     }
     
     override func viewDidLayoutSubviews() {
@@ -44,12 +64,12 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stations?.count ?? 0
+        return filteredStations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
-        cell.textLabel?.text = String(indexPath.row + 1) + "- " + (stations?[indexPath.row].name ?? "")
+        cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row])
         return cell
     }
     
@@ -64,5 +84,20 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         if selectedLatitude != nil{
             self.navigationController?.pushViewController(stationMapVC, animated: true)
         }
+    }
+    
+    // MARK: Search Bar Config
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredStations = []
+        if searchText == ""{
+            filteredStations = stationsName
+        } else{
+            for station in stationsName{
+                if station.lowercased().contains(searchText.lowercased()){
+                    filteredStations.append(station)
+                }
+            }
+        }
+        self.tableView.reloadData()
     }
 }
