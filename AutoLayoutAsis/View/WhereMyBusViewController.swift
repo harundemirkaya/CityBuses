@@ -31,13 +31,16 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     var searchBar: UISearchBar = UISearchBar()
     var filteredServices: [String] = []
     var servicesName: [String] = []
-    var pageTitle = UILabel()
+    var pageTitle: UILabel {
+        let label = UILabel()
+        label.text = "Otobüsüm Nerede?"
+        return label
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        pageTitle.text = "Otobüsüm Nerede?"
         
         view.addSubview(tableView)
         tableView.delegate = self

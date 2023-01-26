@@ -22,6 +22,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var latitude: Double?
     var longitude: Double?
     
+    var pageTitle: UILabel {
+        let label = UILabel()
+        label.text = "Anasayfa"
+        return label
+    }
+    
     // SideBar
     var isSlideMenuPresented = false
     
@@ -84,6 +90,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        navigationItem.titleView = pageTitle
         
         if currentUser != nil{
             menuItem.append("Çıkış Yap")

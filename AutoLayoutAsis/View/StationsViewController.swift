@@ -31,12 +31,15 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     var searchBar: UISearchBar = UISearchBar()
     var stationsName: [String] = []
     var filteredStations: [String] = []
-    var pageTitle = UILabel()
+    var pageTitle: UILabel {
+        let label = UILabel()
+        label.text = "Duraklar"
+        return label
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        pageTitle.text = "Duraklar"
         
         view.addSubview(tableView)
         tableView.addSubview(searchBar)

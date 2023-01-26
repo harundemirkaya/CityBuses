@@ -15,8 +15,6 @@ class AppNavigationController: UINavigationController {
         UINavigationBar.appearance().barTintColor = .white
         UINavigationBar.appearance().tintColor = .black
         UINavigationBar.appearance().backgroundColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().isTranslucent = false
         
         viewControllers = [AppTabBarController()]
     }

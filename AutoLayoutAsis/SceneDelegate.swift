@@ -25,7 +25,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let currentUser = Auth.auth().currentUser
         if currentUser != nil{
-            // Burası ayarlanacak
             window?.rootViewController = AppTabBarController()
         }
     }
