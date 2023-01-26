@@ -30,11 +30,12 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     var searchBar: UISearchBar = UISearchBar()
     var stationsName: [String] = []
     var filteredStations: [String] = []
+    var pageTitle = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        
+        pageTitle.text = "Duraklar"
         view.addSubview(tableView)
         tableView.addSubview(searchBar)
         tableView.delegate = self
@@ -46,16 +47,33 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
             self.stations = result.value?.stops
         }
         
+        filteredStations = stationsName
+        
         searchBar.searchBarStyle = UISearchBar.Style.prominent
-        searchBar.placeholder = " Search..."
+        searchBar.placeholder = "Ara"
         searchBar.sizeToFit()
         searchBar.isTranslucent = false
         searchBar.backgroundImage = UIImage()
         searchBar.delegate = self
         searchBar.sizeToFit()
         view.addSubview(searchBar)
+        
+        navigationItem.titleView = pageTitle
+        
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.done, target: self, action: #selector(openSearch))
+        navigationItem.rightBarButtonItem = searchButton
+    }
+    
+    @objc func openSearch(){
+        UIView.animate(withDuration: 0.5) {
+            self.searchBar.frame = CGRect(x:0, y:0, width:300, height:20)
+        }
         navigationItem.titleView = searchBar
-        filteredStations = stationsName
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        navigationItem.titleView = pageTitle
     }
     
     override func viewDidLayoutSubviews() {
