@@ -152,7 +152,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         let location = CLLocationCoordinate2D(latitude: userLatitude!, longitude: userLongitude!)
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
-        annotation.title = "Ben"
+        annotation.title = "Me"
         mapView.addAnnotation(annotation)
         
     }

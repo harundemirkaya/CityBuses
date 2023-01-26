@@ -10,10 +10,10 @@ import UIKit
 class DealersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var dealers: [String] = [
-        "Bayi 1",
-        "Bayi 2",
-        "Bayi 3",
-        "Bayi 4"
+        "Dealer 1",
+        "Dealer 2",
+        "Dealer 3",
+        "Dealer 4"
     ]
     
     var tableView = UITableView()

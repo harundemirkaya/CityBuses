@@ -187,6 +187,8 @@
 			dependencies = (
 			);
 			name = AutoLayoutAsis;
+			packageProductDependencies = (
+			);
 			productName = AutoLayoutAsis;
 			productReference = 4FFB91F6297E6B1900B19260 /* AutoLayoutAsis.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +217,8 @@
 				Base,
 			);
 			mainGroup = 4FFB91ED297E6B1900B19260;
+			packageReferences = (
+			);
 			productRefGroup = 4FFB91F7297E6B1900B19260 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -326,6 +330,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -386,6 +391,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

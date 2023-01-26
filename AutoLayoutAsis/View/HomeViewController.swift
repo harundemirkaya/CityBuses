@@ -24,7 +24,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var pageTitle: UILabel {
         let label = UILabel()
-        label.text = "Anasayfa"
+        label.text = "Home Page"
         return label
     }
     
@@ -70,13 +70,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // SideBar Table
     let tableView = UITableView()
     var menuItem = [
-        "Otobüsüm Nerede?",
-        "Duraklar",
-        "Bayiler",
-        "Bakiye Sorgula",
-        "Uygulamayı Paylaş",
-        "Dili Değiştir",
-        "Ayarlar"
+        "Where My Bus?",
+        "Stations",
+        "Dealers",
+        "Balance Query",
+        "Share App",
+        "Change Language",
+        "Settings"
         ]
     
     let currentUser = Auth.auth().currentUser
@@ -93,10 +93,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationItem.titleView = pageTitle
         
         if currentUser != nil{
-            menuItem.append("Çıkış Yap")
+            menuItem.append("Sign Out")
         } else{
             menuItem.removeLast()
-            menuItem.append("Giriş Yap / Kayıt Ol")
+            menuItem.append("Sign In / Sign Uo")
             menuCount -= 1
         }
         

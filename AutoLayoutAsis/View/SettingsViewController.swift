@@ -19,7 +19,7 @@ final class SettingsViewController: UIViewController {
     
     var btnUpdate: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Login", for: .normal)
+        btn.setTitle("Update", for: .normal)
         btn.backgroundColor = .gray
         return btn
     }()
@@ -44,7 +44,7 @@ final class SettingsViewController: UIViewController {
     @objc func btnUpdateTarget(){
         if txtFieldEmail.text != ""{
             Auth.auth().currentUser?.updateEmail(to: txtFieldEmail.text!)
-            self.alertMessage(title: "Başarılı", description: "Mail Adresiniz Başarıyla Değiştirildi.")
+            self.alertMessage(title: "Success", description: "Your email address has been successfully changed.")
         } else{
             self.alertMessage(title: "Error", description: "Please fill in all fields")
         }

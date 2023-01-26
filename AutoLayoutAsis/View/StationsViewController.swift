@@ -33,7 +33,7 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     var filteredStations: [String] = []
     var pageTitle: UILabel {
         let label = UILabel()
-        label.text = "Duraklar"
+        label.text = "Stations"
         return label
     }
     
@@ -55,7 +55,7 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         filteredStations = stationsName
         
         searchBar.searchBarStyle = UISearchBar.Style.prominent
-        searchBar.placeholder = "Ara"
+        searchBar.placeholder = "Search"
         searchBar.sizeToFit()
         searchBar.isTranslucent = false
         searchBar.backgroundImage = UIImage()
