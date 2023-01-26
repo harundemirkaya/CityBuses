@@ -12,24 +12,28 @@ class LoginViewController: UIViewController {
     
     var txtFieldUserName: UITextField = {
         let txtField = UITextField()
+        txtField.translatesAutoresizingMaskIntoConstraints = false
         txtField.placeholder = "E-Mail"
         txtField.borderStyle = .bezel
         return txtField
     }()
     var txtFieldPassword: UITextField = {
         let txtField = UITextField()
+        txtField.translatesAutoresizingMaskIntoConstraints = false
         txtField.placeholder = "Password"
         txtField.borderStyle = .bezel
         return txtField
     }()
     var btnLogin: UIButton = {
         let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Login", for: .normal)
         btn.backgroundColor = .gray
         return btn
     }()
     var btnRegister: UIButton = {
         let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Register", for: .normal)
         btn.backgroundColor = .gray
         return btn
@@ -39,19 +43,13 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        txtFieldUserName.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(txtFieldUserName)
-        
-        txtFieldPassword.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(txtFieldPassword)
         
         btnLogin.addTarget(self, action: #selector(btnLoginTarget), for: .touchUpInside)
-        btnLogin.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(btnLogin)
-        
 
         btnRegister.addTarget(self, action: #selector(btnRegisterTarget), for: .touchUpInside)
-        btnRegister.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(btnRegister)
         
         
@@ -75,9 +73,7 @@ class LoginViewController: UIViewController {
             
         ]
         NSLayoutConstraint.activate(constraints)
-        
     }
-
 
     @objc func btnRegisterTarget(){
         if txtFieldUserName.text != "" && txtFieldPassword.text != ""{

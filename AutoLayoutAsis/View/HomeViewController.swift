@@ -41,6 +41,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }()
     
     
+    var menuCount = 7
+    
     // HomePage
     lazy var containerView: UIView = {
         let view = UIView()
@@ -86,7 +88,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if currentUser != nil{
             menuItem.append("Çıkış Yap")
         } else{
+            menuItem.removeLast()
             menuItem.append("Giriş Yap / Kayıt Ol")
+            menuCount -= 1
         }
         
         menuBarButtonItem.tintColor = .white
@@ -144,10 +148,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if selectedItem == 5{
             let changeLanguageVC = ChangeLanguageViewController()
             self.navigationController?.pushViewController(changeLanguageVC, animated: true)
-        } else if selectedItem == 6{
+        } else if selectedItem == 6 && menuCount == 7{
             let settingsVC = SettingsViewController()
             self.navigationController?.pushViewController(settingsVC, animated: true)
-        } else if selectedItem == 7{
+        } else if selectedItem == 7 && menuCount == 7 || selectedItem == 6 && menuCount == 6{
             if currentUser != nil{
                 do{
                     try Auth.auth().signOut()
@@ -156,7 +160,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 } catch{
                     print("Error")
                 }
-                
             } else{
                 let loginVC = LoginViewController()
                 self.navigationController?.pushViewController(loginVC, animated: true)
@@ -166,7 +169,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func setMenuItems(){
-        for i in 0...7{
+        for i in 0...menuCount{
             let item = MenuItems(id: i, name: menuItem[i])
             menuItems.append(item)
         }
