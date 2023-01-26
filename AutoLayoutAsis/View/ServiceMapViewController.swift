@@ -55,7 +55,6 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         if CLLocationManager.locationServicesEnabled(){
             locationManager.startUpdatingLocation()
         }
-        
         setMapConstrainst()
         getBus()
         setAnnotation()
@@ -67,6 +66,12 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     
     @objc func changeDirection(){
+        let randomRouteLatitude = Double(routes?[direction].points?[2].latitude ?? "0.0")
+        let randomRouteLongitude = Double(routes?[direction].points?[2].longitude ?? "0.0")
+        let location = CLLocationCoordinate2D(latitude: randomRouteLatitude!, longitude: randomRouteLongitude!)
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let region = MKCoordinateRegion(center: location, span: span)
+        mapView.setRegion(region, animated: true)
         if direction + 1 < routes!.count{
             direction += 1
         } else{
@@ -112,14 +117,13 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
         if annotationView == nil{
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
-            annotationView?.canShowCallout = true
         } else{
             annotationView?.annotation = annotation
         }
-        
         for i in 0...(routes?[direction].points?.count ?? 0)-1{
             if(annotation.title == routes?[direction].points?[i].stopID){
                 annotationView?.image = UIImage(systemName: "rectangle.roundedbottom.fill")
+                annotationView?.displayPriority = .defaultHigh
             }
         }
         
@@ -181,19 +185,19 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     func filterServiceBus(){
         var busCount = vehicles?.count ?? 0
-        if busCount == 0{
-            busCount = 1
-        }
-        for i in 0...(busCount-1){
-            if vehicles?[i].serviceName == serviceName{
-                if vehicles?[i].destination == routes?[direction].destination{
-                    let loc = CLLocation(latitude: vehicles![i].latitude ?? 0.0, longitude: vehicles![i].longitude ?? 0.0)
-                    busID.append((vehicles?[i].vehicleID!)!)
-                    busLocation.append(loc)
-                    
+        if busCount != 0{
+            for i in 0...busCount-1{
+                if vehicles?[i].serviceName == serviceName{
+                    if vehicles?[i].destination == routes?[direction].destination{
+                        let loc = CLLocation(latitude: vehicles![i].latitude ?? 0.0, longitude: vehicles![i].longitude ?? 0.0)
+                        busID.append((vehicles?[i].vehicleID!)!)
+                        busLocation.append(loc)
+                        
+                    }
                 }
             }
         }
+       
     }
     
     func getBus(){
