@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Firebase
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate{
     
@@ -65,11 +66,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         "Duraklar",
         "Bayiler",
         "Bakiye Sorgula",
-        "Ayarlar",
         "Uygulamayı Paylaş",
         "Dili Değiştir",
-        "Giriş Yap / Kayıt Ol"
+        "Ayarlar"
         ]
+    
+    let currentUser = Auth.auth().currentUser
+    
     var menuItems = [MenuItems]()
     
     var selectedItem: Int?
@@ -79,6 +82,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
+        if currentUser != nil{
+            menuItem.append("Çıkış Yap")
+        } else{
+            menuItem.append("Giriş Yap / Kayıt Ol")
+        }
+        
         menuBarButtonItem.tintColor = .white
         navigationItem.setLeftBarButton(menuBarButtonItem, animated: false)
         setMenuItems()
@@ -124,9 +134,35 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             tabBarController?.selectedIndex = 2
         } else if selectedItem == 2{
             let dealersVC = DealersViewController()
-            
             self.navigationController?.pushViewController(dealersVC, animated: true)
+        } else if selectedItem == 3{
+            let balanceVC = BalanceViewController()
+            self.navigationController?.pushViewController(balanceVC, animated: true)
+        } else if selectedItem == 4{
+            let shareAppVC = ShareAppViewController()
+            self.navigationController?.pushViewController(shareAppVC, animated: true)
+        } else if selectedItem == 5{
+            let changeLanguageVC = ChangeLanguageViewController()
+            self.navigationController?.pushViewController(changeLanguageVC, animated: true)
+        } else if selectedItem == 6{
+            let settingsVC = SettingsViewController()
+            self.navigationController?.pushViewController(settingsVC, animated: true)
+        } else if selectedItem == 7{
+            if currentUser != nil{
+                do{
+                    try Auth.auth().signOut()
+                    let homeVC = HomeViewController()
+                    self.navigationController?.pushViewController(homeVC, animated: true)
+                } catch{
+                    print("Error")
+                }
+                
+            } else{
+                let loginVC = LoginViewController()
+                self.navigationController?.pushViewController(loginVC, animated: true)
+            }
         }
+        
     }
     
     func setMenuItems(){

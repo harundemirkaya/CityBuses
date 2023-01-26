@@ -103,7 +103,8 @@ class LoginViewController: UIViewController {
                 if err != nil{
                     self.alertMessage(title: "Error", description: err!.localizedDescription)
                 } else{
-                    self.tabBarController?.selectedIndex = 0
+                    let homeVC = HomeViewController()
+                    self.navigationController?.pushViewController(homeVC, animated: true)
                 }
             }
         }

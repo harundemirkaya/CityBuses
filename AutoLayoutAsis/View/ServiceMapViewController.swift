@@ -35,12 +35,15 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
             busAnnotation()
         }
     }
+    var busID: [String] = []
     
     var RouteData: Route?
     var routeCoordinates: [CLLocation] = []
     var routeOverlay: MKOverlay?
     
     var networkManager = NetworkManager()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,11 +90,11 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
             let location = CLLocationCoordinate2D(latitude: routeLatitude!, longitude: routeLongitude!)
             let loc = CLLocation(latitude: routeLatitude!, longitude: routeLongitude!)
             routeCoordinates.append(loc)
-            let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+            let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
             let region = MKCoordinateRegion(center: location, span: span)
             mapView.setRegion(region, animated: true)
             let annotation = MKPointAnnotation()
-            annotation.title = "stop"
+            annotation.title = routes?[direction].points?[i].stopID
             annotation.coordinate = location
             mapView.addAnnotation(annotation)
         }
@@ -101,22 +104,33 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         let annotation = MKPointAnnotation()
         let location = CLLocationCoordinate2D(latitude: (busLocation.last?.coordinate.latitude)!, longitude: (busLocation.last?.coordinate.longitude)!)
         annotation.coordinate = location
-        annotation.title = "bus"
+        annotation.title = busID.last
         mapView.addAnnotation(annotation)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "annotation")
-        annotationView.markerTintColor = UIColor.red
-        switch annotation.title {
-        case "stop":
-            annotationView.markerTintColor = UIColor.red
-        case "userLocation":
-            annotationView.markerTintColor = UIColor.blue
-        case "bus":
-            annotationView.markerTintColor = UIColor.yellow
-        default:
-            annotationView.markerTintColor = UIColor.black
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
+        if annotationView == nil{
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
+            annotationView?.canShowCallout = true
+        } else{
+            annotationView?.annotation = annotation
+        }
+        
+        for i in 0...(routes?[direction].points?.count ?? 0)-1{
+            if(annotation.title == routes?[direction].points?[i].stopID){
+                annotationView?.image = UIImage(systemName: "rectangle.roundedbottom.fill")
+            }
+        }
+        
+        var busCount = vehicles?.count ?? 0
+        if busCount == 0{
+            busCount = 1
+        }
+        for i in 0...(busCount-1){
+            if(annotation.title == vehicles?[i].vehicleID){
+                annotationView?.image = UIImage(systemName: "bus")
+            }
         }
         return annotationView
     }
@@ -128,7 +142,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         let location = CLLocationCoordinate2D(latitude: userLatitude!, longitude: userLongitude!)
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
-        annotation.title = "userLocation"
+        annotation.title = "Ben"
         mapView.addAnnotation(annotation)
         
     }
@@ -166,12 +180,17 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     
     func filterServiceBus(){
-        let busCount = vehicles?.count ?? 0
-        for i in 0...busCount-1{
+        var busCount = vehicles?.count ?? 0
+        if busCount == 0{
+            busCount = 1
+        }
+        for i in 0...(busCount-1){
             if vehicles?[i].serviceName == serviceName{
                 if vehicles?[i].destination == routes?[direction].destination{
                     let loc = CLLocation(latitude: vehicles![i].latitude ?? 0.0, longitude: vehicles![i].longitude ?? 0.0)
+                    busID.append((vehicles?[i].vehicleID!)!)
                     busLocation.append(loc)
+                    
                 }
             }
         }
