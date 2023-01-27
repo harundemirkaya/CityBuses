@@ -81,7 +81,12 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: -Fetch Services
     func getServices(){
         networkManager.fetchServices{ [weak self] result in
-            self?.services = result.value?.services
+            if result.response?.statusCode == 200{
+                self?.services = result.value?.services
+            } else{
+                self?.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: result.error!.localizedDescription)
+            }
+            
         }
     }
     
@@ -151,5 +156,13 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
         if selectedRoute != nil{
             self.navigationController?.pushViewController(serviceMapVC, animated: true)
         }
+    }
+    
+    // MARK: -Show Alert Message
+    func alertMessage(title: String, description: String){
+            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
+            alertMessage.addAction(okButton)
+            self.present(alertMessage, animated: true)
     }
 }

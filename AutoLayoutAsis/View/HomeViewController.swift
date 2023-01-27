@@ -57,17 +57,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         locationManager.requestAlwaysAuthorization()
         
         DispatchQueue.global().async {
-            if CLLocationManager.locationServicesEnabled() {
-                switch self.locationManager.authorizationStatus {
-                    case .notDetermined, .restricted, .denied:
-                    self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: NSLocalizedString("locationDisabled", comment: "Location Disabled"))
-                    case .authorizedAlways, .authorizedWhenInUse:
-                        self.locationManager.startUpdatingLocation()
-                    @unknown default:
-                        break
-                }
-            } else {
-                self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: NSLocalizedString("errorTitle", comment: "Error"))
+            if CLLocationManager.locationServicesEnabled(){
+                self.locationManager.startUpdatingLocation()
             }
         }
         return view

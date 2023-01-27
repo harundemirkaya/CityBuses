@@ -82,7 +82,11 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: -Fetch Stations
     func getStations(){
         networkManager.fetchStations { [weak self] result in
-            self?.stations = result.value?.stops
+            if result.response?.statusCode == 200{
+                self?.stations = result.value?.stops
+            } else{
+                self?.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: result.error!.localizedDescription)
+            }
         }
     }
     
@@ -152,5 +156,13 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         if selectedLatitude != nil{
             self.navigationController?.pushViewController(stationMapVC, animated: true)
         }
+    }
+    
+    // MARK: -Show Alert Message
+    func alertMessage(title: String, description: String){
+            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
+            alertMessage.addAction(okButton)
+            self.present(alertMessage, animated: true)
     }
 }

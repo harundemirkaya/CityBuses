@@ -62,6 +62,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         locationManager.requestAlwaysAuthorization()
         mapView.delegate = self
         
+        // MARK: MAP
         DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
                 switch self.locationManager.authorizationStatus {
@@ -76,7 +77,6 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
                 self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: NSLocalizedString("errorTitle", comment: "Error"))
             }
         }
-        
         
         // MARK: Map Constraints
         setMapConstrainst()
@@ -244,8 +244,12 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     // MARK: -Fetch Bus
     func getBus(){
-        networkManager.fetchLiveVehicles { result in
-            self.vehicles = result.value?.vehicles
+        networkManager.fetchLiveVehicles { [weak self] result in
+            if result.response?.statusCode == 200{
+                self?.vehicles = result.value?.vehicles
+            } else{
+                self?.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: result.error!.localizedDescription)
+            }
         }
     }
     
