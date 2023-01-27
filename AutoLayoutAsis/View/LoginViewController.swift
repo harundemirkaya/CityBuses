@@ -13,28 +13,28 @@ class LoginViewController: UIViewController {
     var txtFieldUserName: UITextField = {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.placeholder = "E-Mail"
+        txtField.placeholder = NSLocalizedString("emailPlaceHolder", comment: "Email Text Field Place Holder")
         txtField.borderStyle = .bezel
         return txtField
     }()
     var txtFieldPassword: UITextField = {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.placeholder = "Password"
+        txtField.placeholder = NSLocalizedString("passwordPlaceHolder", comment: "Password Text Field Place Holder")
         txtField.borderStyle = .bezel
         return txtField
     }()
     var btnLogin: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Login", for: .normal)
+        btn.setTitle(NSLocalizedString("btnLogin", comment: "Login Button Title"), for: .normal)
         btn.backgroundColor = .gray
         return btn
     }()
     var btnRegister: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Register", for: .normal)
+        btn.setTitle(NSLocalizedString("btnRegister", comment: "Register Button Title"), for: .normal)
         btn.backgroundColor = .gray
         return btn
     }()
@@ -83,7 +83,7 @@ class LoginViewController: UIViewController {
             Auth.auth().createUser(withEmail: txtFieldUserName.text!, password: txtFieldPassword.text!) {
                 authDataResult, err in
                 if err != nil{
-                    self.alertMessage(title: "Error", description: err!.localizedDescription)
+                    self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error Title"), description: err!.localizedDescription)
                 }
                 else{
                     let homeVC = HomeViewController()
@@ -91,7 +91,7 @@ class LoginViewController: UIViewController {
                 }
             }
         } else{
-            self.alertMessage(title: "Error", description: "Please fill in all fields")
+            self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error Title"), description: NSLocalizedString("fillAllField", comment: "Fill All Field"))
         }
     }
     
@@ -100,7 +100,7 @@ class LoginViewController: UIViewController {
             Auth.auth().signIn(withEmail: txtFieldUserName.text!, password: txtFieldPassword.text!){
                 AuthDataResult, err in
                 if err != nil{
-                    self.alertMessage(title: "Error", description: err!.localizedDescription)
+                    self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error Title"), description: err!.localizedDescription)
                 } else{
                     let homeVC = HomeViewController()
                     self.navigationController?.pushViewController(homeVC, animated: true)
@@ -111,7 +111,7 @@ class LoginViewController: UIViewController {
     
     func alertMessage(title: String, description: String){
             let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
-            let okButton = UIAlertAction(title: "Okey", style: UIAlertAction.Style.default)
+            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
             alertMessage.addAction(okButton)
             self.present(alertMessage, animated: true)
     }

@@ -33,7 +33,7 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     var servicesName: [String] = []
     var pageTitle: UILabel {
         let label = UILabel()
-        label.text = "Where My Bus?"
+        label.text = NSLocalizedString("whereMyBusPageTitle", comment: "Where My Bus Page Title")
         return label
     }
     
@@ -55,7 +55,7 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
         filteredServices = servicesName
         
         searchBar.searchBarStyle = UISearchBar.Style.prominent
-        searchBar.placeholder = "Search"
+        searchBar.placeholder = NSLocalizedString("searchPlaceholder", comment: "Search Placeholder")
         searchBar.sizeToFit()
         searchBar.isTranslucent = false
         searchBar.backgroundImage = UIImage()

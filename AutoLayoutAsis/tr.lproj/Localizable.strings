@@ -1,0 +1,37 @@
+/*
+  Localizable.strings
+  AutoLayoutAsis
+
+  Created by Harun Demirkaya on 27.01.2023.
+  
+*/
+
+"emailPlaceHolder" = "E-Mail";
+"passwordPlaceHolder" = "Şifre";
+"btnLogin" = "Giriş Yap";
+"btnRegister" = "Kayıt Ol";
+"errorTitle" = "Hata";
+"fillAllField" = "Lütfen tüm alanları doldurun";
+"btnOkey" = "Tamam";
+"homePageTitle" = "Anasayfa";
+"whereMyBusMenuItem" = "Otobüsüm Nerede?";
+"stationsMenuItem" = "Duraklar";
+"dealersMenuItem" = "Bayiler";
+"balanceQueryMenuItem" = "Bakiye Sorgulama";
+"shareAppMenuItem" = "Uygulamayı Paylaş";
+"changeLanguageMenuItem" = "Dil Değiştir";
+"settingsMenuItem" = "Ayarlar";
+"signOutMenuItem" = "Çıkış Yap";
+"signInSignUpMenuItem" = "Giriş Yap / Kayıt Ol";
+"whereMyBusPageTitle" = "Otobüsüm Nerede?";
+"searchPlaceholder" = "Ara";
+"stationsPageTitle" = "Duraklar";
+"dealer" = "Bayi";
+"dealersPageTitle" = "Bayiler";
+"settingPageTitle" = "Ayarlar";
+"successTitle" = "Başarılı";
+"changeMailSuccessAlertDescription" = "Mail adresiniz başarıyla değiştirilmiştir.";
+"btnUpdate" = "Güncelle";
+"tabBarHome" = "Anasayfa";
+"tabBarWhereMyBus" = "Otobüsüm Nerede?";
+"tabBarStations" = "Duraklar";

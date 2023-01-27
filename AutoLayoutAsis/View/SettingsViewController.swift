@@ -19,10 +19,16 @@ final class SettingsViewController: UIViewController {
     
     var btnUpdate: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Update", for: .normal)
+        btn.setTitle(NSLocalizedString("btnUpdate", comment: "Update Button"), for: .normal)
         btn.backgroundColor = .gray
         return btn
     }()
+    
+    var pageTitle: UILabel {
+        let label = UILabel()
+        label.text = NSLocalizedString("settingPageTitle", comment: "Settings Page Title")
+        return label
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +38,8 @@ final class SettingsViewController: UIViewController {
         txtFieldEmail.txtFieldEmail(view)
         btnUpdate.btnUpdate(view, with: txtFieldEmail)
         btnUpdate.addTarget(self, action: #selector(btnUpdateTarget), for: .touchUpInside)
+        
+        navigationItem.titleView = pageTitle
     }
     
     func requestCurrentuser(){
@@ -44,15 +52,15 @@ final class SettingsViewController: UIViewController {
     @objc func btnUpdateTarget(){
         if txtFieldEmail.text != ""{
             Auth.auth().currentUser?.updateEmail(to: txtFieldEmail.text!)
-            self.alertMessage(title: "Success", description: "Your email address has been successfully changed.")
+            self.alertMessage(title: NSLocalizedString("successTitle", comment: "Succes Alert Title"), description: NSLocalizedString("changeMailSuccessAlertDescription", comment: "Change E Mail Success Alert Description"))
         } else{
-            self.alertMessage(title: "Error", description: "Please fill in all fields")
+            self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error Title"), description: NSLocalizedString("fillAllField", comment: "Fill All Fields"))
         }
     }
     
     func alertMessage(title: String, description: String){
             let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
-            let okButton = UIAlertAction(title: "Okey", style: UIAlertAction.Style.default)
+            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Okey Button"), style: UIAlertAction.Style.default)
             alertMessage.addAction(okButton)
             self.present(alertMessage, animated: true)
     }

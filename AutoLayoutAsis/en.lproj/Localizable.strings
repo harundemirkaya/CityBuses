@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  AutoLayoutAsis
+
+  Created by Harun Demirkaya on 27.01.2023.
+  
+*/
+
+"emailPlaceHolder" = "E-Mail";
+"passwordPlaceHolder" = "Password";
+"btnLogin" = "Login";
+"btnRegister" = "Register";
+"errorTitle" = "Error";
+"fillAllField" = "Please fill in all fields";
+"btnOkey" = "Okey";
+"homePageTitle" = "Home Page";
+"whereMyBusMenuItem" = "Where My Bus?";
+"stationsMenuItem" = "Stations";
+"dealersMenuItem" = "Dealers";
+"balanceQueryMenuItem" = "Balance Query";
+"shareAppMenuItem" = "Share App";
+"changeLanguageMenuItem" = "Change Language";
+"settingsMenuItem" = "Settings";
+"signOutMenuItem" = "Sign Out";
+"signInSignUpMenuItem" = "Sign In / Sign Up";
+"whereMyBusPageTitle" = "Where My Bus?";
+"searchPlaceholder" = "Search";
+"stationsPageTitle" = "Stations";
+"dealer" = "Dealer";
+"dealersPageTitle" = "Dealers";
+"settingPageTitle" = "Settings";
+"successTitle" = "Success";
+"changeMailSuccessAlertDescription" = "Your email address has been successfully changed.";
+"btnUpdate" = "Update";
+"tabBarHome" = "Home Page";
+"tabBarWhereMyBus" = "Where My Bus?";
+"tabBarStations" = "Stations";

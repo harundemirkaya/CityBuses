@@ -10,13 +10,19 @@ import UIKit
 class DealersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var dealers: [String] = [
-        "Dealer 1",
-        "Dealer 2",
-        "Dealer 3",
-        "Dealer 4"
+        NSLocalizedString("dealer", comment: "Dealer Name"),
+        NSLocalizedString("dealer", comment: "Dealer Name"),
+        NSLocalizedString("dealer", comment: "Dealer Name"),
+        NSLocalizedString("dealer", comment: "Dealer Name")
     ]
     
     var tableView = UITableView()
+    
+    var pageTitle: UILabel {
+        let label = UILabel()
+        label.text = NSLocalizedString("dealersPageTitle", comment: "Dealers Page Title")
+        return label
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +32,8 @@ class DealersViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
+        
+        navigationItem.titleView = pageTitle
     }
     
     override func viewDidLayoutSubviews() {

@@ -24,7 +24,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var pageTitle: UILabel {
         let label = UILabel()
-        label.text = "Home Page"
+        label.text = NSLocalizedString("homePageTitle", comment: "Home Page Title")
         return label
     }
     
@@ -70,13 +70,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // SideBar Table
     let tableView = UITableView()
     var menuItem = [
-        "Where My Bus?",
-        "Stations",
-        "Dealers",
-        "Balance Query",
-        "Share App",
-        "Change Language",
-        "Settings"
+        NSLocalizedString("whereMyBusMenuItem", comment: "Where My Bus Menu Item"),
+        NSLocalizedString("stationsMenuItem", comment: "Stations Menu Item"),
+        NSLocalizedString("dealersMenuItem", comment: "Dealers Menu Item"),
+        NSLocalizedString("balanceQueryMenuItem", comment: "Balance Query Menu Item"),
+        NSLocalizedString("shareAppMenuItem", comment: "Share App Menu Item"),
+        NSLocalizedString("changeLanguageMenuItem", comment: "Change Language Menu Item"),
+        NSLocalizedString("settingsMenuItem", comment: "Setting Menu Item")
         ]
     
     let currentUser = Auth.auth().currentUser
@@ -93,10 +93,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationItem.titleView = pageTitle
         
         if currentUser != nil{
-            menuItem.append("Sign Out")
+            menuItem.append(NSLocalizedString("signOutMenuItem", comment: "Sign Out Menu Item"))
         } else{
             menuItem.removeLast()
-            menuItem.append("Sign In / Sign Uo")
+            menuItem.append(NSLocalizedString("signInSignUpMenuItem", comment: "Sign In Sign Up Menu Item"))
             menuCount -= 1
         }
         
