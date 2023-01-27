@@ -71,7 +71,6 @@ class LoginViewController: UIViewController {
         let constraints = [
             txtFieldUserName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             txtFieldUserName.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
             txtFieldUserName.widthAnchor.constraint(equalTo: view.widthAnchor),
     
             txtFieldPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor),

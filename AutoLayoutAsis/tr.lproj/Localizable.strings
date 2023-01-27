@@ -36,3 +36,5 @@
 "tabBarWhereMyBus" = "Otobüsüm Nerede?";
 "tabBarStations" = "Duraklar";
 "locationDisabled" = "Konum ayarlarınız kapalıdır. Lütfen Ayarlar'dan konum ayarlarınızı açınız.";
+"UUID" = "UUD";
+"btnCheck" = "Doğrula";
