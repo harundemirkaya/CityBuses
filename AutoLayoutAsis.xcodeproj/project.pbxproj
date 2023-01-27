@@ -53,6 +53,7 @@
 		4FC119B82983A01C002BD302 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4FC119BC2983A087002BD302 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4FC119BE2983A62A002BD302 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4FC119C52983FBC0002BD302 /* AutoLayoutAsis.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AutoLayoutAsis.entitlements; sourceTree = "<group>"; };
 		4FC4287D29810792004BED52 /* StationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationMapViewController.swift; sourceTree = "<group>"; };
 		4FC4287F29811257004BED52 /* ServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceModel.swift; sourceTree = "<group>"; };
 		4FC4288129811453004BED52 /* ServiceMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMapViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +133,7 @@
 		4FFB91ED297E6B1900B19260 = {
 			isa = PBXGroup;
 			children = (
+				4FC119C52983FBC0002BD302 /* AutoLayoutAsis.entitlements */,
 				4FFB91F8297E6B1900B19260 /* AutoLayoutAsis */,
 				4FFB91F7297E6B1900B19260 /* Products */,
 				EB9DF1F5817E8710DD3841AF /* Pods */,
