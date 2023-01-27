@@ -4,13 +4,17 @@
 //
 //  Created by Harun Demirkaya on 25.01.2023.
 //
-
+// MARK: -Import Libaries
 import UIKit
 import MapKit
 import CoreLocation
 
+// MARK: -Station Map Class
 class StationMapViewController: UIViewController {
     
+    // MARK: -Define
+    
+    // MARK: Map Defined
     let mapView: MKMapView = {
         let map = MKMapView()
         map.overrideUserInterfaceStyle = .dark
@@ -20,14 +24,16 @@ class StationMapViewController: UIViewController {
     var latitude: Double?
     var longitude: Double?
     
+    // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: Set Constraints and Annotation
         setMapConstrainst()
         setAnnotation()
-        
     }
     
+    // MARK: -Set Annotation Function
     func setAnnotation(){
         let location = CLLocationCoordinate2D(latitude: latitude ?? 0.0, longitude: longitude ?? 0.0)
         let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
@@ -37,7 +43,8 @@ class StationMapViewController: UIViewController {
         annotation.coordinate = location
         mapView.addAnnotation(annotation)
     }
-
+    
+    // MARK: -Map Constraints
     func setMapConstrainst(){
         view.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false

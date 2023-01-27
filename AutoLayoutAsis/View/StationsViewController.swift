@@ -4,12 +4,26 @@
 //
 //  Created by Harun Demirkaya on 24.01.2023.
 //
-
+// MARK: -Import Libaries
 import UIKit
 import Alamofire
 
+// MARK: -Stations Class
 class StationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
+    // MARK: -DEFINE
+    
+    // MARK: Table Defined
+    private lazy var tableView : UITableView = {
+        let table = UITableView()
+        table.delegate = self
+        table.dataSource = self
+        table.backgroundColor = .white
+        table.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
+        return table
+    }()
+    
+    // MARK: Stop Model Defined
     var stations: [Stop]? {
         didSet{
             for i in 0...(stations?.count ?? 0)-1{
@@ -20,40 +34,36 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    let tableView = UITableView()
-    
+    // MARK: Network Manager Defined
     let networkManager = NetworkManager()
     
+    // MARK: Table Tools Defined
     var selectedLatitude: Double?
     var selectedLongitude: Double?
-    
-    let searchController = UISearchController()
-    var searchBar: UISearchBar = UISearchBar()
     var stationsName: [String] = []
     var filteredStations: [String] = []
+    
+    // MARK: Search Bar Defined
+    let searchController = UISearchController()
+    var searchBar: UISearchBar = UISearchBar()
+   
+    // MARK: Page Title Defined
     var pageTitle: UILabel {
         let label = UILabel()
         label.text = NSLocalizedString("stationsPageTitle", comment: "Stations Page Title")
         return label
     }
     
+    // MARK: -View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
+        // MARK: Screen
         self.view.backgroundColor = .white
+        navigationItem.titleView = pageTitle
         
+        // MARK: TableView and Search Bar
         view.addSubview(tableView)
         tableView.addSubview(searchBar)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = .white
-        tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
-        
-        networkManager.fetchStations { result in
-            self.stations = result.value?.stops
-        }
-        
-        filteredStations = stationsName
-        
         searchBar.searchBarStyle = UISearchBar.Style.prominent
         searchBar.placeholder = NSLocalizedString("searchPlaceholder", comment: "Search Placeholder")
         searchBar.sizeToFit()
@@ -61,19 +71,29 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         searchBar.backgroundImage = UIImage()
         searchBar.delegate = self
         searchBar.sizeToFit()
-        
-        navigationItem.titleView = pageTitle
-        
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.done, target: self, action: #selector(openSearch))
         navigationItem.rightBarButtonItem = searchButton
+        
+        // MARK: Stations
+        getStations()
+        filteredStations = stationsName
     }
     
+    // MARK: -Fetch Stations
+    func getStations(){
+        networkManager.fetchStations { [weak self] result in
+            self?.stations = result.value?.stops
+        }
+    }
+    
+    // MARK: -Search Bar Open Keyboard
     override func viewDidAppear(_ animated: Bool) {
         DispatchQueue.main.async {
             self.searchController.searchBar.becomeFirstResponder()
         }
     }
     
+    // MARK: -Search Bar Functions
     @objc func openSearch(){
         view.addSubview(searchBar)
         UIView.animate(withDuration: 0.5) {
@@ -89,35 +109,6 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         navigationItem.rightBarButtonItem?.isHidden = false
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredStations.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
-        cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let stationMapVC = StationMapViewController()
-        networkManager.fetchStations { result in
-            self.selectedLatitude = result.value?.stops?[indexPath.row].latitude
-            self.selectedLongitude = result.value?.stops?[indexPath.row].longitude
-        }
-        stationMapVC.longitude = selectedLongitude
-        stationMapVC.latitude = selectedLatitude
-        if selectedLatitude != nil{
-            self.navigationController?.pushViewController(stationMapVC, animated: true)
-        }
-    }
-    
-    // MARK: Search Bar Config
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredStations = []
         if searchText == ""{
@@ -130,5 +121,36 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         self.tableView.reloadData()
+    }
+    
+    // MARK: -TableView Frame
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
+    }
+    
+    // MARK: -TableView for Rows
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredStations.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
+        cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row])
+        return cell
+    }
+    
+    // MARK: -TableView Select Row
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let stationMapVC = StationMapViewController()
+        networkManager.fetchStations { [weak self] result in
+            self?.selectedLatitude = result.value?.stops?[indexPath.row].latitude
+            self?.selectedLongitude = result.value?.stops?[indexPath.row].longitude
+        }
+        stationMapVC.longitude = selectedLongitude
+        stationMapVC.latitude = selectedLatitude
+        if selectedLatitude != nil{
+            self.navigationController?.pushViewController(stationMapVC, animated: true)
+        }
     }
 }

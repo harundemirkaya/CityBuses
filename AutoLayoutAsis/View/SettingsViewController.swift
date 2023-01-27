@@ -4,12 +4,16 @@
 //
 //  Created by Harun Demirkaya on 24.01.2023.
 //
-
+// MARK: -Import Libaries
 import UIKit
 import Firebase
 
+// MARK: -Settings Class
 final class SettingsViewController: UIViewController {
     
+    // MARK: -Define
+    
+    // MARK: -Text Field Defined
     var txtFieldEmail: UITextField = {
         let txtField = UITextField()
         txtField.placeholder = Auth.auth().currentUser?.email
@@ -17,6 +21,7 @@ final class SettingsViewController: UIViewController {
         return txtField
     }()
     
+    // MARK: -Button Defined
     var btnUpdate: UIButton = {
         let btn = UIButton()
         btn.setTitle(NSLocalizedString("btnUpdate", comment: "Update Button"), for: .normal)
@@ -24,24 +29,31 @@ final class SettingsViewController: UIViewController {
         return btn
     }()
     
+    // MARK: -Page Title Defined
     var pageTitle: UILabel {
         let label = UILabel()
         label.text = NSLocalizedString("settingPageTitle", comment: "Settings Page Title")
         return label
     }
     
+    // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         
+        // MARK: Screen
+        view.backgroundColor = .white
+        navigationItem.titleView = pageTitle
+        
+        // MARK: User Session Control
         requestCurrentuser()
+        
+        // MARK: TextFields and Button
         txtFieldEmail.txtFieldEmail(view)
         btnUpdate.btnUpdate(view, with: txtFieldEmail)
         btnUpdate.addTarget(self, action: #selector(btnUpdateTarget), for: .touchUpInside)
-        
-        navigationItem.titleView = pageTitle
     }
     
+    // MARK: -User Session Control Function
     func requestCurrentuser(){
         if Auth.auth().currentUser == nil{
             let homeVC = HomeViewController()
@@ -49,6 +61,7 @@ final class SettingsViewController: UIViewController {
         }
     }
     
+    // MARK: -Update Button Clicked
     @objc func btnUpdateTarget(){
         if txtFieldEmail.text != ""{
             Auth.auth().currentUser?.updateEmail(to: txtFieldEmail.text!)
@@ -58,6 +71,7 @@ final class SettingsViewController: UIViewController {
         }
     }
     
+    // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
             let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
             let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Okey Button"), style: UIAlertAction.Style.default)
@@ -66,7 +80,7 @@ final class SettingsViewController: UIViewController {
     }
 }
 
-// Constraints
+// MARK: -Constraints
 public extension UIView {
     func txtFieldEmail(_ view: UIView) {
         view.addSubview(self)

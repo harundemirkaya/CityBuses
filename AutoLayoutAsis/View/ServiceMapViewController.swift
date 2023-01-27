@@ -4,32 +4,33 @@
 //
 //  Created by Harun Demirkaya on 25.01.2023.
 //
-
+// MARK: -Import Libaries
 import UIKit
 import MapKit
 import CoreLocation
 
+// MARK: Service Map Class
 class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
+    // MARK: -Define
+    
+    // MARK: Map Defined
     let mapView: MKMapView = {
         let map = MKMapView()
         map.overrideUserInterfaceStyle = .dark
         return map
     }()
     var locationManager: CLLocationManager!
-    var routes: [Route]?
-    var serviceName: String?
     var routeLatitude: Double?
     var routeLongitude: Double?
-    var vehicles: [Vehicle]? {
-        didSet{
-            filterServiceBus()
-        }
-    }
-    
+    var routes: [Route]?
+    var serviceName: String?
     var direction = 0
     var userLatitude: Double?
     var userLongitude: Double?
+    var RouteData: Route?
+    var routeCoordinates: [CLLocation] = []
+    var routeOverlay: MKOverlay?
     var busLocation: [CLLocation] = [] {
         didSet{
             busAnnotation()
@@ -37,16 +38,24 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     }
     var busID: [String] = []
     
-    var RouteData: Route?
-    var routeCoordinates: [CLLocation] = []
-    var routeOverlay: MKOverlay?
+    // MARK: Vehicle Model Defined
+    var vehicles: [Vehicle]? {
+        didSet{
+            filterServiceBus()
+        }
+    }
     
+    // MARK: Network Manager Defined
     var networkManager = NetworkManager()
     
+    // MARK: Timer Defined
     var gameTimer: Timer?
     
+    // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // MARK: Map Config
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -55,17 +64,28 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         if CLLocationManager.locationServicesEnabled(){
             locationManager.startUpdatingLocation()
         }
+        
+        // MARK: Map Constraints
         setMapConstrainst()
+        
+        // MARK: Fetch Bus
         getBus()
+        
+        // MARK: Set Annotations
         setAnnotation()
+        
+        // MARK: Draw Route
         drawRoute(routeData: routeCoordinates)
         
+        // MARK: Change Direction Button Define and Add Right Bar
         let btnChangeDirection = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(changeDirection))
         navigationItem.rightBarButtonItems = [btnChangeDirection]
         
+        // MARK: Refresh Annotations Every 15 Seconds
         Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(reload), userInfo: nil, repeats: true)
     }
     
+    // MARK: -Change Direction Functions
     @objc func changeDirection(){
         let randomRouteLatitude = Double(routes?[direction].points?[2].latitude ?? "0.0")
         let randomRouteLongitude = Double(routes?[direction].points?[2].longitude ?? "0.0")
@@ -79,7 +99,6 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
             direction = 0
         }
         reload()
-        
     }
     
     @objc func reload(){
@@ -93,6 +112,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         drawRoute(routeData: routeCoordinates)
     }
     
+    // MARK: -Add Stations Annotations
     func setAnnotation(){
         for i in 0...(routes?[direction].points?.count ?? 0)-1{
             routeLatitude = Double(routes?[direction].points?[i].latitude ?? "0.0")
@@ -110,6 +130,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
     }
     
+    // MARK: -Add Bus Annotations
     func busAnnotation(){
         let annotation = MKPointAnnotation()
         let location = CLLocationCoordinate2D(latitude: (busLocation.last?.coordinate.latitude)!, longitude: (busLocation.last?.coordinate.longitude)!)
@@ -118,6 +139,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         mapView.addAnnotation(annotation)
     }
     
+    // MARK: -Map Config
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
         if annotationView == nil{
@@ -132,7 +154,6 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
                 annotationView?.backgroundColor = .yellow
             }
         }
-        
         let busCount = vehicles?.count ?? 0
         if busCount != 0{
             for i in 0...busCount-1{
@@ -145,6 +166,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         return annotationView
     }
     
+    // MARK: -User Location Annotation add Map
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations[0] as CLLocation
         userLatitude = userLocation.coordinate.latitude
@@ -157,6 +179,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         
     }
 
+    // MARK: -Map Constraints Function
     func setMapConstrainst(){
         view.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -166,11 +189,11 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
+    // MARK: -Draw Route for Stations Function
     func drawRoute(routeData: [CLLocation]){
         let coordinates = routeData.map { location -> CLLocationCoordinate2D in
             return location.coordinate
         }
-        
         DispatchQueue.main.async {
             self.routeOverlay = MKPolyline(coordinates: coordinates, count: coordinates.count)
             self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
@@ -189,6 +212,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         return renderer
     }
     
+    // MARK: -Filter Direction Bus
     func filterServiceBus(){
         let busCount = vehicles?.count ?? 0
         if busCount != 0{
@@ -198,14 +222,13 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
                         let loc = CLLocation(latitude: vehicles![i].latitude ?? 0.0, longitude: vehicles![i].longitude ?? 0.0)
                         busID.append((vehicles?[i].vehicleID!)!)
                         busLocation.append(loc)
-                        
                     }
                 }
             }
         }
-       
     }
     
+    // MARK: -Fetch Bus
     func getBus(){
         networkManager.fetchLiveVehicles { result in
             self.vehicles = result.value?.vehicles

@@ -4,15 +4,18 @@
 //
 //  Created by Harun Demirkaya on 23.01.2023.
 //
-
+// MARK: -Import Libaries
 import UIKit
 import MapKit
 import CoreLocation
 import Firebase
 
+// MARK: -Home Class
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate{
     
-    // Map
+    // MARK: -Define
+    
+    // MARK: Map Defined
     let mapView: MKMapView = {
         let map = MKMapView()
         map.overrideUserInterfaceStyle = .dark
@@ -22,13 +25,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var latitude: Double?
     var longitude: Double?
     
-    var pageTitle: UILabel {
-        let label = UILabel()
-        label.text = NSLocalizedString("homePageTitle", comment: "Home Page Title")
-        return label
-    }
     
-    // SideBar
+    // MARK: SideBar Defined
     var isSlideMenuPresented = false
     
     lazy var slideInMenuPadding: CGFloat = self.view.frame.width * 0.30
@@ -45,11 +43,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
         return view
     }()
-    
-    
     var menuCount = 7
     
-    // HomePage
+    // MARK: Map Page Defined
     lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -63,11 +59,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if CLLocationManager.locationServicesEnabled(){
             locationManager.startUpdatingLocation()
         }
-        
         return view
     }()
     
-    // SideBar Table
+    // MARK: SideBar Menu Defined
     let tableView = UITableView()
     var menuItem = [
         NSLocalizedString("whereMyBusMenuItem", comment: "Where My Bus Menu Item"),
@@ -78,20 +73,28 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         NSLocalizedString("changeLanguageMenuItem", comment: "Change Language Menu Item"),
         NSLocalizedString("settingsMenuItem", comment: "Setting Menu Item")
         ]
-    
-    let currentUser = Auth.auth().currentUser
-    
     var menuItems = [MenuItems]()
-    
     var selectedItem: Int?
     
+    // MARK: User Defined
+    let currentUser = Auth.auth().currentUser
     
+    // MARK: Page Title Defined
+    var pageTitle: UILabel {
+        let label = UILabel()
+        label.text = NSLocalizedString("homePageTitle", comment: "Home Page Title")
+        return label
+    }
+    
+    // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: Screen
         view.backgroundColor = .white
         navigationItem.titleView = pageTitle
         
+        // MARK: Session Control
         if currentUser != nil{
             menuItem.append(NSLocalizedString("signOutMenuItem", comment: "Sign Out Menu Item"))
         } else{
@@ -100,25 +103,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             menuCount -= 1
         }
         
+        // MARK: Menu
         menuBarButtonItem.tintColor = .white
         navigationItem.setLeftBarButton(menuBarButtonItem, animated: false)
         setMenuItems()
+        
+        // MARK: Map Page
         menuView.pinMenuTo(view, with: slideInMenuPadding)
         containerView.edgeTo(view)
         setMapConstrainst()
-        
-        
-        
     }
     
-    // Table
+    // MARK: -Table Frame
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
     
-    
-    // SideBar and Menu Table
+    // MARK: -Sidebar Menu Config
     @objc func menuBarButtonItemTapped(){
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0) {
             self.containerView.frame.origin.x = self.isSlideMenuPresented ? 0 : self.containerView.frame.width - self.slideInMenuPadding
@@ -127,6 +129,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func setMenuItems(){
+        for i in 0...menuCount{
+            let item = MenuItems(id: i, name: menuItem[i])
+            menuItems.append(item)
+        }
+    }
+    
+    // MARK: TableView for Rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItems.count
     }
@@ -137,6 +147,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    // MARK: -TableView Select Row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedItem = menuItems[indexPath.row].id
         if selectedItem == 0{
@@ -172,18 +183,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 self.navigationController?.pushViewController(loginVC, animated: true)
             }
         }
-        
     }
     
-    func setMenuItems(){
-        for i in 0...menuCount{
-            let item = MenuItems(id: i, name: menuItem[i])
-            menuItems.append(item)
-        }
-    }
-    
-    
-    // MAP
+    // MARK: -Map Config
     func setMapConstrainst(){
         containerView.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -207,7 +209,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 }
 
-//Constraints
+// MARK: Constraints
 public extension UIView {
     func edgeTo(_ view: UIView) {
         view.addSubview(self)

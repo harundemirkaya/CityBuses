@@ -4,12 +4,16 @@
 //
 //  Created by Harun Demirkaya on 23.01.2023.
 //
-
+// MARK: -Import Libaries
 import UIKit
 import FirebaseAuth
 
+// MARK: -Login View Class
 class LoginViewController: UIViewController {
     
+    // MARK: -Define
+    
+    // MARK: Text Field's Defined
     var txtFieldUserName: UITextField = {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
@@ -17,6 +21,7 @@ class LoginViewController: UIViewController {
         txtField.borderStyle = .bezel
         return txtField
     }()
+    
     var txtFieldPassword: UITextField = {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
@@ -24,6 +29,8 @@ class LoginViewController: UIViewController {
         txtField.borderStyle = .bezel
         return txtField
     }()
+    
+    // MARK: Button's Defined
     var btnLogin: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +38,7 @@ class LoginViewController: UIViewController {
         btn.backgroundColor = .gray
         return btn
     }()
+    
     var btnRegister: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -39,23 +47,27 @@ class LoginViewController: UIViewController {
         return btn
     }()
     
+    // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // MARK: Screen
         view.backgroundColor = .white
         
+        // MARK: TextFields and Buttons Add Screen
         view.addSubview(txtFieldUserName)
         view.addSubview(txtFieldPassword)
         
         btnLogin.addTarget(self, action: #selector(btnLoginTarget), for: .touchUpInside)
         view.addSubview(btnLogin)
-
         btnRegister.addTarget(self, action: #selector(btnRegisterTarget), for: .touchUpInside)
         view.addSubview(btnRegister)
         
+        // MARK: for Close Keyboard
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        
+        // MARK: Constraints Defined
         let constraints = [
             txtFieldUserName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             txtFieldUserName.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -78,6 +90,7 @@ class LoginViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
 
+    // MARK: -Register Button Clicked
     @objc func btnRegisterTarget(){
         if txtFieldUserName.text != "" && txtFieldPassword.text != ""{
             Auth.auth().createUser(withEmail: txtFieldUserName.text!, password: txtFieldPassword.text!) {
@@ -95,6 +108,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: -Login Button Clicked
     @objc func btnLoginTarget(){
         if txtFieldUserName.text != "" && txtFieldPassword.text != ""{
             Auth.auth().signIn(withEmail: txtFieldUserName.text!, password: txtFieldPassword.text!){
@@ -109,6 +123,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
             let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
             let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
@@ -116,9 +131,9 @@ class LoginViewController: UIViewController {
             self.present(alertMessage, animated: true)
     }
     
+    // MARK: -Close Keyboard Function
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
 }
 
