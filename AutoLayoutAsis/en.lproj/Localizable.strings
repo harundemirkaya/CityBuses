@@ -35,3 +35,4 @@
 "tabBarHome" = "Home Page";
 "tabBarWhereMyBus" = "Where My Bus?";
 "tabBarStations" = "Stations";
+"locationDisabled" = "Your location settings are turned off. Please open your location settings in Settings.";

@@ -61,9 +61,22 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         mapView.delegate = self
-        if CLLocationManager.locationServicesEnabled(){
-            locationManager.startUpdatingLocation()
+        
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                switch self.locationManager.authorizationStatus {
+                    case .notDetermined, .restricted, .denied:
+                    self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: NSLocalizedString("locationDisabled", comment: "Location Disabled"))
+                    case .authorizedAlways, .authorizedWhenInUse:
+                        self.locationManager.startUpdatingLocation()
+                    @unknown default:
+                        break
+                }
+            } else {
+                self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: NSLocalizedString("errorTitle", comment: "Error"))
+            }
         }
+        
         
         // MARK: Map Constraints
         setMapConstrainst()
@@ -84,6 +97,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         // MARK: Refresh Annotations Every 15 Seconds
         Timer.scheduledTimer(timeInterval: 15, target: self, selector: #selector(reload), userInfo: nil, repeats: true)
     }
+    
     
     // MARK: -Change Direction Functions
     @objc func changeDirection(){
@@ -233,6 +247,14 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         networkManager.fetchLiveVehicles { result in
             self.vehicles = result.value?.vehicles
         }
+    }
+    
+    // MARK: -Show Alert Message
+    func alertMessage(title: String, description: String){
+            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
+            alertMessage.addAction(okButton)
+            self.present(alertMessage, animated: true)
     }
 }
 

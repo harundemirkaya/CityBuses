@@ -56,8 +56,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         
-        if CLLocationManager.locationServicesEnabled(){
-            locationManager.startUpdatingLocation()
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                switch self.locationManager.authorizationStatus {
+                    case .notDetermined, .restricted, .denied:
+                    self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: NSLocalizedString("locationDisabled", comment: "Location Disabled"))
+                    case .authorizedAlways, .authorizedWhenInUse:
+                        self.locationManager.startUpdatingLocation()
+                    @unknown default:
+                        break
+                }
+            } else {
+                self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: NSLocalizedString("errorTitle", comment: "Error"))
+            }
         }
         return view
     }()
@@ -206,6 +217,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let annotation = MKPointAnnotation()
         annotation.coordinate = location
         mapView.addAnnotation(annotation)
+    }
+    
+    // MARK: -Show Alert Message
+    func alertMessage(title: String, description: String){
+            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
+            alertMessage.addAction(okButton)
+            self.present(alertMessage, animated: true)
     }
 }
 

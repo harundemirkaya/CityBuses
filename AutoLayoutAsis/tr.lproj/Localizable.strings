@@ -35,3 +35,4 @@
 "tabBarHome" = "Anasayfa";
 "tabBarWhereMyBus" = "Otobüsüm Nerede?";
 "tabBarStations" = "Duraklar";
+"locationDisabled" = "Konum ayarlarınız kapalıdır. Lütfen Ayarlar'dan konum ayarlarınızı açınız.";
