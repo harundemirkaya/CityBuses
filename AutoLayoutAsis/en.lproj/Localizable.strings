@@ -38,3 +38,5 @@
 "locationDisabled" = "Your location settings are turned off. Please open your location settings in Settings.";
 "UUID" = "UUID";
 "btnCheck" = "Check";
+"btnChangeLanguage" = "Change Language";
+"successChangeLanguage" = "Your language settings have been successfully changed. Please close and reopen the application.";

@@ -38,3 +38,5 @@
 "locationDisabled" = "Konum ayarlarınız kapalıdır. Lütfen Ayarlar'dan konum ayarlarınızı açınız.";
 "UUID" = "UUD";
 "btnCheck" = "Doğrula";
+"btnChangeLanguage" = "Dili Değiştir";
+"successChangeLanguage" = "Dil ayarlarınız başarıyla değiştirilmiştir. Lütfen uygulamayı kapatıp tekrardan açınız.";

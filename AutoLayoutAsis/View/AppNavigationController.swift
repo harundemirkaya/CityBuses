@@ -13,7 +13,7 @@ class AppNavigationController: UINavigationController {
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+ 
         // MARK: Create Navigate
         UINavigationBar.appearance().barTintColor = .white
         UINavigationBar.appearance().tintColor = .black
