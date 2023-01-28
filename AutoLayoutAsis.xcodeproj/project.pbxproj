@@ -33,7 +33,6 @@
 		4FFB9206297E6B1B00B19260 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FFB9204297E6B1B00B19260 /* LaunchScreen.storyboard */; };
 		4FFB9235297E7E0B00B19260 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FFB9234297E7E0B00B19260 /* GoogleService-Info.plist */; };
 		4FFB9237297E94BC00B19260 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB9236297E94BB00B19260 /* HomeViewController.swift */; };
-		4FFB923E297EA09500B19260 /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB923D297EA09500B19260 /* AppNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +68,6 @@
 		4FFB9207297E6B1B00B19260 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FFB9234297E7E0B00B19260 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FFB9236297E94BB00B19260 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		4FFB923D297EA09500B19260 /* AppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
 		6C9A80F6C01A31D44E7446B0 /* Pods-AutoLayoutAsis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLayoutAsis.debug.xcconfig"; path = "Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,7 +107,6 @@
 				4F6BA122297FB7750010C8C2 /* SettingsViewController.swift */,
 				4F6BA124297FB7AA0010C8C2 /* ShareAppViewController.swift */,
 				4F6BA126297FB7CC0010C8C2 /* ChangeLanguageViewController.swift */,
-				4FFB923D297EA09500B19260 /* AppNavigationController.swift */,
 				4F6BA128297FC29E0010C8C2 /* AppTabBarController.swift */,
 				4FC4287D29810792004BED52 /* StationMapViewController.swift */,
 				4FC4288129811453004BED52 /* ServiceMapViewController.swift */,
@@ -316,7 +313,6 @@
 				4FC4287E29810792004BED52 /* StationMapViewController.swift in Sources */,
 				4F6BA12C298006830010C8C2 /* NetworkManager.swift in Sources */,
 				4FC4288429815740004BED52 /* VehicleModel.swift in Sources */,
-				4FFB923E297EA09500B19260 /* AppNavigationController.swift in Sources */,
 				4FEF8E892985723100BF6B86 /* LocalizationSystem.swift in Sources */,
 				4FC4288029811257004BED52 /* ServiceModel.swift in Sources */,
 				4F6BA11F297FB67B0010C8C2 /* DealersViewController.swift in Sources */,

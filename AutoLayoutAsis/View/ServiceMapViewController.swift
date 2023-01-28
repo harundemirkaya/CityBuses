@@ -146,11 +146,13 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     // MARK: -Add Bus Annotations
     func busAnnotation(){
-        let annotation = MKPointAnnotation()
-        let location = CLLocationCoordinate2D(latitude: (busLocation.last?.coordinate.latitude)!, longitude: (busLocation.last?.coordinate.longitude)!)
-        annotation.coordinate = location
-        annotation.title = busID.last
-        mapView.addAnnotation(annotation)
+        if !busLocation.isEmpty{
+            let annotation = MKPointAnnotation()
+            let location = CLLocationCoordinate2D(latitude: (busLocation.last?.coordinate.latitude)!, longitude: (busLocation.last?.coordinate.longitude)!)
+            annotation.coordinate = location
+            annotation.title = busID.last
+            mapView.addAnnotation(annotation)
+        }
     }
     
     // MARK: -Map Config

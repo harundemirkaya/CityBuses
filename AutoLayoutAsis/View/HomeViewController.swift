@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     lazy var slideInMenuPadding: CGFloat = self.view.frame.width * 0.30
     
-    lazy var menuBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "square.grid.3x3.middle.filled")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped))
+    lazy var menuBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(menuBarButtonItemTapped))
     
     lazy var menuView: UIView = {
         let view = UIView()
@@ -91,7 +91,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // MARK: Screen
         view.backgroundColor = .white
         navigationItem.titleView = pageTitle
@@ -191,7 +190,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func setMapConstrainst(){
         containerView.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         mapView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         mapView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
