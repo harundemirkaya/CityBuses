@@ -40,3 +40,4 @@
 "btnCheck" = "Check";
 "btnChangeLanguage" = "Change Language";
 "successChangeLanguage" = "Your language settings have been successfully changed. Please close and reopen the application.";
+"btnShareApp" = "Share";

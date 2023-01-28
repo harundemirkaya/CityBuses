@@ -40,3 +40,4 @@
 "btnCheck" = "Doğrula";
 "btnChangeLanguage" = "Dili Değiştir";
 "successChangeLanguage" = "Dil ayarlarınız başarıyla değiştirilmiştir. Lütfen uygulamayı kapatıp tekrardan açınız.";
+"btnShareApp" = "Paylaş";
