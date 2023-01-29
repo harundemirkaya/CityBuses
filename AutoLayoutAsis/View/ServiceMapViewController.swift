@@ -55,6 +55,9 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // MARK: Screen
+        view.backgroundColor = .white
+        
         // MARK: Map Config
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -199,10 +202,10 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     func setMapConstrainst(){
         view.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        mapView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        mapView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        mapView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
     
     // MARK: -Draw Route for Stations Function

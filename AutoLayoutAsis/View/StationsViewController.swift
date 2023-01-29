@@ -54,6 +54,9 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         return label
     }
     
+    // MARK: Loading Screen Defined
+    let loadingScreen = LoadingScreen()
+    
     // MARK: -View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,7 +138,13 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: -TableView for Rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredStations.count
+        if filteredStations.isEmpty{
+            loadingScreen.startIndicator(view: view)
+            return 0
+        } else{
+            loadingScreen.stopIndicator(view: view)
+            return filteredStations.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,10 +156,8 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: -TableView Select Row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let stationMapVC = StationMapViewController()
-        networkManager.fetchStations { [weak self] result in
-            self?.selectedLatitude = result.value?.stops?[indexPath.row].latitude
-            self?.selectedLongitude = result.value?.stops?[indexPath.row].longitude
-        }
+        self.selectedLatitude = stations![indexPath.row].latitude
+        self.selectedLongitude = stations![indexPath.row].longitude
         stationMapVC.longitude = selectedLongitude
         stationMapVC.latitude = selectedLatitude
         if selectedLatitude != nil{

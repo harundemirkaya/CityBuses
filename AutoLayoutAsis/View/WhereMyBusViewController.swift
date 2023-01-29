@@ -54,6 +54,9 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
         return label
     }
     
+    // MARK: Loading Screen Defined
+    let loadingScreen = LoadingScreen()
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,7 +138,13 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: -TableView for Rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredServices.count
+        if filteredServices.isEmpty{
+            loadingScreen.startIndicator(view: view)
+            return 0
+        } else{
+            loadingScreen.stopIndicator(view: view)
+            return filteredServices.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,15 +156,12 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: -TableView Select Row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let serviceMapVC = ServiceMapViewController()
-        networkManager.fetchServices { [weak self] result in
-            self?.selectedRoute = result.value?.services?[indexPath.row].routes
-            self?.selectedServiceName = result.value?.services?[indexPath.row].name
-        }
+        self.selectedRoute = services![indexPath.row].routes
+        self.selectedServiceName = services![indexPath.row].name
         serviceMapVC.routes = selectedRoute
         serviceMapVC.serviceName = selectedServiceName
-        if selectedRoute != nil{
-            self.navigationController?.pushViewController(serviceMapVC, animated: true)
-        }
+        self.navigationController?.pushViewController(serviceMapVC, animated: true)
+        
     }
     
     // MARK: -Show Alert Message
