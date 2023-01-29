@@ -31,7 +31,6 @@ class ChangeLanguageViewController: UIViewController {
     
     // MARK: -Change Language Button Clicked
     @objc func changeLanguage(){
-        let homeVC = HomeViewController()
         if LocalizationSystem.sharedInstance.getLanguage() == "en" {
             LocalizationSystem.sharedInstance.setLanguage(languageCode: "tr")
             alertMessage(title: NSLocalizedString("successTitle", comment: "Success Title"), description: NSLocalizedString("successChangeLanguage", comment: "Success Change Language"))

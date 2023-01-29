@@ -190,7 +190,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func setMapConstrainst(){
         containerView.addSubview(mapView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        mapView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         mapView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         mapView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true

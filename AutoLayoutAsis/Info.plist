@@ -21,7 +21,9 @@
 					<string>Default Configuration</string>
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-					<key>UIViewControllerBasedStatusBarAppearance</key>
+					<key>Status bar style</key>
+					<string>Light Content</string>
+					<key>View controller-based status bar appearance</key>
 					<false/>
 				</dict>
 			</array>
