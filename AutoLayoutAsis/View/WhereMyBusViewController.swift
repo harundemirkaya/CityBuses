@@ -106,6 +106,8 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        filteredServices = servicesName
+        tableView.reloadData()
         navigationItem.titleView = pageTitle
         navigationItem.rightBarButtonItem?.isHidden = false
     }

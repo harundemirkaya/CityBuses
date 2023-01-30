@@ -109,6 +109,8 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        filteredStations = stationsName
+        tableView.reloadData()
         navigationItem.titleView = pageTitle
         navigationItem.rightBarButtonItem?.isHidden = false
     }
