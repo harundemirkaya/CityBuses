@@ -7,12 +7,13 @@
 // MARK: -Import Libaries
 import UIKit
 import FirebaseAuth
+import AVFoundation
 
 // MARK: -Login View Class
 class LoginViewController: UIViewController {
     
     // MARK: -Define
-    
+    var player: AVPlayer?
     // MARK: Text Field's Defined
     var txtFieldUserName: UITextField = {
         let txtField = UITextField()
@@ -24,6 +25,7 @@ class LoginViewController: UIViewController {
         let paddingViewUsername = UIView(frame: CGRectMake(0, 0, 15, txtField.frame.height))
         txtField.leftView = paddingViewUsername
         txtField.leftViewMode = UITextField.ViewMode.always
+        txtField.backgroundColor = .white
         return txtField
     }()
     
@@ -37,6 +39,7 @@ class LoginViewController: UIViewController {
         let paddingViewUsername = UIView(frame: CGRectMake(0, 0, 15, txtField.frame.height))
         txtField.leftView = paddingViewUsername
         txtField.leftViewMode = UITextField.ViewMode.always
+        txtField.backgroundColor = .white
         return txtField
     }()
     
@@ -59,6 +62,15 @@ class LoginViewController: UIViewController {
         return btn
     }()
     
+    var btnBackHome: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("btnBackHome".localized(), for: .normal)
+        btn.layer.cornerRadius = 6.0
+        btn.backgroundColor = .purple
+        return btn
+    }()
+    
     // MARK: Label Defined
     var lblTitle: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
@@ -66,6 +78,7 @@ class LoginViewController: UIViewController {
         label.textAlignment = .left
         label.text = "login".localized()
         label.font = UIFont.boldSystemFont(ofSize: 28.0)
+        label.textColor = .white
         return label
     }()
     
@@ -75,6 +88,7 @@ class LoginViewController: UIViewController {
         label.text = "username".localized()
         label.textAlignment = .left
         label.font = label.font.withSize(14)
+        label.textColor = .white
         return label
     }()
     
@@ -84,6 +98,7 @@ class LoginViewController: UIViewController {
         label.textAlignment = .left
         label.text = "password".localized()
         label.font = label.font.withSize(14)
+        label.textColor = .white
         return label
     }()
 
@@ -92,14 +107,6 @@ class LoginViewController: UIViewController {
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // MARK: Screen
-        view.backgroundColor = .white
-
-        btnLogin.addTarget(self, action: #selector(btnLoginTarget), for: .touchUpInside)
-        view.addSubview(btnLogin)
-        btnRegister.addTarget(self, action: #selector(btnRegisterTarget), for: .touchUpInside)
-        view.addSubview(btnRegister)
         
         // MARK: for Close Keyboard
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -113,9 +120,27 @@ class LoginViewController: UIViewController {
         lblTitle.lblTitle(view)
         lblUsername.lblTxtFieldLabel(view, txtField: txtFieldUserName)
         lblPassword.lblTxtFieldLabel(view, txtField: txtFieldPassword)
-        
+        btnBackHome.btnBackHomeConstraints(view, btnRegister: btnRegister
+        )
         // MARK: View Model Connect
         loginViewModel.loginVC = self
+        
+        // MARK: Video Config
+        playVideo()
+        navigationController?.navigationBar.isHidden = true
+        tabBarController?.tabBar.isHidden = true
+        
+        btnLogin.addTarget(self, action: #selector(btnLoginTarget), for: .touchUpInside)
+        btnRegister.addTarget(self, action: #selector(btnRegisterTarget), for: .touchUpInside)
+        btnBackHome.addTarget(self, action: #selector(btnBackHomeTarget), for: .touchUpInside)
+    }
+    
+    // MARK: -Back Home Button Clicked
+    @objc func btnBackHomeTarget(){
+        let homeVC = HomeViewController()
+        navigationController?.pushViewController(homeVC, animated: true)
+        tabBarController?.tabBar.isHidden = false
+        navigationController?.navigationBar.isHidden = false
     }
 
     // MARK: -Register Button Clicked
@@ -147,6 +172,25 @@ class LoginViewController: UIViewController {
     // MARK: -Close Keyboard Function
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    // MARK: -Video Functions
+    func playVideo(){
+        let path = Bundle.main.path(forResource: "intro", ofType: ".mp4")
+        player = AVPlayer(url: URL(fileURLWithPath: path!))
+        player!.actionAtItemEnd = AVPlayer.ActionAtItemEnd.none
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = self.view.frame
+        playerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        self.view.layer.insertSublayer(playerLayer, at: 0)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player!.currentItem)
+        player!.seek(to: CMTime.zero)
+        player!.play()
+        self.player?.isMuted = true
+    }
+    
+    @objc func playerItemDidReachEnd(){
+        player!.seek(to: CMTime.zero)
     }
 }
 
@@ -198,6 +242,13 @@ public extension UIView{
     func btnRegisterConstraints(_ view: UIView, btnLogin: UIButton){
         view.addSubview(self)
         topAnchor.constraint(equalTo: btnLogin.bottomAnchor, constant: 10).isActive = true
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
+    }
+    
+    func btnBackHomeConstraints(_ view: UIView, btnRegister: UIButton){
+        view.addSubview(self)
+        topAnchor.constraint(equalTo: btnRegister.bottomAnchor, constant: 10).isActive = true
         centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
     }

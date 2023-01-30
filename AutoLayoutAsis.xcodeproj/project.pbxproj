@@ -26,6 +26,7 @@
 		4F988CF72987A22D00E74198 /* WhereMyBusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF62987A22D00E74198 /* WhereMyBusViewModel.swift */; };
 		4F988CF92987A3BC00E74198 /* StationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF82987A3BC00E74198 /* StationsViewModel.swift */; };
 		4F988CFB2987A4C700E74198 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CFA2987A4C700E74198 /* SettingsViewModel.swift */; };
+		4FADF2E32987E3A80087AA81 /* intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4FADF2E02987E3620087AA81 /* intro.mp4 */; };
 		4FC119BB2983A087002BD302 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4FC119BD2983A087002BD302 /* Localizable.strings */; };
 		4FC4287E29810792004BED52 /* StationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4287D29810792004BED52 /* StationMapViewController.swift */; };
 		4FC4288029811257004BED52 /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4287F29811257004BED52 /* ServiceModel.swift */; };
@@ -36,7 +37,6 @@
 		4FFB91FC297E6B1900B19260 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91FB297E6B1900B19260 /* SceneDelegate.swift */; };
 		4FFB91FE297E6B1900B19260 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91FD297E6B1900B19260 /* LoginViewController.swift */; };
 		4FFB9203297E6B1B00B19260 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FFB9202297E6B1B00B19260 /* Assets.xcassets */; };
-		4FFB9206297E6B1B00B19260 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FFB9204297E6B1B00B19260 /* LaunchScreen.storyboard */; };
 		4FFB9235297E7E0B00B19260 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FFB9234297E7E0B00B19260 /* GoogleService-Info.plist */; };
 		4FFB9237297E94BC00B19260 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB9236297E94BB00B19260 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
@@ -62,7 +62,7 @@
 		4F988CF62987A22D00E74198 /* WhereMyBusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereMyBusViewModel.swift; sourceTree = "<group>"; };
 		4F988CF82987A3BC00E74198 /* StationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsViewModel.swift; sourceTree = "<group>"; };
 		4F988CFA2987A4C700E74198 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		4FADF2DE2987DB240087AA81 /* intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro.mp4; sourceTree = "<group>"; };
+		4FADF2E02987E3620087AA81 /* intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = intro.mp4; path = ../../../intro.mp4; sourceTree = "<group>"; };
 		4FC119B82983A01C002BD302 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4FC119BC2983A087002BD302 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4FC119BE2983A62A002BD302 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -110,7 +110,6 @@
 		4F6BA113297FB1150010C8C2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4FADF2DE2987DB240087AA81 /* intro.mp4 */,
 				4F988CF42987A1D700E74198 /* TableViewCell */,
 				4F988CE52986893100E74198 /* LoadingScreen.swift */,
 				4FFB91FD297E6B1900B19260 /* LoginViewController.swift */,
@@ -189,6 +188,7 @@
 				4FFB9202297E6B1B00B19260 /* Assets.xcassets */,
 				4FFB9204297E6B1B00B19260 /* LaunchScreen.storyboard */,
 				4FFB9207297E6B1B00B19260 /* Info.plist */,
+				4FADF2E02987E3620087AA81 /* intro.mp4 */,
 				4FFB9234297E7E0B00B19260 /* GoogleService-Info.plist */,
 				4FC119BD2983A087002BD302 /* Localizable.strings */,
 			);
@@ -277,7 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FFB9206297E6B1B00B19260 /* LaunchScreen.storyboard in Resources */,
+				4FADF2E32987E3A80087AA81 /* intro.mp4 in Resources */,
 				4FC119BB2983A087002BD302 /* Localizable.strings in Resources */,
 				4FFB9203297E6B1B00B19260 /* Assets.xcassets in Resources */,
 				4FFB9235297E7E0B00B19260 /* GoogleService-Info.plist in Resources */,
