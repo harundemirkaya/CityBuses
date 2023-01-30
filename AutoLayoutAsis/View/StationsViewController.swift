@@ -57,6 +57,9 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: Loading Screen Defined
     let loadingScreen = LoadingScreen()
     
+    // MARK: Stations View Model Defined
+    let stationsViewModel = StationsViewModel()
+    
     // MARK: -View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,21 +80,15 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.done, target: self, action: #selector(openSearch))
         navigationItem.rightBarButtonItem = searchButton
         
+        // MARK: Stations View Model Connect
+        stationsViewModel.stationsVC = self
+        
         // MARK: Stations
-        getStations()
+        stationsViewModel.getStations()
         filteredStations = stationsName
     }
     
-    // MARK: -Fetch Stations
-    func getStations(){
-        networkManager.fetchStations { [weak self] result in
-            if result.response?.statusCode == 200{
-                self?.stations = result.value?.stops
-            } else{
-                self?.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: result.error!.localizedDescription)
-            }
-        }
-    }
+
     
     // MARK: -Search Bar Open Keyboard
     override func viewDidAppear(_ animated: Bool) {

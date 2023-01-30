@@ -47,6 +47,8 @@ class LoginViewController: UIViewController {
         return btn
     }()
     
+    let loginViewModel = LoginViewModel()
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,21 +89,15 @@ class LoginViewController: UIViewController {
             
         ]
         NSLayoutConstraint.activate(constraints)
+        
+        // MARK: View Model Connect
+        loginViewModel.loginVC = self
     }
 
     // MARK: -Register Button Clicked
     @objc func btnRegisterTarget(){
         if txtFieldUserName.text != "" && txtFieldPassword.text != ""{
-            Auth.auth().createUser(withEmail: txtFieldUserName.text!, password: txtFieldPassword.text!) {
-                authDataResult, err in
-                if err != nil{
-                    self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error Title"), description: err!.localizedDescription)
-                }
-                else{
-                    let homeVC = HomeViewController()
-                    self.navigationController?.pushViewController(homeVC, animated: true)
-                }
-            }
+            loginViewModel.btnRegisterClicked()
         } else{
             self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error Title"), description: NSLocalizedString("fillAllField", comment: "Fill All Field"))
         }
@@ -110,15 +106,9 @@ class LoginViewController: UIViewController {
     // MARK: -Login Button Clicked
     @objc func btnLoginTarget(){
         if txtFieldUserName.text != "" && txtFieldPassword.text != ""{
-            Auth.auth().signIn(withEmail: txtFieldUserName.text!, password: txtFieldPassword.text!){
-                AuthDataResult, err in
-                if err != nil{
-                    self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error Title"), description: err!.localizedDescription)
-                } else{
-                    let homeVC = HomeViewController()
-                    self.navigationController?.pushViewController(homeVC, animated: true)
-                }
-            }
+            loginViewModel.btnLoginClicked()
+        } else{
+            self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error Title"), description: NSLocalizedString("fillAllField", comment: "Fill All Field"))
         }
     }
     

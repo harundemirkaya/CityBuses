@@ -36,6 +36,8 @@ final class SettingsViewController: UIViewController {
         return label
     }
     
+    let settingsViewModel = SettingsViewModel()
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,32 +46,19 @@ final class SettingsViewController: UIViewController {
         view.backgroundColor = .white
         navigationItem.titleView = pageTitle
         
+        // MARK: Settings View Model Connect
+        settingsViewModel.settingsVC = self
+        
         // MARK: User Session Control
-        requestCurrentuser()
+        settingsViewModel.requestCurrentuser()
         
         // MARK: TextFields and Button
         txtFieldEmail.txtFieldEmail(view)
         btnUpdate.btnUpdate(view, with: txtFieldEmail)
-        btnUpdate.addTarget(self, action: #selector(btnUpdateTarget), for: .touchUpInside)
+        btnUpdate.addTarget(self, action: #selector(settingsViewModel.btnUpdateTarget), for: .touchUpInside)
     }
     
-    // MARK: -User Session Control Function
-    func requestCurrentuser(){
-        if Auth.auth().currentUser == nil{
-            let homeVC = HomeViewController()
-            self.navigationController?.pushViewController(homeVC, animated: true)
-        }
-    }
-    
-    // MARK: -Update Button Clicked
-    @objc func btnUpdateTarget(){
-        if txtFieldEmail.text != ""{
-            Auth.auth().currentUser?.updateEmail(to: txtFieldEmail.text!)
-            self.alertMessage(title: NSLocalizedString("successTitle", comment: "Succes Alert Title"), description: NSLocalizedString("changeMailSuccessAlertDescription", comment: "Change E Mail Success Alert Description"))
-        } else{
-            self.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error Title"), description: NSLocalizedString("fillAllField", comment: "Fill All Fields"))
-        }
-    }
+
     
     // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){

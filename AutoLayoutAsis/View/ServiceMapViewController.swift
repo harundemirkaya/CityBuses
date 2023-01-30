@@ -51,6 +51,9 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     // MARK: Timer Defined
     var gameTimer: Timer?
     
+    // MARK: ServiceMapViewModel Defined
+    let serviceMapViewModel = ServiceMapViewModel()
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +67,8 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         mapView.delegate = self
+        
+        serviceMapViewModel.serviceMapVC = self
         
         // MARK: MAP
         DispatchQueue.global().async {
@@ -85,7 +90,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         setMapConstrainst()
         
         // MARK: Fetch Bus
-        getBus()
+        serviceMapViewModel.getBus()
         
         // MARK: Set Annotations
         setAnnotation()
@@ -124,7 +129,7 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         self.mapView.removeOverlays(self.mapView.overlays)
         routeCoordinates.removeAll()
         setAnnotation()
-        getBus()
+        serviceMapViewModel.getBus()
         busAnnotation()
         drawRoute(routeData: routeCoordinates)
     }
@@ -243,17 +248,6 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
                         busLocation.append(loc)
                     }
                 }
-            }
-        }
-    }
-    
-    // MARK: -Fetch Bus
-    func getBus(){
-        networkManager.fetchLiveVehicles { [weak self] result in
-            if result.response?.statusCode == 200{
-                self?.vehicles = result.value?.vehicles
-            } else{
-                self?.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: result.error!.localizedDescription)
             }
         }
     }

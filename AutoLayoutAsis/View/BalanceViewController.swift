@@ -17,7 +17,7 @@ final class BalanceViewController: UIViewController{
     var txtFieldUUID: UITextField = {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.placeholder = NSLocalizedString("UUID", comment: "UUID")
+        txtField.placeholder = "UUID".localized()
         txtField.borderStyle = .bezel
         return txtField
     }()
@@ -61,5 +61,11 @@ public extension UIView{
         topAnchor.constraint(equalTo: txtField.bottomAnchor, constant: 10).isActive = true
         centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    }
+}
+
+extension String {
+    func localized() -> String{
+        return NSLocalizedString(self, comment: self)
     }
 }

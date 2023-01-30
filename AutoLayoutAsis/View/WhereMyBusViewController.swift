@@ -57,6 +57,9 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: Loading Screen Defined
     let loadingScreen = LoadingScreen()
     
+    // MARK: Where My Bus View Model Defined
+    let whereMyBusViewModel = WhereMyBusViewModel()
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,21 +79,12 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.done, target: self, action: #selector(openSearch))
         navigationItem.rightBarButtonItem = searchButton
         
-        // MARK: Services
-        getServices()
-        filteredServices = servicesName
-    }
+        // MARK: View Model
+        whereMyBusViewModel.whereMyBusVC = self
     
-    // MARK: -Fetch Services
-    func getServices(){
-        networkManager.fetchServices{ [weak self] result in
-            if result.response?.statusCode == 200{
-                self?.services = result.value?.services
-            } else{
-                self?.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: result.error!.localizedDescription)
-            }
-            
-        }
+        // MARK: Services
+        whereMyBusViewModel.getServices()
+        filteredServices = servicesName
     }
     
     // MARK: -Search Bar Open Keyboard
