@@ -41,3 +41,10 @@
 "btnChangeLanguage" = "Change Language";
 "successChangeLanguage" = "Your language settings have been successfully changed. Please close and reopen the application.";
 "btnShareApp" = "Share";
+"login" = "Login";
+"btnBalanceQuery" = "Query";
+"balanceQueryTitle" = "Balance Query";
+"shareAppTitle" = "Share App";
+"changeLanguageTitle" = "Change Language";
+"username" = "Username";
+"password" = "Password";

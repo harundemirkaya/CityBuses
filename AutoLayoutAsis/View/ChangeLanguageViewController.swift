@@ -10,12 +10,26 @@ import UIKit
 // MARK: -Change Language Class
 class ChangeLanguageViewController: UIViewController {
 
+    // MARK: -Define
+    
+    // MARK: Button Defined
     var btnChange: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle(NSLocalizedString("btnChangeLanguage", comment: "Change Language Button"), for: .normal)
-        btn.backgroundColor = .gray
+        btn.setTitle("btnChangeLanguage".localized(), for: .normal)
+        btn.layer.cornerRadius = 6.0
+        btn.backgroundColor = .purple
         return btn
+    }()
+    
+    // MARK: Title Label Defined
+    var lblTitle: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.text = "changeLanguageTitle".localized()
+        label.font = UIFont.boldSystemFont(ofSize: 28.0)
+        return label
     }()
     
     override func viewDidLoad() {
@@ -25,7 +39,8 @@ class ChangeLanguageViewController: UIViewController {
         view.backgroundColor = .white
         
         // MARK: Button Added Screen and Added Button Function
-        btnChange.btnConstraints(view)
+        btnChange.btnChangeLanguageConstraints(view)
+        lblTitle.lblTitleConstraints(view)
         btnChange.addTarget(self, action: #selector(changeLanguage), for: .touchUpInside)
     }
     
@@ -51,10 +66,10 @@ class ChangeLanguageViewController: UIViewController {
 
 // MARK: -Constraints
 public extension UIView{
-    func btnConstraints(_ view: UIView){
+    func btnChangeLanguageConstraints(_ view: UIView){
         view.addSubview(self)
-        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
     }
 }

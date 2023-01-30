@@ -12,14 +12,26 @@ class ShareAppViewController: UIViewController {
     
     // MARK: -Define
     
+    // MARK: Button Defined
     var btnShare: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle(NSLocalizedString("btnShareApp", comment: "Share App Button"), for: .normal)
-        btn.backgroundColor = .gray
+        btn.setTitle("btnShareApp".localized(), for: .normal)
+        btn.layer.cornerRadius = 6.0
+        btn.backgroundColor = .purple
         return btn
     }()
 
+    // MARK: Title Label Defined
+    var lblTitle: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.text = "shareAppTitle".localized()
+        label.font = UIFont.boldSystemFont(ofSize: 28.0)
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,7 +39,8 @@ class ShareAppViewController: UIViewController {
         view.backgroundColor = .white
         
         // MARK: Add Button
-        btnShare.btnConstraints(view)
+        btnShare.btnShareConstraints(view)
+        lblTitle.lblTitle(view)
         btnShare.addTarget(self, action: #selector(btnShareClicked), for: .touchUpInside)
     }
     
@@ -43,8 +56,8 @@ class ShareAppViewController: UIViewController {
 public extension UIView{
     func btnShareConstraints(_ view: UIView){
         view.addSubview(self)
-        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
     }
 }

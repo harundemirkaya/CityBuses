@@ -41,3 +41,10 @@
 "btnChangeLanguage" = "Dili Değiştir";
 "successChangeLanguage" = "Dil ayarlarınız başarıyla değiştirilmiştir. Lütfen uygulamayı kapatıp tekrardan açınız.";
 "btnShareApp" = "Paylaş";
+"login" = "Giriş Yap";
+"btnBalanceQuery" = "Sorgula";
+"balanceQueryTitle" = "Bakiye Sorgula";
+"shareAppTitle" = "Uygulamayı Paylaş";
+"changeLanguageTitle" = "Dili Değiştir";
+"username" = "Kullanıcı Adı";
+"password" = "Şifre";

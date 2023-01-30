@@ -17,16 +17,26 @@ class LoginViewController: UIViewController {
     var txtFieldUserName: UITextField = {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.placeholder = NSLocalizedString("emailPlaceHolder", comment: "Email Text Field Place Holder")
-        txtField.borderStyle = .bezel
+        txtField.placeholder = "emailPlaceHolder".localized()
+        txtField.layer.cornerRadius = 4.0
+        txtField.layer.borderWidth = 1.0
+        txtField.layer.borderColor = UIColor.gray.cgColor
+        let paddingViewUsername = UIView(frame: CGRectMake(0, 0, 15, txtField.frame.height))
+        txtField.leftView = paddingViewUsername
+        txtField.leftViewMode = UITextField.ViewMode.always
         return txtField
     }()
     
     var txtFieldPassword: UITextField = {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
-        txtField.placeholder = NSLocalizedString("passwordPlaceHolder", comment: "Password Text Field Place Holder")
-        txtField.borderStyle = .bezel
+        txtField.placeholder = "passwordPlaceHolder".localized()
+        txtField.layer.cornerRadius = 4.0
+        txtField.layer.borderWidth = 1.0
+        txtField.layer.borderColor = UIColor.gray.cgColor
+        let paddingViewUsername = UIView(frame: CGRectMake(0, 0, 15, txtField.frame.height))
+        txtField.leftView = paddingViewUsername
+        txtField.leftViewMode = UITextField.ViewMode.always
         return txtField
     }()
     
@@ -34,19 +44,49 @@ class LoginViewController: UIViewController {
     var btnLogin: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle(NSLocalizedString("btnLogin", comment: "Login Button Title"), for: .normal)
-        btn.backgroundColor = .gray
+        btn.setTitle("btnLogin".localized(), for: .normal)
+        btn.layer.cornerRadius = 6.0
+        btn.backgroundColor = .purple
         return btn
     }()
     
     var btnRegister: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle(NSLocalizedString("btnRegister", comment: "Register Button Title"), for: .normal)
-        btn.backgroundColor = .gray
+        btn.setTitle("btnRegister".localized(), for: .normal)
+        btn.layer.cornerRadius = 6.0
+        btn.backgroundColor = .purple
         return btn
     }()
     
+    // MARK: Label Defined
+    var lblTitle: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.text = "login".localized()
+        label.font = UIFont.boldSystemFont(ofSize: 28.0)
+        return label
+    }()
+    
+    var lblUsername: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "username".localized()
+        label.textAlignment = .left
+        label.font = label.font.withSize(14)
+        return label
+    }()
+    
+    var lblPassword: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.text = "password".localized()
+        label.font = label.font.withSize(14)
+        return label
+    }()
+
     let loginViewModel = LoginViewModel()
     
     // MARK: -ViewDidLoad
@@ -55,11 +95,7 @@ class LoginViewController: UIViewController {
         
         // MARK: Screen
         view.backgroundColor = .white
-        
-        // MARK: TextFields and Buttons Add Screen
-        view.addSubview(txtFieldUserName)
-        view.addSubview(txtFieldPassword)
-        
+
         btnLogin.addTarget(self, action: #selector(btnLoginTarget), for: .touchUpInside)
         view.addSubview(btnLogin)
         btnRegister.addTarget(self, action: #selector(btnRegisterTarget), for: .touchUpInside)
@@ -70,25 +106,13 @@ class LoginViewController: UIViewController {
         view.addGestureRecognizer(tap)
         
         // MARK: Constraints Defined
-        let constraints = [
-            txtFieldUserName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            txtFieldUserName.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            txtFieldUserName.widthAnchor.constraint(equalTo: view.widthAnchor),
-    
-            txtFieldPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            txtFieldPassword.topAnchor.constraint(equalTo: txtFieldUserName.bottomAnchor, constant: 10),
-            txtFieldPassword.widthAnchor.constraint(equalTo: view.widthAnchor),
-            
-            btnLogin.topAnchor.constraint(equalTo: txtFieldPassword.bottomAnchor, constant: 10),
-            btnLogin.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            btnLogin.widthAnchor.constraint(equalTo: view.widthAnchor),
-            
-            btnRegister.topAnchor.constraint(equalTo: btnLogin.bottomAnchor, constant: 10),
-            btnRegister.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            btnRegister.widthAnchor.constraint(equalTo: view.widthAnchor)
-            
-        ]
-        NSLayoutConstraint.activate(constraints)
+        txtFieldUserName.txtUserNameConstraints(view)
+        txtFieldPassword.txtPasswordConstraints(view, txtFieldUserName: txtFieldUserName)
+        btnLogin.btnLoginConstraints(view, txtFieldPassword: txtFieldPassword)
+        btnRegister.btnRegisterConstraints(view, btnLogin: btnLogin)
+        lblTitle.lblTitle(view)
+        lblUsername.lblTxtFieldLabel(view, txtField: txtFieldUserName)
+        lblPassword.lblTxtFieldLabel(view, txtField: txtFieldPassword)
         
         // MARK: View Model Connect
         loginViewModel.loginVC = self
@@ -126,3 +150,55 @@ class LoginViewController: UIViewController {
     }
 }
 
+public extension UIView{
+    func lblTitle(_ view: UIView){
+        view.addSubview(self)
+        topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 65).isActive = true
+        centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
+    }
+    
+    func lblTxtFieldLabel(_ view: UIView, txtField: UITextField){
+        view.addSubview(self)
+        bottomAnchor.constraint(equalTo: txtField.topAnchor, constant: -10).isActive = true
+        centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
+    }
+    
+    func lblPassword(_ view: UIView, txtFieldPassword: UITextField){
+        view.addSubview(self)
+        bottomAnchor.constraint(equalTo: txtFieldPassword.topAnchor, constant: -10).isActive = true
+        centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
+    }
+    
+    func txtUserNameConstraints(_ view: UIView){
+        view.addSubview(self)
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -30).isActive = true
+        widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
+        heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    func txtPasswordConstraints(_ view: UIView,  txtFieldUserName: UITextField){
+        view.addSubview(self)
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        topAnchor.constraint(equalTo: txtFieldUserName.bottomAnchor, constant: 40).isActive = true
+        widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
+        heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    func btnLoginConstraints(_ view: UIView, txtFieldPassword: UITextField){
+        view.addSubview(self)
+        topAnchor.constraint(equalTo: txtFieldPassword.bottomAnchor, constant: 50).isActive = true
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
+    }
+    
+    func btnRegisterConstraints(_ view: UIView, btnLogin: UIButton){
+        view.addSubview(self)
+        topAnchor.constraint(equalTo: btnLogin.bottomAnchor, constant: 10).isActive = true
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
+    }
+}

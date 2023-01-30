@@ -33,6 +33,7 @@ class AppTabBarController: UITabBarController {
         // MARK: TabBar and View Config
         self.viewControllers = views
         tabBar.backgroundColor = .white
+        tabBar.tintColor = .purple
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{

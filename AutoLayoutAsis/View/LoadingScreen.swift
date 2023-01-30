@@ -24,6 +24,7 @@ class LoadingScreen{
         self.activityIndicator = UIActivityIndicatorView()
         self.activityIndicator.frame = CGRectMake(40, 12, 40, 40)
         self.activityIndicator.style = UIActivityIndicatorView.Style.large
+        self.activityIndicator.color = .purple
         
         loadingView.addSubview(activityIndicator)
         view.addSubview(loadingView)
