@@ -127,7 +127,7 @@ class LoginViewController: UIViewController {
         
         // MARK: Video Config
         playVideo()
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.isNavigationBarHidden = true
         tabBarController?.tabBar.isHidden = true
         
         btnLogin.addTarget(self, action: #selector(btnLoginTarget), for: .touchUpInside)
@@ -140,7 +140,7 @@ class LoginViewController: UIViewController {
         let homeVC = HomeViewController()
         navigationController?.pushViewController(homeVC, animated: true)
         tabBarController?.tabBar.isHidden = false
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.isNavigationBarHidden = false
     }
 
     // MARK: -Register Button Clicked

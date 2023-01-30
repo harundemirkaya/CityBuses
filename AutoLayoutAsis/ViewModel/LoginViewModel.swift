@@ -25,7 +25,7 @@ class LoginViewModel{
                 let homeVC = HomeViewController()
                 self.loginVC?.navigationController?.pushViewController(homeVC, animated: true)
                 self.loginVC?.tabBarController?.tabBar.isHidden = false
-                self.loginVC?.navigationController?.navigationBar.isHidden = false
+                self.loginVC?.navigationController?.isNavigationBarHidden = false
             }
         }
     }
@@ -40,7 +40,7 @@ class LoginViewModel{
                 let homeVC = HomeViewController()
                 self.loginVC?.navigationController?.pushViewController(homeVC, animated: true)
                 self.loginVC?.tabBarController?.tabBar.isHidden = false
-                self.loginVC?.navigationController?.navigationBar.isHidden = false
+                self.loginVC?.navigationController?.isNavigationBarHidden = false
             }
         }
     }
