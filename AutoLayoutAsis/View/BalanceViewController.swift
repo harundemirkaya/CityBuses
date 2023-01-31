@@ -75,7 +75,6 @@ final class BalanceViewController: UIViewController, NFCTagReaderSessionDelegate
     }
     
     func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
-        
     }
     
     func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
@@ -92,7 +91,12 @@ final class BalanceViewController: UIViewController, NFCTagReaderSessionDelegate
                     byteData.forEach {
                         uid.append(String($0, radix: 16))
                     }
-                    print("UID: \(uid)")
+                    DispatchQueue.main.async {
+                        self.txtFieldUUID.text = uid
+                    }
+                    session.alertMessage = "Okuma İşlemi Başarılı"
+                    session.invalidate()
+                    
                 }
             })
     }
