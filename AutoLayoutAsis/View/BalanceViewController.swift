@@ -24,6 +24,8 @@ final class BalanceViewController: UIViewController{
         let paddingViewUsername = UIView(frame: CGRectMake(0, 0, 15, txtField.frame.height))
         txtField.leftView = paddingViewUsername
         txtField.leftViewMode = UITextField.ViewMode.always
+        txtField.autocorrectionType = .no
+        txtField.autocapitalizationType = .none
         return txtField
     }()
     

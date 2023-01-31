@@ -26,8 +26,10 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: Stop Model Defined
     var stations: [Stop]? {
         didSet{
-            for i in 0...(stations?.count ?? 0)-1{
-                stationsName.append(stations![i].name!)
+            if stations!.count != 0 {
+                for i in 0...stations!.count-1{
+                    stationsName.append(stations![i].name!)
+                }
             }
             filteredStations = stationsName
             tableView.reloadData()

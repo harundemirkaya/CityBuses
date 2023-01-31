@@ -25,6 +25,8 @@ final class SettingsViewController: UIViewController {
         txtField.leftView = paddingViewUsername
         txtField.leftViewMode = UITextField.ViewMode.always
         txtField.backgroundColor = .white
+        txtField.autocorrectionType = .no
+        txtField.autocapitalizationType = .none
         return txtField
     }()
     

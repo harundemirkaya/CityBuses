@@ -13,7 +13,7 @@ import AVFoundation
 class LoginViewController: UIViewController {
     
     // MARK: -Define
-    var player: AVPlayer?
+    
     // MARK: Text Field's Defined
     var txtFieldUserName: UITextField = {
         let txtField = UITextField()
@@ -26,6 +26,8 @@ class LoginViewController: UIViewController {
         txtField.leftView = paddingViewUsername
         txtField.leftViewMode = UITextField.ViewMode.always
         txtField.backgroundColor = .white
+        txtField.autocorrectionType = .no
+        txtField.autocapitalizationType = .none
         return txtField
     }()
     
@@ -40,6 +42,8 @@ class LoginViewController: UIViewController {
         txtField.leftView = paddingViewUsername
         txtField.leftViewMode = UITextField.ViewMode.always
         txtField.backgroundColor = .white
+        txtField.autocorrectionType = .no
+        txtField.autocapitalizationType = .none
         return txtField
     }()
     
@@ -101,6 +105,9 @@ class LoginViewController: UIViewController {
         label.textColor = .white
         return label
     }()
+    
+    // MARK: Video Player Defined
+    var player: AVPlayer?
 
     let loginViewModel = LoginViewModel()
     
@@ -127,9 +134,12 @@ class LoginViewController: UIViewController {
         
         // MARK: Video Config
         playVideo()
+        
+        // MARK: Disable Bars
         navigationController?.isNavigationBarHidden = true
         tabBarController?.tabBar.isHidden = true
         
+        // MARK: Button Targets
         btnLogin.addTarget(self, action: #selector(btnLoginTarget), for: .touchUpInside)
         btnRegister.addTarget(self, action: #selector(btnRegisterTarget), for: .touchUpInside)
         btnBackHome.addTarget(self, action: #selector(btnBackHomeTarget), for: .touchUpInside)
