@@ -9,10 +9,13 @@ import UIKit
 import CoreNFC
 
 // MARK: -Balance Class
-final class BalanceViewController: UIViewController{
+final class BalanceViewController: UIViewController, NFCTagReaderSessionDelegate{
     
     // MARK: -Define
     
+    // MARK: NFC Session Defined
+    var session: NFCTagReaderSession?
+    var result = ""
     // MARK: TextField Defined
     var txtFieldUUID: UITextField = {
         let txtField = UITextField()
@@ -62,6 +65,36 @@ final class BalanceViewController: UIViewController{
         btnCheck.btnConstraints(view, with: txtFieldUUID)
         lblTitle.lblTitleConstraints(view)
         
+        btnCheck.addTarget(self, action: #selector(btnTarget), for: UIControl.Event.touchUpInside)
+        
+    }
+    
+    @objc func btnTarget(){
+        session = NFCTagReaderSession(pollingOption: NFCTagReaderSession.PollingOption.iso14443, delegate: self)
+        session?.begin()
+    }
+    
+    func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
+        
+    }
+    
+    func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
+        print("Error")
+    }
+    
+    func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
+        let tag = tags.first!
+            session.connect(to: tag, completionHandler: { error in
+                if case let .miFare(miFare) = tag {
+                    var byteData = [UInt8]()
+                    miFare.identifier.withUnsafeBytes { byteData.append(contentsOf: $0) }
+                    var uid = "0"
+                    byteData.forEach {
+                        uid.append(String($0, radix: 16))
+                    }
+                    print("UID: \(uid)")
+                }
+            })
     }
 }
 
