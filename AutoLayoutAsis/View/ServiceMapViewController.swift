@@ -54,13 +54,18 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     // MARK: ServiceMapViewModel Defined
     let serviceMapViewModel = ServiceMapViewModel()
     
+    var pageTitle: UILabel {
+        let label = UILabel()
+        return label
+    }
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // MARK: Screen
         view.backgroundColor = .white
-        
+        navigationItem.titleView = pageTitle
         // MARK: Map Config
         locationManager = CLLocationManager()
         locationManager.delegate = self
