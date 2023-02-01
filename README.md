@@ -1,6 +1,6 @@
 # City Buses
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://cdn.iconscout.com/icon/free/png-256/swift-13-722653.png" width="200" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://cdn.iconscout.com/icon/free/png-256/swift-13-722653.png" width="200" alt="Logo" /></a>
 </p>
 
 City Buses App with Swift
@@ -9,8 +9,8 @@ City bus application that I coded with Swift. Application functions; view curren
 The 3rd party libraries used are listed below. Local ones are; UIKit, CoreLocation, AVFoundation, MapKit, CoreNFC, Network.
 
 
-![alt text](https://softetik.com/git/1.png)
-![alt text](https://softetik.com/git/2.png)
+![alt text](https://softetik.com/git/1.jpg)
+![alt text](https://softetik.com/git/2.jpg)
 
 <h2>Libraries I use:</h2>
 
