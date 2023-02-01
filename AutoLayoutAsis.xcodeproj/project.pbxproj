@@ -26,13 +26,13 @@
 		4F988CF72987A22D00E74198 /* WhereMyBusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF62987A22D00E74198 /* WhereMyBusViewModel.swift */; };
 		4F988CF92987A3BC00E74198 /* StationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF82987A3BC00E74198 /* StationsViewModel.swift */; };
 		4F988CFB2987A4C700E74198 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CFA2987A4C700E74198 /* SettingsViewModel.swift */; };
-		4FADF2E32987E3A80087AA81 /* intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4FADF2E02987E3620087AA81 /* intro.mp4 */; };
 		4FC119BB2983A087002BD302 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4FC119BD2983A087002BD302 /* Localizable.strings */; };
 		4FC4287E29810792004BED52 /* StationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4287D29810792004BED52 /* StationMapViewController.swift */; };
 		4FC4288029811257004BED52 /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4287F29811257004BED52 /* ServiceModel.swift */; };
 		4FC4288229811453004BED52 /* ServiceMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4288129811453004BED52 /* ServiceMapViewController.swift */; };
 		4FC4288429815740004BED52 /* VehicleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4288329815740004BED52 /* VehicleModel.swift */; };
 		4FEF8E892985723100BF6B86 /* LocalizationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */; };
+		4FF4A371298A3A780078FC28 /* intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF4A370298A3A780078FC28 /* intro.mp4 */; };
 		4FFB91FA297E6B1900B19260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91F9297E6B1900B19260 /* AppDelegate.swift */; };
 		4FFB91FC297E6B1900B19260 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91FB297E6B1900B19260 /* SceneDelegate.swift */; };
 		4FFB91FE297E6B1900B19260 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91FD297E6B1900B19260 /* LoginViewController.swift */; };
@@ -42,8 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E55F6D99355AE0F3A6311F1 /* Pods-AutoLayoutAsis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLayoutAsis.release.xcconfig"; path = "Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis.release.xcconfig"; sourceTree = "<group>"; };
 		34FB332453DDF9B4BC8FD309 /* Pods_AutoLayoutAsis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AutoLayoutAsis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F8A9ECD26A88D9F8FCA97FA /* Pods-AutoLayoutAsis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLayoutAsis.release.xcconfig"; path = "Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis.release.xcconfig"; sourceTree = "<group>"; };
 		4F1A540A297ED18F003566F1 /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuItems.swift; path = "../../../../../Creative Cloud Files/MenuItems.swift"; sourceTree = "<group>"; };
 		4F6BA118297FB5CE0010C8C2 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		4F6BA11A297FB60F0010C8C2 /* WhereMyBusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereMyBusViewController.swift; sourceTree = "<group>"; };
@@ -62,7 +62,6 @@
 		4F988CF62987A22D00E74198 /* WhereMyBusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereMyBusViewModel.swift; sourceTree = "<group>"; };
 		4F988CF82987A3BC00E74198 /* StationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsViewModel.swift; sourceTree = "<group>"; };
 		4F988CFA2987A4C700E74198 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		4FADF2E02987E3620087AA81 /* intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = intro.mp4; path = ../../../intro.mp4; sourceTree = "<group>"; };
 		4FC119B82983A01C002BD302 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4FC119BC2983A087002BD302 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4FC119BE2983A62A002BD302 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		4FC4288129811453004BED52 /* ServiceMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMapViewController.swift; sourceTree = "<group>"; };
 		4FC4288329815740004BED52 /* VehicleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleModel.swift; sourceTree = "<group>"; };
 		4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationSystem.swift; sourceTree = "<group>"; };
+		4FF4A370298A3A780078FC28 /* intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro.mp4; sourceTree = "<group>"; };
 		4FFB91F6297E6B1900B19260 /* AutoLayoutAsis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLayoutAsis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FFB91F9297E6B1900B19260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FFB91FB297E6B1900B19260 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 		4FFB9207297E6B1B00B19260 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FFB9234297E7E0B00B19260 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FFB9236297E94BB00B19260 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		6C9A80F6C01A31D44E7446B0 /* Pods-AutoLayoutAsis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLayoutAsis.debug.xcconfig"; path = "Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis.debug.xcconfig"; sourceTree = "<group>"; };
+		63842527B830C71F989D2F3B /* Pods-AutoLayoutAsis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLayoutAsis.debug.xcconfig"; path = "Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +96,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33154C32D9658078D489836F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				63842527B830C71F989D2F3B /* Pods-AutoLayoutAsis.debug.xcconfig */,
+				3F8A9ECD26A88D9F8FCA97FA /* Pods-AutoLayoutAsis.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		4F1A5407297ECBDE003566F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,13 +165,21 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		4FF4A36E298A3A4F0078FC28 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				4FF4A370298A3A780078FC28 /* intro.mp4 */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
 		4FFB91ED297E6B1900B19260 = {
 			isa = PBXGroup;
 			children = (
 				4FFB91F8297E6B1900B19260 /* AutoLayoutAsis */,
 				4FFB91F7297E6B1900B19260 /* Products */,
-				EB9DF1F5817E8710DD3841AF /* Pods */,
 				9EEF2DB4CCD3B6A3315661F0 /* Frameworks */,
+				33154C32D9658078D489836F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC119C52983FBC0002BD302 /* AutoLayoutAsis.entitlements */,
+				4FF4A36E298A3A4F0078FC28 /* resources */,
 				4F6BA12A298005A00010C8C2 /* Services */,
 				4FC119C42983FA25002BD302 /* ViewModel */,
 				4F6BA113297FB1150010C8C2 /* View */,
@@ -188,7 +206,6 @@
 				4FFB9202297E6B1B00B19260 /* Assets.xcassets */,
 				4FFB9204297E6B1B00B19260 /* LaunchScreen.storyboard */,
 				4FFB9207297E6B1B00B19260 /* Info.plist */,
-				4FADF2E02987E3620087AA81 /* intro.mp4 */,
 				4FFB9234297E7E0B00B19260 /* GoogleService-Info.plist */,
 				4FC119BD2983A087002BD302 /* Localizable.strings */,
 			);
@@ -201,15 +218,6 @@
 				34FB332453DDF9B4BC8FD309 /* Pods_AutoLayoutAsis.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EB9DF1F5817E8710DD3841AF /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6C9A80F6C01A31D44E7446B0 /* Pods-AutoLayoutAsis.debug.xcconfig */,
-				0E55F6D99355AE0F3A6311F1 /* Pods-AutoLayoutAsis.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,8 +238,6 @@
 			dependencies = (
 			);
 			name = AutoLayoutAsis;
-			packageProductDependencies = (
-			);
 			productName = AutoLayoutAsis;
 			productReference = 4FFB91F6297E6B1900B19260 /* AutoLayoutAsis.app */;
 			productType = "com.apple.product-type.application";
@@ -261,8 +267,6 @@
 				tr,
 			);
 			mainGroup = 4FFB91ED297E6B1900B19260;
-			packageReferences = (
-			);
 			productRefGroup = 4FFB91F7297E6B1900B19260 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,7 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FADF2E32987E3A80087AA81 /* intro.mp4 in Resources */,
+				4FF4A371298A3A780078FC28 /* intro.mp4 in Resources */,
 				4FC119BB2983A087002BD302 /* Localizable.strings in Resources */,
 				4FFB9203297E6B1B00B19260 /* Assets.xcassets in Resources */,
 				4FFB9235297E7E0B00B19260 /* GoogleService-Info.plist in Resources */,
@@ -505,7 +509,7 @@
 		};
 		4FFB920B297E6B1B00B19260 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C9A80F6C01A31D44E7446B0 /* Pods-AutoLayoutAsis.debug.xcconfig */;
+			baseConfigurationReference = 63842527B830C71F989D2F3B /* Pods-AutoLayoutAsis.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -516,6 +520,9 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AutoLayoutAsis/Info.plist;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "Test Only";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Lokasyon Kullanımı";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = Lokasyon;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -537,7 +544,7 @@
 		};
 		4FFB920C297E6B1B00B19260 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E55F6D99355AE0F3A6311F1 /* Pods-AutoLayoutAsis.release.xcconfig */;
+			baseConfigurationReference = 3F8A9ECD26A88D9F8FCA97FA /* Pods-AutoLayoutAsis.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -548,6 +555,9 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AutoLayoutAsis/Info.plist;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "Test Only";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Lokasyon Kullanımı";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = Lokasyon;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
