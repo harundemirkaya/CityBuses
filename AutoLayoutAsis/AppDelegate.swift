@@ -16,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    var location: [Double] = []
+    
+    var string = ""
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
@@ -76,14 +80,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   func userNotificationCenter(_ center: UNUserNotificationCenter,
                               didReceive response: UNNotificationResponse) async {
     let userInfo = response.notification.request.content.userInfo
-
-    // ...
-
-    // With swizzling disabled you must let Messaging know about the message, for Analytics
-    // Messaging.messaging().appDidReceiveMessage(userInfo)
-
-    // Print full message.
-    print(userInfo)
+      if userInfo["service"] != nil {
+          string = userInfo["latitude"] as! String
+          location.append(Double(string)!)
+          string = userInfo["longitude"] as! String
+          location.append(Double(string)!)
+          NotificationCenter.default.post(name: Notification.Name("notificationCalled"), object: nil)
+          NotificationCenter.default.post(name: Notification.Name("Location"), object: location)
+          
+      }
   }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) async
@@ -101,8 +106,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       }
 
       // Print full message.
-      print(userInfo)
-
       return UIBackgroundFetchResult.newData
     }
     

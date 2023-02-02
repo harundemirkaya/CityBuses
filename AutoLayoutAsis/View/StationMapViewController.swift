@@ -24,6 +24,15 @@ class StationMapViewController: UIViewController {
     var latitude: Double?
     var longitude: Double?
     
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveLocation), name: Notification.Name("Location"), object: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +40,18 @@ class StationMapViewController: UIViewController {
         // MARK: Screen
         view.backgroundColor = .white
         
+        // MARK: Notification Control and Configure
+        
         // MARK: Set Constraints and Annotation
         setMapConstrainst()
         setAnnotation()
+        
+    }
+    
+    @objc func receiveLocation(_ notification: Notification) {
+        guard let location = notification.object as? [Double] else { return }
+        self.latitude = location[0]
+        self.longitude = location[1]
     }
     
     // MARK: -Set Annotation Function

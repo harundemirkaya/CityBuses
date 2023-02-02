@@ -27,15 +27,26 @@ class AppTabBarController: UITabBarController {
         return label
     }()
     
+    var tabBarIndex = true
+    
+    var latitude = 0.0
+    var longitude = 0.0
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        // MARK: -Navigation Bar Style
+        
+        
+        
+        // MARK: Navigation Bar Style
         UINavigationBar.appearance().barTintColor = .white
         UINavigationBar.appearance().tintColor = .black
         UINavigationBar.appearance().backgroundColor = .white
 
+        // MARK: Check Push Notification
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationReceive), name: Notification.Name("notificationCalled"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveLocation), name: Notification.Name("Location"), object: nil)
         // MARK: Define VC and Add Tab Bar
         let homeVC = UINavigationController(rootViewController: HomeViewController())
         homeVC.tabBarItem = UITabBarItem.init(title: NSLocalizedString("tabBarHome", comment: "Tab Bar Home Page"), image: UIImage(systemName: "house"), tag: 0)
@@ -61,14 +72,35 @@ class AppTabBarController: UITabBarController {
         self.monitor.start(queue: queue)
     }
     
+    @objc func notificationReceive(){
+        tabBarIndex = false
+    }
+    
+    @objc func receiveLocation(_ notification: Notification) {
+        guard let location = notification.object as? [Double] else { return }
+        self.latitude = location[0]
+        self.longitude = location[1]
+    }
+    
     func appControl(){
         loadingScreen.stopIndicator(view: view)
         tabBar.isHidden = false
         // MARK: TabBar and View Config
         self.viewControllers = views
+        selectedIndex = 0
         tabBar.backgroundColor = .white
         tabBar.tintColor = .purple
+        
+        if tabBarIndex { return }
+        
+        let stationMapVC = StationMapViewController()
+        if let navigationController = self.selectedViewController as? UINavigationController {
+            stationMapVC.latitude = latitude
+            stationMapVC.longitude = longitude
+            navigationController.pushViewController(stationMapVC, animated: true)
+        }
     }
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .lightContent
@@ -76,10 +108,10 @@ class AppTabBarController: UITabBarController {
     
     // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
-            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
-            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
-            alertMessage.addAction(okButton)
-            present(alertMessage, animated: true)
+        let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
+        alertMessage.addAction(okButton)
+        present(alertMessage, animated: true)
     }
 }
 

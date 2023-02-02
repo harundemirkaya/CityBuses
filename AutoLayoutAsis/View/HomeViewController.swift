@@ -84,7 +84,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: Page Title Defined
     var pageTitle: UILabel {
         let label = UILabel()
-        label.text = NSLocalizedString("homePageTitle", comment: "Home Page Title")
+        label.text = "homePageTitle".localized()
         return label
     }
     
@@ -93,6 +93,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         // MARK: Screen
         view.backgroundColor = .white
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationReceive), name: Notification.Name("notificationCalled"), object: nil)
+        
         navigationItem.titleView = pageTitle
         
         // MARK: Session Control
@@ -113,6 +116,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         menuView.pinMenuTo(view, with: slideInMenuPadding)
         containerView.edgeTo(view)
         setMapConstrainst()
+    }
+    
+    @objc func notificationReceive(){
+        let stationMapVC = StationMapViewController()
+        navigationController?.pushViewController(stationMapVC, animated: true)
     }
     
     // MARK: -Table Frame
