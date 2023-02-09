@@ -135,6 +135,7 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
             if CLLocationManager.locationServicesEnabled() {
                 self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
                 self.locationManager.startUpdatingLocation()
+                self.locationManager.stopUpdatingLocation()
             }
         }
         mapView.delegate = self
@@ -142,27 +143,36 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         
         tableView.tableViewConstraints(stackView)
         tableView.transform = CGAffineTransform(translationX: 0, y: view.frame.height)
-        txtFieldFrom.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
+        txtFieldFrom.addTarget(self, action: #selector(txtFieldStartTable), for: .editingDidBegin)
+        txtFieldTo.addTarget(self, action: #selector(txtFieldStartTable), for: .editingDidBegin)
         
         howCanIgoViewModel.howCanIgoVC = self
         howCanIgoViewModel.getStations()
         filteredStations = stationsName
         
         txtFieldFrom.inputAccessoryView = btnCloseKeyboard
+        txtFieldTo.inputAccessoryView = btnCloseKeyboard
         btnCloseKeyboard.addTarget(self, action: #selector(closeKeyboard), for: .touchUpInside)
         
     }
     
     // MARK: -CloseKeyboard Function
     @objc func closeKeyboard(){
-        tableView.transform = CGAffineTransform(translationX: 0, y: view.frame.height)
-        txtFieldFrom.endEditing(true)
+        txtFieldStopTable()
     }
     
     // MARK: -Open Table
-    @objc func textFieldDidBeginEditing() {
+    @objc func txtFieldStartTable() {
         UIView.animate(withDuration: 0.3) {
             self.tableView.transform = CGAffineTransform(translationX: 0, y: 0)
+        }
+    }
+    
+    @objc func txtFieldStopTable() {
+        txtFieldFrom.endEditing(true)
+        txtFieldTo.endEditing(true)
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
         }
     }
     
@@ -190,6 +200,17 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
             let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
             alertMessage.addAction(okButton)
             self.present(alertMessage, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let location = CLLocationCoordinate2D(latitude: (stations?[indexPath.row].latitude)!, longitude: (stations?[indexPath.row].longitude)!)
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let region = MKCoordinateRegion(center: location, span: span)
+        mapView.setRegion(region, animated: true)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location
+        mapView.addAnnotation(annotation)
+        txtFieldStopTable()
     }
 }
 
