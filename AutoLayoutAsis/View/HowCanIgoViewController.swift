@@ -278,10 +278,12 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
             // MARK: From Annotation
             let annotation = MKPointAnnotation()
             annotation.coordinate = fromLocation
+            annotation.title = "From"
             mapView.addAnnotation(annotation)
             // MARK: To Annotation
             let annotationTo = MKPointAnnotation()
             annotationTo.coordinate = toLocation
+            annotationTo.title = "To"
             mapView.addAnnotation(annotationTo)
             txtFieldStopTable()
         } else if tableView == tableViewTo{
@@ -292,13 +294,31 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
             // MARK: To Annotation
             let annotation = MKPointAnnotation()
             annotation.coordinate = toLocation
+            annotation.title = "To"
             mapView.addAnnotation(annotation)
             // MARK: From Location
             let annotationFrom = MKPointAnnotation()
             annotationFrom.coordinate = fromLocation
+            annotationFrom.title = "From"
             mapView.addAnnotation(annotationFrom)
             txtFieldStopTable()
         }
+    }
+    
+    // MARK: -Set Annotations Image
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom")
+        if annotationView == nil{
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
+        } else{
+            annotationView?.annotation = annotation
+        }
+        if annotation.title == "From"{
+            annotationView?.image = UIImage(named: "start-point-tr")
+        } else if annotation.title == "To"{
+            annotationView?.image = UIImage(named: "stop-point-tr")
+        }
+        return annotationView
     }
 }
 
