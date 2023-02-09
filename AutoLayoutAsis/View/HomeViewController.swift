@@ -43,7 +43,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
         return view
     }()
-    var menuCount = 7
+    var menuCount = 8
     
     // MARK: Map Page Defined
     lazy var containerView: UIView = {
@@ -73,7 +73,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         NSLocalizedString("balanceQueryMenuItem", comment: "Balance Query Menu Item"),
         NSLocalizedString("shareAppMenuItem", comment: "Share App Menu Item"),
         NSLocalizedString("changeLanguageMenuItem", comment: "Change Language Menu Item"),
-        NSLocalizedString("settingsMenuItem", comment: "Setting Menu Item")
+        NSLocalizedString("settingsMenuItem", comment: "Setting Menu Item"),
+        NSLocalizedString("howCanIgoMenuItems", comment: "How Can I Go Menu Item")
         ]
     var menuItems = [MenuItems]()
     var selectedItem: Int?
@@ -102,9 +103,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if currentUser != nil{
             menuItem.append(NSLocalizedString("signOutMenuItem", comment: "Sign Out Menu Item"))
         } else{
-            menuItem.removeLast()
             menuItem.append(NSLocalizedString("signInSignUpMenuItem", comment: "Sign In Sign Up Menu Item"))
-            menuCount -= 1
         }
         
         // MARK: Menu
@@ -175,10 +174,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if selectedItem == 5{
             let changeLanguageVC = ChangeLanguageViewController()
             self.navigationController?.pushViewController(changeLanguageVC, animated: true)
-        } else if selectedItem == 6 && menuCount == 7{
+        } else if selectedItem == 6 && menuCount == 8{
             let settingsVC = SettingsViewController()
             self.navigationController?.pushViewController(settingsVC, animated: true)
-        } else if selectedItem == 7 && menuCount == 7 || selectedItem == 6 && menuCount == 6{
+        } else if selectedItem == 7{
+            let howCanIgoVC = HowCanIgoViewController()
+            self.navigationController?.pushViewController(howCanIgoVC, animated: true)
+        } else if selectedItem == 8 && menuCount == 8 || selectedItem == 6 && menuCount == 6{
             if currentUser != nil{
                 do{
                     try Auth.auth().signOut()

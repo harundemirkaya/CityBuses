@@ -51,3 +51,6 @@
 "btnBackHome" = "Anasayfa";
 "settingsTitle" = "Ayarlar";
 "checkNetwork" = "Lütfen internet bağlantınızı kontrol ediniz.";
+"howCanIgoMenuItems" = "Nasıl Giderim?";
+"from" = "Nereden";
+"to" = "Nereye";

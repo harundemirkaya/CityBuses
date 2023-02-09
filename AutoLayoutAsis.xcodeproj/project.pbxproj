@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		21A68B9078A3BD2166A7EDAC /* Pods_AutoLayoutAsis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FB332453DDF9B4BC8FD309 /* Pods_AutoLayoutAsis.framework */; };
 		4F1A540B297ED18F003566F1 /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A540A297ED18F003566F1 /* MenuItems.swift */; };
+		4F695CD32994E25900B7F233 /* HowCanIgoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F695CD22994E25900B7F233 /* HowCanIgoViewController.swift */; };
+		4F695CD52995064A00B7F233 /* HowCanIgoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F695CD42995064A00B7F233 /* HowCanIgoViewModel.swift */; };
 		4F6BA119297FB5CE0010C8C2 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA118297FB5CE0010C8C2 /* MenuTableViewCell.swift */; };
 		4F6BA11B297FB60F0010C8C2 /* WhereMyBusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA11A297FB60F0010C8C2 /* WhereMyBusViewController.swift */; };
 		4F6BA11D297FB6570010C8C2 /* StationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA11C297FB6570010C8C2 /* StationsViewController.swift */; };
@@ -45,6 +47,8 @@
 		34FB332453DDF9B4BC8FD309 /* Pods_AutoLayoutAsis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AutoLayoutAsis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F8A9ECD26A88D9F8FCA97FA /* Pods-AutoLayoutAsis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLayoutAsis.release.xcconfig"; path = "Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis.release.xcconfig"; sourceTree = "<group>"; };
 		4F1A540A297ED18F003566F1 /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuItems.swift; path = "../../../../../Creative Cloud Files/MenuItems.swift"; sourceTree = "<group>"; };
+		4F695CD22994E25900B7F233 /* HowCanIgoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowCanIgoViewController.swift; sourceTree = "<group>"; };
+		4F695CD42995064A00B7F233 /* HowCanIgoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowCanIgoViewModel.swift; sourceTree = "<group>"; };
 		4F6BA118297FB5CE0010C8C2 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		4F6BA11A297FB60F0010C8C2 /* WhereMyBusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereMyBusViewController.swift; sourceTree = "<group>"; };
 		4F6BA11C297FB6570010C8C2 /* StationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 				4F6BA128297FC29E0010C8C2 /* AppTabBarController.swift */,
 				4FC4287D29810792004BED52 /* StationMapViewController.swift */,
 				4FC4288129811453004BED52 /* ServiceMapViewController.swift */,
+				4F695CD22994E25900B7F233 /* HowCanIgoViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 				4F988CF62987A22D00E74198 /* WhereMyBusViewModel.swift */,
 				4F988CF82987A3BC00E74198 /* StationsViewModel.swift */,
 				4F988CFA2987A4C700E74198 /* SettingsViewModel.swift */,
+				4F695CD42995064A00B7F233 /* HowCanIgoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -195,18 +201,18 @@
 			isa = PBXGroup;
 			children = (
 				4FC119C52983FBC0002BD302 /* AutoLayoutAsis.entitlements */,
-				4FF4A36E298A3A4F0078FC28 /* resources */,
-				4F6BA12A298005A00010C8C2 /* Services */,
-				4FC119C42983FA25002BD302 /* ViewModel */,
-				4F6BA113297FB1150010C8C2 /* View */,
-				4F1A5407297ECBDE003566F1 /* Models */,
+				4FFB9202297E6B1B00B19260 /* Assets.xcassets */,
+				4FFB9204297E6B1B00B19260 /* LaunchScreen.storyboard */,
 				4FFB91F9297E6B1900B19260 /* AppDelegate.swift */,
 				4FFB91FB297E6B1900B19260 /* SceneDelegate.swift */,
 				4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */,
-				4FFB9202297E6B1B00B19260 /* Assets.xcassets */,
-				4FFB9204297E6B1B00B19260 /* LaunchScreen.storyboard */,
-				4FFB9207297E6B1B00B19260 /* Info.plist */,
 				4FFB9234297E7E0B00B19260 /* GoogleService-Info.plist */,
+				4FFB9207297E6B1B00B19260 /* Info.plist */,
+				4FF4A36E298A3A4F0078FC28 /* resources */,
+				4F6BA12A298005A00010C8C2 /* Services */,
+				4F1A5407297ECBDE003566F1 /* Models */,
+				4F6BA113297FB1150010C8C2 /* View */,
+				4FC119C42983FA25002BD302 /* ViewModel */,
 				4FC119BD2983A087002BD302 /* Localizable.strings */,
 			);
 			path = AutoLayoutAsis;
@@ -351,6 +357,7 @@
 				4F6BA11F297FB67B0010C8C2 /* DealersViewController.swift in Sources */,
 				4F6BA119297FB5CE0010C8C2 /* MenuTableViewCell.swift in Sources */,
 				4F988CE62986893100E74198 /* LoadingScreen.swift in Sources */,
+				4F695CD32994E25900B7F233 /* HowCanIgoViewController.swift in Sources */,
 				4F988CF129879ABB00E74198 /* ServiceMapViewModel.swift in Sources */,
 				4F6BA127297FB7CC0010C8C2 /* ChangeLanguageViewController.swift in Sources */,
 				4F6BA11B297FB60F0010C8C2 /* WhereMyBusViewController.swift in Sources */,
@@ -361,6 +368,7 @@
 				4F6BA121297FB6A30010C8C2 /* BalanceViewController.swift in Sources */,
 				4F988CF329879FDB00E74198 /* LoginViewModel.swift in Sources */,
 				4FFB9237297E94BC00B19260 /* HomeViewController.swift in Sources */,
+				4F695CD52995064A00B7F233 /* HowCanIgoViewModel.swift in Sources */,
 				4F6BA12E29800B6C0010C8C2 /* StationModel.swift in Sources */,
 				4F6BA123297FB7750010C8C2 /* SettingsViewController.swift in Sources */,
 				4F988CFB2987A4C700E74198 /* SettingsViewModel.swift in Sources */,
