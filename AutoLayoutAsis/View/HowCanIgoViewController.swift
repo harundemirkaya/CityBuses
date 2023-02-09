@@ -62,8 +62,18 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         return txtField
     }()
     
-    // MARK: Table Defined
-    private lazy var tableView : UITableView = {
+    // MARK: TableViews Defined
+    private lazy var tableViewFrom : UITableView = {
+        let table = UITableView()
+        table.delegate = self
+        table.dataSource = self
+        table.backgroundColor = .white
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.register(MenuTableViewCell.self, forCellReuseIdentifier: MenuTableViewCell.identifier)
+        return table
+    }()
+    
+    private lazy var tableViewTo : UITableView = {
         let table = UITableView()
         table.delegate = self
         table.dataSource = self
@@ -82,7 +92,8 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
                 }
             }
             filteredStations = stationsName
-            tableView.reloadData()
+            tableViewFrom.reloadData()
+            tableViewTo.reloadData()
         }
     }
     var stationsName: [String] = []
@@ -108,6 +119,10 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         btn.backgroundColor = .white
         return btn
     }()
+    
+    // MARK: From and To Location
+    var fromLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    var toLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
     // MARK: StationsViewModel
     var howCanIgoViewModel = HowCanIgoViewModel()
@@ -141,10 +156,12 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         mapView.delegate = self
         mapView.showsUserLocation = true
         
-        tableView.tableViewConstraints(stackView)
-        tableView.transform = CGAffineTransform(translationX: 0, y: view.frame.height)
-        txtFieldFrom.addTarget(self, action: #selector(txtFieldStartTable), for: .editingDidBegin)
-        txtFieldTo.addTarget(self, action: #selector(txtFieldStartTable), for: .editingDidBegin)
+        tableViewFrom.tableViewConstraints(stackView)
+        tableViewTo.tableViewConstraints(stackView)
+        tableViewFrom.transform = CGAffineTransform(translationX: 0, y: view.frame.height)
+        tableViewTo.transform = CGAffineTransform(translationX: 0, y: view.frame.height)
+        txtFieldFrom.addTarget(self, action: #selector(txtFieldStartTableFrom), for: .editingDidBegin)
+        txtFieldTo.addTarget(self, action: #selector(txtFieldStartTableTo), for: .editingDidBegin)
         
         howCanIgoViewModel.howCanIgoVC = self
         howCanIgoViewModel.getStations()
@@ -154,6 +171,37 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         txtFieldTo.inputAccessoryView = btnCloseKeyboard
         btnCloseKeyboard.addTarget(self, action: #selector(closeKeyboard), for: .touchUpInside)
         
+        // MARK: Search Algorithm
+        txtFieldFrom.addTarget(self, action: #selector(textFieldFromDidChange), for: .editingChanged)
+        txtFieldTo.addTarget(self, action: #selector(textFieldToDidChange), for: .editingChanged)
+    }
+    
+    @objc func textFieldFromDidChange(){
+        filteredStations = []
+        if txtFieldFrom.text == ""{
+            filteredStations = stationsName
+        } else{
+            for station in stationsName{
+                if station.lowercased().contains(txtFieldFrom.text!.lowercased()){
+                    filteredStations.append(station)
+                }
+            }
+        }
+        self.tableViewFrom.reloadData()
+    }
+    
+    @objc func textFieldToDidChange(){
+        filteredStations = []
+        if txtFieldTo.text == ""{
+            filteredStations = stationsName
+        } else{
+            for station in stationsName{
+                if station.lowercased().contains(txtFieldTo.text!.lowercased()){
+                    filteredStations.append(station)
+                }
+            }
+        }
+        self.tableViewTo.reloadData()
     }
     
     // MARK: -CloseKeyboard Function
@@ -161,18 +209,25 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         txtFieldStopTable()
     }
     
-    // MARK: -Open Table
-    @objc func txtFieldStartTable() {
+    // MARK: -Open TableViews
+    @objc func txtFieldStartTableFrom() {
         UIView.animate(withDuration: 0.3) {
-            self.tableView.transform = CGAffineTransform(translationX: 0, y: 0)
+            self.tableViewFrom.transform = CGAffineTransform(translationX: 0, y: 0)
+        }
+    }
+    @objc func txtFieldStartTableTo() {
+        UIView.animate(withDuration: 0.3) {
+            self.tableViewTo.transform = CGAffineTransform(translationX: 0, y: 0)
         }
     }
     
+    // MARK: -Close TableView and Keyboard
     @objc func txtFieldStopTable() {
         txtFieldFrom.endEditing(true)
         txtFieldTo.endEditing(true)
         UIView.animate(withDuration: 0.3) {
-            self.tableView.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
+            self.tableViewFrom.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
+            self.tableViewTo.transform = CGAffineTransform(translationX: 0, y: self.view.frame.height)
         }
     }
     
@@ -203,14 +258,47 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // MARK: Set TextField Text
+        if tableView == tableViewFrom{
+            txtFieldFrom.text = filteredStations[indexPath.row]
+        } else if tableView == tableViewTo{
+            txtFieldTo.text = filteredStations[indexPath.row]
+        }
+        // MARK: Remove All Annotations
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        self.mapView.removeOverlays(self.mapView.overlays)
+        
         let location = CLLocationCoordinate2D(latitude: (stations?[indexPath.row].latitude)!, longitude: (stations?[indexPath.row].longitude)!)
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        let region = MKCoordinateRegion(center: location, span: span)
-        mapView.setRegion(region, animated: true)
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = location
-        mapView.addAnnotation(annotation)
-        txtFieldStopTable()
+        if tableView == tableViewFrom{
+            fromLocation = location
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegion(center: fromLocation, span: span)
+            mapView.setRegion(region, animated: true)
+            // MARK: From Annotation
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = fromLocation
+            mapView.addAnnotation(annotation)
+            // MARK: To Annotation
+            let annotationTo = MKPointAnnotation()
+            annotationTo.coordinate = toLocation
+            mapView.addAnnotation(annotationTo)
+            txtFieldStopTable()
+        } else if tableView == tableViewTo{
+            toLocation = location
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegion(center: toLocation, span: span)
+            mapView.setRegion(region, animated: true)
+            // MARK: To Annotation
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = toLocation
+            mapView.addAnnotation(annotation)
+            // MARK: From Location
+            let annotationFrom = MKPointAnnotation()
+            annotationFrom.coordinate = fromLocation
+            mapView.addAnnotation(annotationFrom)
+            txtFieldStopTable()
+        }
     }
 }
 
