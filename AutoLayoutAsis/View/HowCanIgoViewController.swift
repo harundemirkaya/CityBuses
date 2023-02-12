@@ -127,6 +127,16 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
     // MARK: StationsViewModel
     var howCanIgoViewModel = HowCanIgoViewModel()
     
+    var btnDirections: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.backgroundColor = .purple
+        btn.setTitle("directions".localized(), for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.layer.cornerRadius = 15
+        return btn
+    }()
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -174,8 +184,13 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         // MARK: Search Algorithm
         txtFieldFrom.addTarget(self, action: #selector(textFieldFromDidChange), for: .editingChanged)
         txtFieldTo.addTarget(self, action: #selector(textFieldToDidChange), for: .editingChanged)
+        
+        btnDirections.btnDirectionsConstraints(stackView)
+        btnDirections.addTarget(self, action: #selector(btnDirectionsTarget), for: .touchUpInside)
+        btnDirections.isHidden = true
     }
     
+    // MARK: -TextFields Did Change Functions
     @objc func textFieldFromDidChange(){
         filteredStations = []
         if txtFieldFrom.text == ""{
@@ -303,6 +318,14 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
             mapView.addAnnotation(annotationFrom)
             txtFieldStopTable()
         }
+        if fromLocation.latitude != 0, toLocation.latitude != 0{
+            btnDirections.isHidden = false
+        }
+    }
+    
+    // MARK: -Btn Directions Clicked
+    @objc func btnDirectionsTarget(){
+        
     }
     
     // MARK: -Set Annotations Image
@@ -371,5 +394,11 @@ public extension UIView{
         bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+    }
+    
+    func btnDirectionsConstraints(_ view: UIView){
+        view.addSubview(self)
+        bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15).isActive = true
+        trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
     }
 }
