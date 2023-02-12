@@ -33,6 +33,7 @@
 		4FC4288029811257004BED52 /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4287F29811257004BED52 /* ServiceModel.swift */; };
 		4FC4288229811453004BED52 /* ServiceMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4288129811453004BED52 /* ServiceMapViewController.swift */; };
 		4FC4288429815740004BED52 /* VehicleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4288329815740004BED52 /* VehicleModel.swift */; };
+		4FE8F358299906E200296733 /* StopToStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8F357299906E200296733 /* StopToStop.swift */; };
 		4FEF8E892985723100BF6B86 /* LocalizationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */; };
 		4FF4A371298A3A780078FC28 /* intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF4A370298A3A780078FC28 /* intro.mp4 */; };
 		4FFB91FA297E6B1900B19260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91F9297E6B1900B19260 /* AppDelegate.swift */; };
@@ -74,6 +75,7 @@
 		4FC4287F29811257004BED52 /* ServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceModel.swift; sourceTree = "<group>"; };
 		4FC4288129811453004BED52 /* ServiceMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMapViewController.swift; sourceTree = "<group>"; };
 		4FC4288329815740004BED52 /* VehicleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleModel.swift; sourceTree = "<group>"; };
+		4FE8F357299906E200296733 /* StopToStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopToStop.swift; sourceTree = "<group>"; };
 		4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationSystem.swift; sourceTree = "<group>"; };
 		4FF4A370298A3A780078FC28 /* intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro.mp4; sourceTree = "<group>"; };
 		4FFB91F6297E6B1900B19260 /* AutoLayoutAsis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLayoutAsis.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 				4F6BA12D29800B6C0010C8C2 /* StationModel.swift */,
 				4FC4287F29811257004BED52 /* ServiceModel.swift */,
 				4FC4288329815740004BED52 /* VehicleModel.swift */,
+				4FE8F357299906E200296733 /* StopToStop.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FE8F358299906E200296733 /* StopToStop.swift in Sources */,
 				4FFB91FE297E6B1900B19260 /* LoginViewController.swift in Sources */,
 				4F988CF92987A3BC00E74198 /* StationsViewModel.swift in Sources */,
 				4F6BA11D297FB6570010C8C2 /* StationsViewController.swift in Sources */,

@@ -120,9 +120,32 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         return btn
     }()
     
+    var fromID = 0
+    var toID = 0
+    
     // MARK: From and To Location
-    var fromLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-    var toLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    var fromLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0){
+        didSet{
+            if !stations!.isEmpty{
+                for i in 0...stations!.count-1{
+                    if stations![i].latitude == fromLocation.latitude, stations![i].longitude == fromLocation.longitude{
+                        fromID = stations![i].stopID!
+                    }
+                }
+            }
+        }
+    }
+    var toLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0){
+        didSet{
+            if !stations!.isEmpty{
+                for i in 0...stations!.count-1{
+                    if stations![i].latitude == toLocation.latitude, stations![i].longitude == toLocation.longitude{
+                        toID = stations![i].stopID!
+                    }
+                }
+            }
+        }
+    }
     
     // MARK: StationsViewModel
     var howCanIgoViewModel = HowCanIgoViewModel()
@@ -136,6 +159,12 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         btn.layer.cornerRadius = 15
         return btn
     }()
+    
+    var stopToStop: StopToStop?{
+        didSet{
+            print(stopToStop)
+        }
+    }
     
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
@@ -325,7 +354,7 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
     
     // MARK: -Btn Directions Clicked
     @objc func btnDirectionsTarget(){
-        
+        howCanIgoViewModel.getPaths(startStopID: fromID, finishStopID: toID)
     }
     
     // MARK: -Set Annotations Image
