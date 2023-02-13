@@ -20,7 +20,7 @@ struct StopServices: Codable {
 // MARK: - Departure
 struct Departure: Codable {
     let serviceName: String
-    let destination: Destination
+    let destination: String?
     let noteID: Int?
     let validFrom, day: Int
     let time: String
@@ -32,13 +32,4 @@ struct Departure: Codable {
         case validFrom = "valid_from"
         case day, time
     }
-}
-
-enum Destination: String, Codable {
-    case broughton = "Broughton"
-    case edinburgh = "Edinburgh"
-    case haymarket = "Haymarket"
-    case longstone = "Longstone"
-    case wallyford = "Wallyford"
-    case whitecraig = "Whitecraig"
 }

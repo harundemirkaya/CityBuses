@@ -37,7 +37,7 @@ class HowCanIgoViewModel{
         networkManager.stopID = selectedStopID
         networkManager.fetchStopServices { [weak self] result in
             if result.response?.statusCode == 200{
-                self?.howCanIgoVC?.stopServices = result.value?.departures
+                self?.howCanIgoVC?.stopServices = result.value
             } else{
                 self?.howCanIgoVC?.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: result.error!.localizedDescription)
             }
@@ -48,7 +48,7 @@ class HowCanIgoViewModel{
     func getServices(){
         networkManager.fetchServices{ [weak self] result in
             if result.response?.statusCode == 200{
-                self?.howCanIgoVC?.services = result.value?.services
+                self!.howCanIgoVC!.services = result.value?.services
             } else{
                 self?.howCanIgoVC?.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: result.error!.localizedDescription)
             }

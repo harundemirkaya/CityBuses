@@ -168,9 +168,9 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         }
     }
     
-    var stopServices: [Departure]? {
+    var stopServices: StopServices? {
         didSet{
-            if stopServices?.count != 0{
+            if stopServices?.departures.count != 0{
                 howCanIgoViewModel.getServices()
             }
         }
@@ -337,8 +337,6 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         self.mapView.removeAnnotations(allAnnotations)
         self.mapView.removeOverlays(self.mapView.overlays)
         
-        selectedFromStopID = (stations?[indexPath.row].stopID)!
-        
         let location = CLLocation(latitude: (stations?[indexPath.row].latitude)!, longitude: (stations?[indexPath.row].longitude)!)
         if tableView == tableViewFrom{
             fromLocation = location
@@ -356,6 +354,7 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
             annotationTo.title = "To"
             mapView.addAnnotation(annotationTo)
             txtFieldStopTable()
+            selectedFromStopID = (stations?[indexPath.row].stopID)!
         } else if tableView == tableViewTo{
             toLocation = location
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
@@ -399,27 +398,26 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         }
         return annotationView
     }
-    
+    var servicename: [String] = []
     // MARK: -Filtered Services
     func filterService(){
+        var stopServicesArr: [String]?
         if stopServices != nil, services != nil{
-            for i in 0...stopServices!.count-1{
-                var distance: [Double] = []
+            var distance: [Double] = []
+            stopServicesArr = stopServices?.departures.reduce([], { $0.contains($1.serviceName) ? $0 : $0 + [$1.serviceName] })
+            for i in 0...stopServicesArr!.count-1{
                 for j in 0...services!.count-1{
-                    if services![j].name == stopServices![i].serviceName{
-                        for k in 0...services![j].routes!.count-1{
-                            for l in 0...services![j].routes![k].points!.count-1{
-                                let location = CLLocation(latitude: Double(services![j].routes![k].points![l].latitude!)!, longitude: Double(services![j].routes![k].points![l].longitude!)!)
-                                distance.append(location.distance(from: toLocation))
-                                nearestStation.append(location)
-                            }
+                    if stopServicesArr![i] == services![j].name{
+                        for k in 0...services![j].routes![0].points!.count-1{
+                            let pointLocation = CLLocation(latitude: Double(services![j].routes![0].points![k].latitude!)!, longitude: Double(services![j].routes![0].points![k].longitude!)!)
+                            distance.append(pointLocation.distance(from: toLocation))
+                            nearestStation.append(pointLocation)
                         }
                     }
                 }
-                let minIndex = distance.firstIndex(of: distance.min()!)
-                print(nearestStation[minIndex!])
             }
         }
+        
     }
 }
 
