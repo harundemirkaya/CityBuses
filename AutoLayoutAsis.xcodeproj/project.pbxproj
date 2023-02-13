@@ -28,12 +28,12 @@
 		4F988CF72987A22D00E74198 /* WhereMyBusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF62987A22D00E74198 /* WhereMyBusViewModel.swift */; };
 		4F988CF92987A3BC00E74198 /* StationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF82987A3BC00E74198 /* StationsViewModel.swift */; };
 		4F988CFB2987A4C700E74198 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CFA2987A4C700E74198 /* SettingsViewModel.swift */; };
+		4FA3ADBC299A0FB300F15DDD /* StopServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3ADBB299A0FB300F15DDD /* StopServices.swift */; };
 		4FC119BB2983A087002BD302 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4FC119BD2983A087002BD302 /* Localizable.strings */; };
 		4FC4287E29810792004BED52 /* StationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4287D29810792004BED52 /* StationMapViewController.swift */; };
 		4FC4288029811257004BED52 /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4287F29811257004BED52 /* ServiceModel.swift */; };
 		4FC4288229811453004BED52 /* ServiceMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4288129811453004BED52 /* ServiceMapViewController.swift */; };
 		4FC4288429815740004BED52 /* VehicleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4288329815740004BED52 /* VehicleModel.swift */; };
-		4FE8F358299906E200296733 /* StopToStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8F357299906E200296733 /* StopToStop.swift */; };
 		4FEF8E892985723100BF6B86 /* LocalizationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */; };
 		4FF4A371298A3A780078FC28 /* intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF4A370298A3A780078FC28 /* intro.mp4 */; };
 		4FFB91FA297E6B1900B19260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91F9297E6B1900B19260 /* AppDelegate.swift */; };
@@ -67,6 +67,7 @@
 		4F988CF62987A22D00E74198 /* WhereMyBusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereMyBusViewModel.swift; sourceTree = "<group>"; };
 		4F988CF82987A3BC00E74198 /* StationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsViewModel.swift; sourceTree = "<group>"; };
 		4F988CFA2987A4C700E74198 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		4FA3ADBB299A0FB300F15DDD /* StopServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopServices.swift; sourceTree = "<group>"; };
 		4FC119B82983A01C002BD302 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4FC119BC2983A087002BD302 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4FC119BE2983A62A002BD302 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -75,7 +76,6 @@
 		4FC4287F29811257004BED52 /* ServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceModel.swift; sourceTree = "<group>"; };
 		4FC4288129811453004BED52 /* ServiceMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMapViewController.swift; sourceTree = "<group>"; };
 		4FC4288329815740004BED52 /* VehicleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleModel.swift; sourceTree = "<group>"; };
-		4FE8F357299906E200296733 /* StopToStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopToStop.swift; sourceTree = "<group>"; };
 		4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationSystem.swift; sourceTree = "<group>"; };
 		4FF4A370298A3A780078FC28 /* intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro.mp4; sourceTree = "<group>"; };
 		4FFB91F6297E6B1900B19260 /* AutoLayoutAsis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLayoutAsis.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +118,7 @@
 				4F6BA12D29800B6C0010C8C2 /* StationModel.swift */,
 				4FC4287F29811257004BED52 /* ServiceModel.swift */,
 				4FC4288329815740004BED52 /* VehicleModel.swift */,
-				4FE8F357299906E200296733 /* StopToStop.swift */,
+				4FA3ADBB299A0FB300F15DDD /* StopServices.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -346,7 +346,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FE8F358299906E200296733 /* StopToStop.swift in Sources */,
 				4FFB91FE297E6B1900B19260 /* LoginViewController.swift in Sources */,
 				4F988CF92987A3BC00E74198 /* StationsViewModel.swift in Sources */,
 				4F6BA11D297FB6570010C8C2 /* StationsViewController.swift in Sources */,
@@ -376,6 +375,7 @@
 				4F6BA12E29800B6C0010C8C2 /* StationModel.swift in Sources */,
 				4F6BA123297FB7750010C8C2 /* SettingsViewController.swift in Sources */,
 				4F988CFB2987A4C700E74198 /* SettingsViewModel.swift in Sources */,
+				4FA3ADBC299A0FB300F15DDD /* StopServices.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

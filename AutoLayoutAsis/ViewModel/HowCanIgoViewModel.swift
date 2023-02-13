@@ -18,7 +18,10 @@ class HowCanIgoViewModel{
     // MARK: Network Manager Defined
     var networkManager = NetworkManager()
     
-    // MARK: -Functions
+    // MARK: Selected Stop ID
+    var selectedStopID = 0
+    
+    // MARK: -Get Stations
     func getStations(){
         networkManager.fetchStations { [weak self] result in
             if result.response?.statusCode == 200{
@@ -29,12 +32,23 @@ class HowCanIgoViewModel{
         }
     }
     
-    func getPaths(startStopID: Int, finishStopID: Int){
-        networkManager.startStopID = startStopID
-        networkManager.finishStopID = finishStopID
-        networkManager.fetchStopToStop { [weak self] result in
+    // MARK: -Get Stop Services
+    func getStopServices(){
+        networkManager.stopID = selectedStopID
+        networkManager.fetchStopServices { [weak self] result in
             if result.response?.statusCode == 200{
-                self?.howCanIgoVC?.stopToStop = result.value
+                self?.howCanIgoVC?.stopServices = result.value?.departures
+            } else{
+                self?.howCanIgoVC?.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: result.error!.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: -Get Services
+    func getServices(){
+        networkManager.fetchServices{ [weak self] result in
+            if result.response?.statusCode == 200{
+                self?.howCanIgoVC?.services = result.value?.services
             } else{
                 self?.howCanIgoVC?.alertMessage(title: NSLocalizedString("errorTitle", comment: "Error"), description: result.error!.localizedDescription)
             }

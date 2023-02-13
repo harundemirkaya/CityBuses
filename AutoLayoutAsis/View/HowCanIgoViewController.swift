@@ -124,22 +124,22 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
     var toID = 0
     
     // MARK: From and To Location
-    var fromLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0){
+    var fromLocation: CLLocation = CLLocation(latitude: 0, longitude: 0){
         didSet{
             if !stations!.isEmpty{
                 for i in 0...stations!.count-1{
-                    if stations![i].latitude == fromLocation.latitude, stations![i].longitude == fromLocation.longitude{
+                    if stations![i].latitude == fromLocation.coordinate.latitude, stations![i].longitude == fromLocation.coordinate.longitude{
                         fromID = stations![i].stopID!
                     }
                 }
             }
         }
     }
-    var toLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0){
+    var toLocation: CLLocation = CLLocation(latitude: 0, longitude: 0){
         didSet{
             if !stations!.isEmpty{
                 for i in 0...stations!.count-1{
-                    if stations![i].latitude == toLocation.latitude, stations![i].longitude == toLocation.longitude{
+                    if stations![i].latitude == toLocation.coordinate.latitude, stations![i].longitude == toLocation.coordinate.longitude{
                         toID = stations![i].stopID!
                     }
                 }
@@ -160,11 +160,23 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         return btn
     }()
     
-    var stopToStop: StopToStop?{
+    var services: [Service]?{
         didSet{
-            print(stopToStop)
+            if services?.count != 0{
+                filterService()
+            }
         }
     }
+    
+    var stopServices: [Departure]? {
+        didSet{
+            if stopServices?.count != 0{
+                howCanIgoViewModel.getServices()
+            }
+        }
+    }
+    
+    var selectedFromStopID = 0
     
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
@@ -313,48 +325,51 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         self.mapView.removeAnnotations(allAnnotations)
         self.mapView.removeOverlays(self.mapView.overlays)
         
-        let location = CLLocationCoordinate2D(latitude: (stations?[indexPath.row].latitude)!, longitude: (stations?[indexPath.row].longitude)!)
+        selectedFromStopID = (stations?[indexPath.row].stopID)!
+        
+        let location = CLLocation(latitude: (stations?[indexPath.row].latitude)!, longitude: (stations?[indexPath.row].longitude)!)
         if tableView == tableViewFrom{
             fromLocation = location
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-            let region = MKCoordinateRegion(center: fromLocation, span: span)
+            let region = MKCoordinateRegion(center: fromLocation.coordinate, span: span)
             mapView.setRegion(region, animated: true)
             // MARK: From Annotation
             let annotation = MKPointAnnotation()
-            annotation.coordinate = fromLocation
+            annotation.coordinate = fromLocation.coordinate
             annotation.title = "From"
             mapView.addAnnotation(annotation)
             // MARK: To Annotation
             let annotationTo = MKPointAnnotation()
-            annotationTo.coordinate = toLocation
+            annotationTo.coordinate = toLocation.coordinate
             annotationTo.title = "To"
             mapView.addAnnotation(annotationTo)
             txtFieldStopTable()
         } else if tableView == tableViewTo{
             toLocation = location
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-            let region = MKCoordinateRegion(center: toLocation, span: span)
+            let region = MKCoordinateRegion(center: toLocation.coordinate, span: span)
             mapView.setRegion(region, animated: true)
             // MARK: To Annotation
             let annotation = MKPointAnnotation()
-            annotation.coordinate = toLocation
+            annotation.coordinate = toLocation.coordinate
             annotation.title = "To"
             mapView.addAnnotation(annotation)
             // MARK: From Location
             let annotationFrom = MKPointAnnotation()
-            annotationFrom.coordinate = fromLocation
+            annotationFrom.coordinate = fromLocation.coordinate
             annotationFrom.title = "From"
             mapView.addAnnotation(annotationFrom)
             txtFieldStopTable()
         }
-        if fromLocation.latitude != 0, toLocation.latitude != 0{
+        if fromLocation.coordinate.latitude != 0, toLocation.coordinate.latitude != 0{
             btnDirections.isHidden = false
         }
     }
     
     // MARK: -Btn Directions Clicked
     @objc func btnDirectionsTarget(){
-        howCanIgoViewModel.getPaths(startStopID: fromID, finishStopID: toID)
+        howCanIgoViewModel.selectedStopID = selectedFromStopID
+        howCanIgoViewModel.getStopServices()
     }
     
     // MARK: -Set Annotations Image
@@ -371,6 +386,25 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
             annotationView?.image = UIImage(named: "stop-point-tr")
         }
         return annotationView
+    }
+    
+    // MARK: -Filtered Services
+    func filterService(){
+        var distance: [Double] = []
+        if stopServices != nil, services != nil{
+            for i in 0...stopServices!.count-1{
+                for j in 0...services!.count-1{
+                    if services![j].name == stopServices![i].serviceName{
+                        for k in 0...services![j].routes!.count{
+                            for l in 0...services![j].routes![k].points!.count{
+                                var location = CLLocation(latitude: Double(services![j].routes![k].points![l].latitude!)!, longitude: Double(services![j].routes![k].points![l].longitude!)!)
+                                distance.append(location.distance(from: toLocation))
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
