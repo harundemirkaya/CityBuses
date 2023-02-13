@@ -178,6 +178,8 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
     
     var selectedFromStopID = 0
     
+    var nearestStation: [CLLocation] = []
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -296,13 +298,23 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
     
     // MARK: -TableView Config
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredStations.count
+        if tableView == tableViewFrom{
+            return filteredStations.count
+        } else{
+            return filteredStations.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
-        cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row])
-        return cell
+        if tableView == tableViewFrom{
+            let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
+            cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row])
+            return cell
+        } else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
+            cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row])
+            return cell
+        }
     }
     
     // MARK: -Show Alert Message
@@ -390,19 +402,22 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
     
     // MARK: -Filtered Services
     func filterService(){
-        var distance: [Double] = []
         if stopServices != nil, services != nil{
             for i in 0...stopServices!.count-1{
+                var distance: [Double] = []
                 for j in 0...services!.count-1{
                     if services![j].name == stopServices![i].serviceName{
-                        for k in 0...services![j].routes!.count{
-                            for l in 0...services![j].routes![k].points!.count{
-                                var location = CLLocation(latitude: Double(services![j].routes![k].points![l].latitude!)!, longitude: Double(services![j].routes![k].points![l].longitude!)!)
+                        for k in 0...services![j].routes!.count-1{
+                            for l in 0...services![j].routes![k].points!.count-1{
+                                let location = CLLocation(latitude: Double(services![j].routes![k].points![l].latitude!)!, longitude: Double(services![j].routes![k].points![l].longitude!)!)
                                 distance.append(location.distance(from: toLocation))
+                                nearestStation.append(location)
                             }
                         }
                     }
                 }
+                let minIndex = distance.firstIndex(of: distance.min()!)
+                print(nearestStation[minIndex!])
             }
         }
     }
