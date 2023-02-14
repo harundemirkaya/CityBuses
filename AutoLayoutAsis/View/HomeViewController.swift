@@ -178,7 +178,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let settingsVC = SettingsViewController()
             self.navigationController?.pushViewController(settingsVC, animated: true)
         } else if selectedItem == 7{
-            let howCanIgoVC = HowCanIgoViewController()
+            let howCanIgoVC = HowIGoViewController()
             self.navigationController?.pushViewController(howCanIgoVC, animated: true)
         } else if selectedItem == 8 && menuCount == 8 || selectedItem == 6 && menuCount == 6{
             if currentUser != nil{

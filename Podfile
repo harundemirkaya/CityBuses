@@ -13,5 +13,7 @@ target 'AutoLayoutAsis' do
   pod 'FirebaseAuth'
   pod 'Alamofire', '~> 5.6'
   pod 'SwiftyJSON', '~> 5.0'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
 end

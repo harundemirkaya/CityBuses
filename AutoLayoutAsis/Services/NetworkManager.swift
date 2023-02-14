@@ -36,11 +36,9 @@ class NetworkManager {
     
     // MARK: -Fetch Stop Services
     public func fetchStopServices(completion: @escaping (_ result: DataResponse<StopServices, AFError>) -> Void) {
-        print("https://tfe-opendata.com/api/v1/timetables/\(stopID!)")
         AF.request("https://tfe-opendata.com/api/v1/timetables/\(stopID!)").responseDecodable(of: StopServices.self) { response in
             completion(response)
         }
-        
     }
 }
 

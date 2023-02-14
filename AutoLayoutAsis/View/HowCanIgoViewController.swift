@@ -172,6 +172,8 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
     
     var pathCounter = 0
     
+    var path: [Path] = []
+    
     var selectedFromStopID = 0
     
     var nearestStation: [CLLocation] = []
@@ -398,14 +400,40 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
 
     // MARK: -Filtered Services
     func filterService(){
-        let result = filterConfig(stopServices: stopServices)
-        pathCounter += 1
-        let distance = result.keys.first
-        print(distance!!)
-        if distance!! > 250, pathCounter < 5{
-            howCanIgoViewModel.selectedStopID = selectedFromStopID
-            howCanIgoViewModel.getStopServices()
+        if pathCounter < 5{
+            let result = filterConfig(stopServices: stopServices)
+            let distance = result.keys.first
+            var loopCounter = 0
+            if !path.isEmpty{
+                for i in 0...path.count-1{
+                    if distance!! <= path[i].distance!{
+                        loopCounter += 1
+                    }
+                }
+            }
+            if loopCounter == path.count{
+                
+                path.append(Path(distance: distance!!, location: result[distance!!]))
+            }
+            if distance!! > 750{
+                howCanIgoViewModel.selectedStopID = selectedFromStopID
+                howCanIgoViewModel.getStopServices()
+            } else{
+                drawPolyline()
+            }
+            path = removeDuplicatePaths(path)
+            pathCounter += 1
         }
+    }
+    
+    func removeDuplicatePaths(_ paths: [Path]) -> [Path] {
+        var uniquePaths = [Path]()
+        for path in paths {
+            if !uniquePaths.contains(where: { $0.location == path.location && $0.distance == path.distance }) {
+                uniquePaths.append(path)
+            }
+        }
+        return uniquePaths
     }
     
     func filterConfig(stopServices: StopServices?) -> [Double? : CLLocation]{
@@ -434,6 +462,32 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
             selectedFromStopID = stopID[minIndex!]
         }
         return result
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKGradientPolylineRenderer(overlay: overlay)
+        renderer.setColors([
+            .yellow
+        ],locations: [])
+        renderer.lineCap = .round
+        renderer.lineWidth = 3.0
+        return renderer
+    }
+    
+    var routeOverlay: MKOverlay?
+    func drawPolyline(){
+        var coordinates: [CLLocationCoordinate2D] = []
+        for pat in path {
+            guard let location = pat.location else { continue }
+            coordinates.append(CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude))
+        }
+        
+        DispatchQueue.main.async {
+            self.routeOverlay = MKPolyline(coordinates: coordinates, count: coordinates.count)
+            self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
+            let customEdgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
+            self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customEdgePadding ,animated: true)
+        }
     }
 }
 
