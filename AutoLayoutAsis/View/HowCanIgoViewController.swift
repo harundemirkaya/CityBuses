@@ -160,21 +160,17 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         return btn
     }()
     
-    var services: [Service]?{
+    var services: [Service]?
+    
+    var stopServices: StopServices? {
         didSet{
-            if services?.count != 0{
+            if stopServices != nil{
                 filterService()
             }
         }
     }
     
-    var stopServices: StopServices? {
-        didSet{
-            if stopServices?.departures.count != 0{
-                howCanIgoViewModel.getServices()
-            }
-        }
-    }
+    var pathCounter = 0
     
     var selectedFromStopID = 0
     
@@ -217,6 +213,7 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         txtFieldTo.addTarget(self, action: #selector(txtFieldStartTableTo), for: .editingDidBegin)
         
         howCanIgoViewModel.howCanIgoVC = self
+        howCanIgoViewModel.getServices()
         howCanIgoViewModel.getStations()
         filteredStations = stationsName
         
@@ -398,10 +395,23 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
         }
         return annotationView
     }
-    var servicename: [String] = []
+
     // MARK: -Filtered Services
     func filterService(){
+        let result = filterConfig(stopServices: stopServices)
+        pathCounter += 1
+        let distance = result.keys.first
+        print(distance!!)
+        if distance!! > 250, pathCounter < 5{
+            howCanIgoViewModel.selectedStopID = selectedFromStopID
+            howCanIgoViewModel.getStopServices()
+        }
+    }
+    
+    func filterConfig(stopServices: StopServices?) -> [Double? : CLLocation]{
         var stopServicesArr: [String]?
+        var stopID: [Int] = []
+        var result: [Double? : CLLocation] = [0.0 : CLLocation()]
         if stopServices != nil, services != nil{
             var distance: [Double] = []
             stopServicesArr = stopServices?.departures.reduce([], { $0.contains($1.serviceName) ? $0 : $0 + [$1.serviceName] })
@@ -409,15 +419,21 @@ class HowCanIgoViewController: UIViewController, CLLocationManagerDelegate, MKMa
                 for j in 0...services!.count-1{
                     if stopServicesArr![i] == services![j].name{
                         for k in 0...services![j].routes![0].points!.count-1{
-                            let pointLocation = CLLocation(latitude: Double(services![j].routes![0].points![k].latitude!)!, longitude: Double(services![j].routes![0].points![k].longitude!)!)
-                            distance.append(pointLocation.distance(from: toLocation))
-                            nearestStation.append(pointLocation)
+                            if services![j].routes![0].points![k].stopID != nil{
+                                let pointLocation = CLLocation(latitude: Double(services![j].routes![0].points![k].latitude!)!, longitude: Double(services![j].routes![0].points![k].longitude!)!)
+                                distance.append(pointLocation.distance(from: toLocation))
+                                nearestStation.append(pointLocation)
+                                stopID.append(Int(services![j].routes![0].points![k].stopID ?? "") ?? 0)
+                            }
                         }
                     }
                 }
             }
+            let minIndex = distance.firstIndex(of: distance.min()!)
+            result = [distance.min() : nearestStation[minIndex!]]
+            selectedFromStopID = stopID[minIndex!]
         }
-        
+        return result
     }
 }
 
