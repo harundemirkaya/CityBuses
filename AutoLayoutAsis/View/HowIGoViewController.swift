@@ -38,9 +38,20 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             controlPlaceID()
         }
     }
+    
     var toPlaceID: String?{
         didSet{
             controlPlaceID()
+        }
+    }
+    
+    var networkManager = NetworkManager()
+    
+    var routeMaps: RouteMaps? {
+        didSet{
+            if routeMaps?.routes.count != nil{
+                pushScreen()
+            }
         }
     }
     
@@ -82,20 +93,19 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 coordinateFrom.longitude = coordinate.longitude
             } else if annotationCounter == 1{
                 coordinateTo.latitude = coordinate.latitude
-                coordinateTo.longitude = coordinate.latitude
+                coordinateTo.longitude = coordinate.longitude
             }
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             mapView.addAnnotation(annotation)
             annotationCounter += 1
         } else{
-            
             convertCoordinatesToPlaceID(latitude: coordinateFrom.latitude, longitude: coordinateFrom.longitude) { (placeID) in
                 if let placeID = placeID {
                     self.fromPlaceID = placeID
                 }
             }
-            convertCoordinatesToPlaceID(latitude: coordinateTo.latitude, longitude: coordinateTo.longitude) { (placeID) in
+            convertCoordinatesToPlaceID(latitude: 41.004609, longitude: 28.720101) { (placeID) in
                 if let placeID = placeID {
                     self.toPlaceID = placeID
                 }
@@ -105,6 +115,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func controlPlaceID(){
         if fromPlaceID != nil, toPlaceID != nil{
+            print(fromPlaceID)
+            print(toPlaceID)
             getDirections(from: fromPlaceID!, to: toPlaceID!)
         }
     }
@@ -112,29 +124,14 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func getDirections(from: String, to: String) {
         let origin = "place_id:\(from)"
         let destination = "place_id:\(to)"
-
-        let url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=\(origin)&destinations=\(destination)&key=\(apiKey)"
-
-        let request = URLRequest(url: URL(string: url)!)
-        let session = URLSession.shared
-
-        let task = session.dataTask(with: request) { (data, response, error) in
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as! [String:Any]
-                    let rows = json["rows"] as! [[String:Any]]
-                    let elements = rows[0]["elements"] as! [[String:Any]]
-                    let distance = elements[0]["distance"] as! [String:Any]
-                    let text = distance["text"] as! String
-                    print("Distance: \(text)")
-                } catch {
-                    print("Error while parsing JSON: \(error)")
-                }
-            }
+        
+        networkManager.apiKey = apiKey
+        networkManager.origin = origin
+        networkManager.destination = destination
+        networkManager.feetchRouteMaps { result in
+            self.routeMaps = result.value
         }
-
-        task.resume()
-
+        
     }
     
     func convertCoordinatesToPlaceID(latitude: Double, longitude: Double, completion: @escaping (String?) -> Void) {
@@ -158,6 +155,10 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             }
         }
         task.resume()
+    }
+    
+    func pushScreen(){
+        
     }
 }
 
