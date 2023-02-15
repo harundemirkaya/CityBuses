@@ -17,7 +17,6 @@ class RouteViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let table = UITableView()
         table.delegate = self
         table.dataSource = self
-        table.allowsSelection = false
         return table
     }()
     
@@ -58,13 +57,13 @@ class RouteViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 65
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let routeMapVC = RouteMapViewController()
         routeMapVC.route = routes![indexPath.row].legs[0].steps
         navigationController?.pushViewController(routeMapVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 65
     }
 }

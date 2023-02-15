@@ -80,7 +80,7 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         // MARK: -Screen
         view.backgroundColor = .white
         
-        // MARK: Set Constraints
+        // MARK: Map Config
         mapView.mapConstraints(view)
         self.locationManager.delegate = self
         self.locationManager.requestAlwaysAuthorization()
@@ -196,7 +196,7 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func pushScreen(){
         let routeVC = RouteViewController()
         routeVC.routes = routeMaps?.routes
-        present(routeVC, animated: true)
+        navigationController?.pushViewController(routeVC, animated: true)
     }
 }
 
