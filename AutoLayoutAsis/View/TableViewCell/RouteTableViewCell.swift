@@ -9,11 +9,6 @@ import UIKit
 
 class RouteTableViewCell: UITableViewCell {
     
-    let nameLabel = UILabel()
-    let distanceLabel = UILabel()
-    let durationLabel = UILabel()
-    
-    
     var icon: UIImage?
     var meter: UILabel?
     var path: [Path] = [] {
@@ -34,40 +29,30 @@ class RouteTableViewCell: UITableViewCell {
         }
     }
     
+    let lblTotalDistance = UILabel()
+    
+    let divider: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.tintColor = .gray
+        view.backgroundColor = .gray
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        lblTotalDistance.translatesAutoresizingMaskIntoConstraints = false
+        lblTotalDistance.font = lblTotalDistance.font.withSize(12)
+        addSubview(lblTotalDistance)
+        lblTotalDistance.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        lblTotalDistance.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-        contentView.addSubview(nameLabel)
-        
-        
-        distanceLabel.translatesAutoresizingMaskIntoConstraints = false
-        distanceLabel.font = UIFont.systemFont(ofSize: 14.0)
-        contentView.addSubview(distanceLabel)
-        
-        
-        durationLabel.translatesAutoresizingMaskIntoConstraints = false
-        durationLabel.font = UIFont.systemFont(ofSize: 14.0)
-        contentView.addSubview(durationLabel)
-        
-        
-        let marginGuide = contentView.layoutMarginsGuide
-        
-        nameLabel.topAnchor.constraint(equalTo: marginGuide.topAnchor).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor).isActive = true
-        nameLabel.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor).isActive = true
-        
-        distanceLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8.0).isActive = true
-        distanceLabel.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor).isActive = true
-        distanceLabel.bottomAnchor.constraint(equalTo: marginGuide.bottomAnchor).isActive = true
-        
-        durationLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8.0).isActive = true
-        durationLabel.leadingAnchor.constraint(equalTo: distanceLabel.trailingAnchor, constant: 8.0).isActive = true
-        durationLabel.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor).isActive = true
-        durationLabel.bottomAnchor.constraint(equalTo: marginGuide.bottomAnchor).isActive = true
-        
+        addSubview(divider)
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.bottomAnchor.constraint(equalTo: lblTotalDistance.topAnchor, constant: -5).isActive = true
+        divider.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        divider.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -94,19 +79,18 @@ class RouteTableViewCell: UITableViewCell {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
 
         let stackView = UIStackView()
         scrollView.addSubview(stackView)
         stackView.axis = .horizontal
-        stackView.alignment = .center
+        stackView.alignment = .leading
         stackView.distribution = .equalSpacing
-        stackView.spacing = 6
             
         for (index, pathIndex) in path.enumerated() {
-            // her bir öğe için birer view oluştur
             let iconView = UIView()
             iconView.backgroundColor = .clear
             let iconImageView = pathIndex.icon
@@ -116,17 +100,14 @@ class RouteTableViewCell: UITableViewCell {
             meterLabel.text = pathIndex.meter?.text
             meterLabel.font = meterLabel.font.withSize(12)
             
-            // icon ve metre label'ını yatay olarak hizala
-            let horizontalStackView = UIStackView(arrangedSubviews: [iconView, meterLabel])
-            horizontalStackView.axis = .vertical
-            horizontalStackView.alignment = .center
-            horizontalStackView.distribution = .fillProportionally
-            horizontalStackView.spacing = 20
+            let verticalStackView = UIStackView(arrangedSubviews: [iconView, meterLabel])
+            verticalStackView.axis = .vertical
+            verticalStackView.alignment = .center
+            verticalStackView.distribution = .fill
+            verticalStackView.spacing = 20
                 
-            // stack view'a ekle
-            stackView.addArrangedSubview(horizontalStackView)
+            stackView.addArrangedSubview(verticalStackView)
                 
-            // son indise kadar > işareti ekle
             if index < path.count - 1 {
                 let separatorLabel = UILabel()
                 separatorLabel.text = ">"
@@ -134,7 +115,6 @@ class RouteTableViewCell: UITableViewCell {
             }
         }
         
-        // horizontal stack view'ın content size'ını belirle
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),

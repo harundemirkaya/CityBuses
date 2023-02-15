@@ -54,10 +54,11 @@ class RouteViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "RouteTableViewCell", for: indexPath) as! RouteTableViewCell
         let route = routes![indexPath.row].legs[0]
         cell.steps = route.steps
+        cell.lblTotalDistance.text = "Distance: \(route.distance.text)"
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 65
     }
 }
