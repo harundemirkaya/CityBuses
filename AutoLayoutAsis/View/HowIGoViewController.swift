@@ -55,6 +55,24 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
+    var btnClear: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.backgroundColor = .purple
+        btn.setTitle("   Clear   ", for: UIControl.State.normal)
+        btn.layer.cornerRadius = 10
+        return btn
+    }()
+    
+    var btnDirection: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.backgroundColor = .purple
+        btn.setTitle("   Direction   ", for: UIControl.State.normal)
+        btn.layer.cornerRadius = 10
+        return btn
+    }()
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +97,35 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         mapView.addGestureRecognizer(longPressRecognizer)
+        
+        btnClear.btnClearConstraints(view)
+        btnClear.addTarget(self, action: #selector(btnClearTarget), for: .touchUpInside)
+        
+        btnDirection.btnDirectionConstraints(view)
+        btnDirection.addTarget(self, action: #selector(btnDirectionTarget), for: .touchUpInside)
+        btnDirection.isHidden = true
+        btnClear.isHidden = true
+    }
+    
+    @objc func btnClearTarget(){
+        btnDirection.isHidden = true
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        annotationCounter = 0
+        btnClear.isHidden = true
+    }
+    
+    @objc func btnDirectionTarget(){
+        convertCoordinatesToPlaceID(latitude: coordinateFrom.latitude, longitude: coordinateFrom.longitude) { (placeID) in
+            if let placeID = placeID {
+                self.fromPlaceID = placeID
+            }
+        }
+        convertCoordinatesToPlaceID(latitude: 41.004609, longitude: 28.720101) { (placeID) in
+            if let placeID = placeID {
+                self.toPlaceID = placeID
+            }
+        }
     }
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer){
@@ -91,32 +138,21 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             if annotationCounter == 0{
                 coordinateFrom.latitude = coordinate.latitude
                 coordinateFrom.longitude = coordinate.longitude
+                btnClear.isHidden = false
             } else if annotationCounter == 1{
                 coordinateTo.latitude = coordinate.latitude
                 coordinateTo.longitude = coordinate.longitude
+                btnDirection.isHidden = false
             }
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             mapView.addAnnotation(annotation)
             annotationCounter += 1
-        } else{
-            convertCoordinatesToPlaceID(latitude: coordinateFrom.latitude, longitude: coordinateFrom.longitude) { (placeID) in
-                if let placeID = placeID {
-                    self.fromPlaceID = placeID
-                }
-            }
-            convertCoordinatesToPlaceID(latitude: 41.004609, longitude: 28.720101) { (placeID) in
-                if let placeID = placeID {
-                    self.toPlaceID = placeID
-                }
-            }
         }
     }
     
     func controlPlaceID(){
         if fromPlaceID != nil, toPlaceID != nil{
-            print(fromPlaceID)
-            print(toPlaceID)
             getDirections(from: fromPlaceID!, to: toPlaceID!)
         }
     }
@@ -172,5 +208,17 @@ public extension UIView{
         bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+    }
+    
+    func btnClearConstraints(_ view: UIView){
+        view.addSubview(self)
+        leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+        topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+    }
+    
+    func btnDirectionConstraints(_ view: UIView){
+        view.addSubview(self)
+        topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
     }
 }

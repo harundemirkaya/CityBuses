@@ -61,4 +61,10 @@ class RouteViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let routeMapVC = RouteMapViewController()
+        routeMapVC.route = routes![indexPath.row].legs[0].steps
+        navigationController?.pushViewController(routeMapVC, animated: true)
+    }
 }
