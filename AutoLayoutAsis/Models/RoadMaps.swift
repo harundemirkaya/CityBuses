@@ -42,12 +42,14 @@ struct Step: Decodable {
     let startLocation: Location
     let endLocation: Location
     let polyline: Polyline
+    let distance: Distance
     
     private enum CodingKeys: String, CodingKey {
         case travelMode = "travel_mode"
         case startLocation = "start_location"
         case endLocation = "end_location"
         case polyline
+        case distance = "distance"
     }
 }
 

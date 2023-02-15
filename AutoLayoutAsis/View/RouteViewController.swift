@@ -53,9 +53,11 @@ class RouteViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RouteTableViewCell", for: indexPath) as! RouteTableViewCell
         let route = routes![indexPath.row].legs[0]
-        cell.nameLabel.text = "Yol"
-        cell.distanceLabel.text = "Mesafe: \(route.distance.text)"
-        cell.durationLabel.text = "Süre: \(route.duration.text)"
+        cell.steps = route.steps
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 }

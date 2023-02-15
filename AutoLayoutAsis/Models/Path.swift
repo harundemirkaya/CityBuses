@@ -2,19 +2,18 @@
 //  Path.swift
 //  AutoLayoutAsis
 //
-//  Created by Harun Demirkaya on 14.02.2023.
+//  Created by Harun Demirkaya on 15.02.2023.
 //
-// MARK: -Import Libaries
-import Foundation
-import CoreLocation
 
-// MARK: -Path Class
+import Foundation
+import UIKit
+
 class Path{
-    var distance: Double?
-    var location: CLLocation?
+    var icon: UIImageView?
+    var meter: UILabel?
     
-    init(distance: Double? = nil, location: CLLocation? = nil) {
-        self.distance = distance
-        self.location = location
+    init(icon: UIImageView? = nil, meter: UILabel? = nil) {
+        self.icon = icon
+        self.meter = meter
     }
 }
