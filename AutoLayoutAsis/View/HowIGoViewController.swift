@@ -158,7 +158,9 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func pushScreen(){
-        
+        let routeVC = RouteViewController()
+        routeVC.routes = routeMaps?.routes
+        present(routeVC, animated: true)
     }
 }
 

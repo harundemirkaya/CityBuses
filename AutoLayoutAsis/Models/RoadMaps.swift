@@ -9,7 +9,7 @@ import Foundation
 
 struct RouteMaps: Decodable {
     let routes: [RouteMap]
-    
+
     private enum CodingKeys: String, CodingKey {
         case routes
     }
@@ -26,9 +26,13 @@ struct RouteMap: Decodable {
 }
 
 struct Leg: Decodable {
+    let distance: Distance
+    let duration: Duration
     let steps: [Step]
     
     private enum CodingKeys: String, CodingKey {
+        case distance
+        case duration
         case steps
     }
 }
@@ -64,3 +68,24 @@ struct Polyline: Decodable {
         case points
     }
 }
+
+struct Distance: Decodable {
+    let text: String
+    let value: Int
+    
+    private enum CodingKeys: String, CodingKey {
+        case text
+        case value
+    }
+}
+
+struct Duration: Decodable {
+    let text: String
+    let value: Int
+    
+    private enum CodingKeys: String, CodingKey {
+        case text
+        case value
+    }
+}
+

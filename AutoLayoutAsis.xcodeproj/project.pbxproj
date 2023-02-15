@@ -11,6 +11,7 @@
 		4F1A540B297ED18F003566F1 /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A540A297ED18F003566F1 /* MenuItems.swift */; };
 		4F38B97C299CB58D008783B7 /* RoadMaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38B97B299CB58D008783B7 /* RoadMaps.swift */; };
 		4F38B97E299CBA45008783B7 /* RouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38B97D299CBA45008783B7 /* RouteViewController.swift */; };
+		4F38B980299CBDFF008783B7 /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38B97F299CBDFF008783B7 /* RouteTableViewCell.swift */; };
 		4F6BA119297FB5CE0010C8C2 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA118297FB5CE0010C8C2 /* MenuTableViewCell.swift */; };
 		4F6BA11B297FB60F0010C8C2 /* WhereMyBusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA11A297FB60F0010C8C2 /* WhereMyBusViewController.swift */; };
 		4F6BA11D297FB6570010C8C2 /* StationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA11C297FB6570010C8C2 /* StationsViewController.swift */; };
@@ -51,6 +52,7 @@
 		4F1A540A297ED18F003566F1 /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuItems.swift; path = "../../../../../Creative Cloud Files/MenuItems.swift"; sourceTree = "<group>"; };
 		4F38B97B299CB58D008783B7 /* RoadMaps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadMaps.swift; sourceTree = "<group>"; };
 		4F38B97D299CBA45008783B7 /* RouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewController.swift; sourceTree = "<group>"; };
+		4F38B97F299CBDFF008783B7 /* RouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
 		4F6BA118297FB5CE0010C8C2 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		4F6BA11A297FB60F0010C8C2 /* WhereMyBusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereMyBusViewController.swift; sourceTree = "<group>"; };
 		4F6BA11C297FB6570010C8C2 /* StationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				4F6BA118297FB5CE0010C8C2 /* MenuTableViewCell.swift */,
+				4F38B97F299CBDFF008783B7 /* RouteTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				4F38B97E299CBA45008783B7 /* RouteViewController.swift in Sources */,
 				4F988CF92987A3BC00E74198 /* StationsViewModel.swift in Sources */,
 				4F6BA11D297FB6570010C8C2 /* StationsViewController.swift in Sources */,
+				4F38B980299CBDFF008783B7 /* RouteTableViewCell.swift in Sources */,
 				4F6BA125297FB7AA0010C8C2 /* ShareAppViewController.swift in Sources */,
 				4F6BA129297FC29E0010C8C2 /* AppTabBarController.swift in Sources */,
 				4FC4288229811453004BED52 /* ServiceMapViewController.swift in Sources */,
