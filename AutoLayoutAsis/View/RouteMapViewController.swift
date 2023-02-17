@@ -26,6 +26,8 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
     // MARK: Location Manager Defined
     var locationManager = CLLocationManager()
     
+    var routeOverlay: MKOverlay?
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,7 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
         // MARK: -Map Config
         mapView.mapConstraints(view)
         self.locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
         DispatchQueue.global().async {
@@ -48,5 +51,34 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
         mapView.delegate = self
         mapView.showsUserLocation = true
         
+        drawRouteOnMap(route: route!)
+    }
+    
+    func drawRouteOnMap(route: [Step]) {
+        var coordinates = [CLLocationCoordinate2D]()
+        for step in route {
+            var latitude = step.startLocation.lat
+            var longitude = step.startLocation.lng
+            coordinates.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+            latitude = step.endLocation.lat
+            longitude = step.endLocation.lng
+            coordinates.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+        }
+        DispatchQueue.main.async {
+            self.routeOverlay = MKPolyline(coordinates: coordinates, count: coordinates.count)
+            self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
+            let customEdgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
+            self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customEdgePadding ,animated: true)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKGradientPolylineRenderer(overlay: overlay)
+        renderer.setColors([
+            .yellow
+        ],locations: [])
+        renderer.lineCap = .round
+        renderer.lineWidth = 3.0
+        return renderer
     }
 }

@@ -38,6 +38,7 @@
 		4FC4288029811257004BED52 /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4287F29811257004BED52 /* ServiceModel.swift */; };
 		4FC4288229811453004BED52 /* ServiceMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4288129811453004BED52 /* ServiceMapViewController.swift */; };
 		4FC4288429815740004BED52 /* VehicleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4288329815740004BED52 /* VehicleModel.swift */; };
+		4FD00B75299FB5D800E2DB3C /* HowIGoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD00B74299FB5D800E2DB3C /* HowIGoViewModel.swift */; };
 		4FEF8E892985723100BF6B86 /* LocalizationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */; };
 		4FF4A371298A3A780078FC28 /* intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF4A370298A3A780078FC28 /* intro.mp4 */; };
 		4FFB91FA297E6B1900B19260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91F9297E6B1900B19260 /* AppDelegate.swift */; };
@@ -84,6 +85,7 @@
 		4FC4287F29811257004BED52 /* ServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceModel.swift; sourceTree = "<group>"; };
 		4FC4288129811453004BED52 /* ServiceMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMapViewController.swift; sourceTree = "<group>"; };
 		4FC4288329815740004BED52 /* VehicleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleModel.swift; sourceTree = "<group>"; };
+		4FD00B74299FB5D800E2DB3C /* HowIGoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowIGoViewModel.swift; sourceTree = "<group>"; };
 		4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationSystem.swift; sourceTree = "<group>"; };
 		4FF4A370298A3A780078FC28 /* intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro.mp4; sourceTree = "<group>"; };
 		4FFB91F6297E6B1900B19260 /* AutoLayoutAsis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLayoutAsis.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +184,7 @@
 				4F988CF62987A22D00E74198 /* WhereMyBusViewModel.swift */,
 				4F988CF82987A3BC00E74198 /* StationsViewModel.swift */,
 				4F988CFA2987A4C700E74198 /* SettingsViewModel.swift */,
+				4FD00B74299FB5D800E2DB3C /* HowIGoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 				4F1A540B297ED18F003566F1 /* MenuItems.swift in Sources */,
 				4FFB91FC297E6B1900B19260 /* SceneDelegate.swift in Sources */,
 				4F988CF72987A22D00E74198 /* WhereMyBusViewModel.swift in Sources */,
+				4FD00B75299FB5D800E2DB3C /* HowIGoViewModel.swift in Sources */,
 				4F6BA121297FB6A30010C8C2 /* BalanceViewController.swift in Sources */,
 				4F988CF329879FDB00E74198 /* LoginViewModel.swift in Sources */,
 				4FFB9237297E94BC00B19260 /* HomeViewController.swift in Sources */,
