@@ -121,7 +121,7 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 self.fromPlaceID = placeID
             }
         }
-        convertCoordinatesToPlaceID(latitude: 41.004609, longitude: 28.720101) { (placeID) in
+        convertCoordinatesToPlaceID(latitude: coordinateTo.latitude, longitude: coordinateTo.longitude) { (placeID) in
             if let placeID = placeID {
                 self.toPlaceID = placeID
             }

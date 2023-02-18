@@ -28,6 +28,8 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
     
     var routeOverlay: MKOverlay?
     
+    var coordinates = [CLLocationCoordinate2D]()
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +57,6 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
     }
     
     func drawRouteOnMap(route: [Step]) {
-        var coordinates = [CLLocationCoordinate2D]()
         for step in route {
             var latitude = step.startLocation.lat
             var longitude = step.startLocation.lng
@@ -64,8 +65,11 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
             longitude = step.endLocation.lng
             coordinates.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
         }
+        for coordinate in coordinates{
+            print(coordinate)
+        }
         DispatchQueue.main.async {
-            self.routeOverlay = MKPolyline(coordinates: coordinates, count: coordinates.count)
+            self.routeOverlay = MKPolyline(coordinates: self.coordinates, count: self.coordinates.count)
             self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
             let customEdgePadding: UIEdgeInsets = UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50)
             self.mapView.setVisibleMapRect(self.routeOverlay!.boundingMapRect, edgePadding: customEdgePadding ,animated: true)
