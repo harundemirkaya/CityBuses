@@ -26,6 +26,7 @@
 		4F6BA12C298006830010C8C2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA12B298006830010C8C2 /* NetworkManager.swift */; };
 		4F6BA12E29800B6C0010C8C2 /* StationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA12D29800B6C0010C8C2 /* StationModel.swift */; };
 		4F7FA199299B97B000C7135D /* HowIGoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA198299B97B000C7135D /* HowIGoViewController.swift */; };
+		4F879D7829A348C500B9B1CB /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F879D7729A348C500B9B1CB /* BottomSheetViewController.swift */; };
 		4F988CE62986893100E74198 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CE52986893100E74198 /* LoadingScreen.swift */; };
 		4F988CF129879ABB00E74198 /* ServiceMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF029879ABB00E74198 /* ServiceMapViewModel.swift */; };
 		4F988CF329879FDB00E74198 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF229879FDB00E74198 /* LoginViewModel.swift */; };
@@ -70,6 +71,7 @@
 		4F6BA12B298006830010C8C2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4F6BA12D29800B6C0010C8C2 /* StationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationModel.swift; sourceTree = "<group>"; };
 		4F7FA198299B97B000C7135D /* HowIGoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowIGoViewController.swift; sourceTree = "<group>"; };
+		4F879D7729A348C500B9B1CB /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		4F988CE52986893100E74198 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		4F988CF029879ABB00E74198 /* ServiceMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMapViewModel.swift; sourceTree = "<group>"; };
 		4F988CF229879FDB00E74198 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				4F7FA198299B97B000C7135D /* HowIGoViewController.swift */,
 				4F38B97D299CBA45008783B7 /* RouteViewController.swift */,
 				4F38B983299D0D0C008783B7 /* RouteMapViewController.swift */,
+				4F879D7729A348C500B9B1CB /* BottomSheetViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				4FC4288029811257004BED52 /* ServiceModel.swift in Sources */,
 				4F6BA11F297FB67B0010C8C2 /* DealersViewController.swift in Sources */,
 				4F6BA119297FB5CE0010C8C2 /* MenuTableViewCell.swift in Sources */,
+				4F879D7829A348C500B9B1CB /* BottomSheetViewController.swift in Sources */,
 				4F988CE62986893100E74198 /* LoadingScreen.swift in Sources */,
 				4F988CF129879ABB00E74198 /* ServiceMapViewModel.swift in Sources */,
 				4F6BA127297FB7CC0010C8C2 /* ChangeLanguageViewController.swift in Sources */,

@@ -30,6 +30,10 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
     
     var coordinates = [CLLocationCoordinate2D]()
     
+    // MARK: Bottom Sheet Defined
+    let bottomSheetVC = BottomSheetViewController()
+    var initialTouchPoint: CGPoint = CGPoint.zero
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +57,19 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
         mapView.delegate = self
         mapView.showsUserLocation = true
         
+        // MARK: Draw Polyline
         drawRouteOnMap(route: route!)
+        
+        // MARK: Bottom Sheet
+        let bottomSheetVC = BottomSheetViewController()
+        if let sheet = bottomSheetVC.sheetPresentationController{
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.prefersGrabberVisible = true
+            sheet.preferredCornerRadius = 24
+            sheet.largestUndimmedDetentIdentifier = .medium
+        }
+        self.present(bottomSheetVC, animated: true)
     }
     
     func drawRouteOnMap(route: [Step]) {
