@@ -37,7 +37,6 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // MARK: -Screen
         view.backgroundColor = .white
         
@@ -62,6 +61,7 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
         
         // MARK: Bottom Sheet
         let bottomSheetVC = BottomSheetViewController()
+        bottomSheetVC.route = self.route
         if let sheet = bottomSheetVC.sheetPresentationController{
             sheet.detents = [.medium(), .large()]
             sheet.prefersScrollingExpandsWhenScrolledToEdge = false

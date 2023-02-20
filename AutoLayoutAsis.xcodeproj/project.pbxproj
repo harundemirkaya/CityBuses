@@ -27,6 +27,7 @@
 		4F6BA12E29800B6C0010C8C2 /* StationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6BA12D29800B6C0010C8C2 /* StationModel.swift */; };
 		4F7FA199299B97B000C7135D /* HowIGoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA198299B97B000C7135D /* HowIGoViewController.swift */; };
 		4F879D7829A348C500B9B1CB /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F879D7729A348C500B9B1CB /* BottomSheetViewController.swift */; };
+		4F879D7A29A35A7700B9B1CB /* RouteMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F879D7929A35A7700B9B1CB /* RouteMapTableViewCell.swift */; };
 		4F988CE62986893100E74198 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CE52986893100E74198 /* LoadingScreen.swift */; };
 		4F988CF129879ABB00E74198 /* ServiceMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF029879ABB00E74198 /* ServiceMapViewModel.swift */; };
 		4F988CF329879FDB00E74198 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF229879FDB00E74198 /* LoginViewModel.swift */; };
@@ -72,6 +73,7 @@
 		4F6BA12D29800B6C0010C8C2 /* StationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationModel.swift; sourceTree = "<group>"; };
 		4F7FA198299B97B000C7135D /* HowIGoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowIGoViewController.swift; sourceTree = "<group>"; };
 		4F879D7729A348C500B9B1CB /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		4F879D7929A35A7700B9B1CB /* RouteMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapTableViewCell.swift; sourceTree = "<group>"; };
 		4F988CE52986893100E74198 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		4F988CF029879ABB00E74198 /* ServiceMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMapViewModel.swift; sourceTree = "<group>"; };
 		4F988CF229879FDB00E74198 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				4F6BA118297FB5CE0010C8C2 /* MenuTableViewCell.swift */,
 				4F38B97F299CBDFF008783B7 /* RouteTableViewCell.swift */,
+				4F879D7929A35A7700B9B1CB /* RouteMapTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				4F6BA121297FB6A30010C8C2 /* BalanceViewController.swift in Sources */,
 				4F988CF329879FDB00E74198 /* LoginViewModel.swift in Sources */,
 				4FFB9237297E94BC00B19260 /* HomeViewController.swift in Sources */,
+				4F879D7A29A35A7700B9B1CB /* RouteMapTableViewCell.swift in Sources */,
 				4F6BA12E29800B6C0010C8C2 /* StationModel.swift in Sources */,
 				4F6BA123297FB7750010C8C2 /* SettingsViewController.swift in Sources */,
 				4F988CFB2987A4C700E74198 /* SettingsViewModel.swift in Sources */,
