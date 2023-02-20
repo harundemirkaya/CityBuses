@@ -46,7 +46,7 @@ class RouteTableViewCell: UITableViewCell {
         lblTotalDistance.font = lblTotalDistance.font.withSize(12)
         addSubview(lblTotalDistance)
         lblTotalDistance.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        lblTotalDistance.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        lblTotalDistance.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         
         addSubview(divider)
         divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
@@ -79,8 +79,7 @@ class RouteTableViewCell: UITableViewCell {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsHorizontalScrollIndicator = false
         NSLayoutConstraint.activate([
-            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: lblTotalDistance.topAnchor),
         ])
@@ -103,7 +102,7 @@ class RouteTableViewCell: UITableViewCell {
             
             let verticalStackView = UIStackView(arrangedSubviews: [iconView, meterLabel])
             verticalStackView.axis = .vertical
-            verticalStackView.alignment = .center
+            verticalStackView.alignment = .leading
             verticalStackView.distribution = .fill
             verticalStackView.spacing = 20
                 

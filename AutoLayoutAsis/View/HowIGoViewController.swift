@@ -197,6 +197,9 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
+    var rememberClear = 0
+    var rememberDirection = 0
+    
     let howIGoViewModel = HowIGoViewModel()
     
     // MARK: -ViewDidLoad
@@ -250,9 +253,9 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         mapView.addGestureRecognizer(longPressRecognizer)
         
+        // MARK: Buttons
         btnClear.btnClearConstraints(view, mapView: mapView)
         btnClear.addTarget(self, action: #selector(btnClearTarget), for: .touchUpInside)
-        
         btnDirection.btnDirectionConstraints(view, mapView: mapView)
         btnDirection.addTarget(self, action: #selector(btnDirectionTarget), for: .touchUpInside)
         btnDirection.isHidden = true
@@ -293,10 +296,12 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 coordinateFrom.latitude = coordinate.latitude
                 coordinateFrom.longitude = coordinate.longitude
                 btnClear.isHidden = false
+                txtFieldFrom.text = "\(String(format: "%.3f", coordinateFrom.latitude)) - \(String(format: "%.3f", coordinateFrom.longitude))"
             } else if annotationCounter == 1{
                 coordinateTo.latitude = coordinate.latitude
                 coordinateTo.longitude = coordinate.longitude
                 btnDirection.isHidden = false
+                txtFieldTo.text = "\(String(format: "%.3f", coordinateTo.latitude)) - \(String(format: "%.3f", coordinateTo.longitude))"
             }
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
@@ -389,11 +394,27 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // MARK: -Open TableViews
     @objc func txtFieldStartTableFrom() {
+        if btnClear.isHidden == false{
+            btnClear.isHidden = true
+            rememberClear = 1
+        }
+        if btnDirection.isHidden == false{
+            btnDirection.isHidden = true
+            rememberDirection = 1
+        }
         UIView.animate(withDuration: 0.3) {
             self.tableViewFrom.transform = CGAffineTransform(translationX: 0, y: 0)
         }
     }
     @objc func txtFieldStartTableTo() {
+        if btnClear.isHidden == false{
+            btnClear.isHidden = true
+            rememberClear = 1
+        }
+        if btnDirection.isHidden == false{
+            btnDirection.isHidden = true
+            rememberDirection = 1
+        }
         UIView.animate(withDuration: 0.3) {
             self.tableViewTo.transform = CGAffineTransform(translationX: 0, y: 0)
         }
@@ -401,6 +422,14 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // MARK: -Close TableView and Keyboard
     @objc func txtFieldStopTable() {
+        if rememberClear == 1{
+            rememberClear = 0
+            btnClear.isHidden = false
+        }
+        if rememberDirection == 1{
+            rememberDirection = 0
+            btnDirection.isHidden = false
+        }
         txtFieldFrom.endEditing(true)
         txtFieldTo.endEditing(true)
         UIView.animate(withDuration: 0.3) {
