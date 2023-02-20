@@ -250,10 +250,10 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         mapView.addGestureRecognizer(longPressRecognizer)
         
-        btnClear.btnClearConstraints(view)
+        btnClear.btnClearConstraints(view, mapView: mapView)
         btnClear.addTarget(self, action: #selector(btnClearTarget), for: .touchUpInside)
         
-        btnDirection.btnDirectionConstraints(view)
+        btnDirection.btnDirectionConstraints(view, mapView: mapView)
         btnDirection.addTarget(self, action: #selector(btnDirectionTarget), for: .touchUpInside)
         btnDirection.isHidden = true
         btnClear.isHidden = true
@@ -264,6 +264,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let allAnnotations = self.mapView.annotations
         self.mapView.removeAnnotations(allAnnotations)
         annotationCounter = 0
+        txtFieldFrom.text = ""
+        txtFieldTo.text = ""
         btnClear.isHidden = true
     }
     
@@ -428,6 +430,64 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        btnClear.isHidden = false
+        // MARK: Set TextField Text
+        if tableView == tableViewFrom{
+            txtFieldFrom.text = filteredStations[indexPath.row]
+        } else if tableView == tableViewTo{
+            txtFieldTo.text = filteredStations[indexPath.row]
+        }
+        // MARK: Remove All Annotations
+        let allAnnotations = self.mapView.annotations
+        self.mapView.removeAnnotations(allAnnotations)
+        self.mapView.removeOverlays(self.mapView.overlays)
+        
+        let location = CLLocation(latitude: (stations?[indexPath.row].latitude)!, longitude: (stations?[indexPath.row].longitude)!)
+        if tableView == tableViewFrom{
+            fromLocation = location
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegion(center: fromLocation.coordinate, span: span)
+            mapView.setRegion(region, animated: true)
+            // MARK: From Annotation
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = fromLocation.coordinate
+            annotation.title = "From"
+            mapView.addAnnotation(annotation)
+            // MARK: To Annotation
+            let annotationTo = MKPointAnnotation()
+            annotationTo.coordinate = toLocation.coordinate
+            annotationTo.title = "To"
+            mapView.addAnnotation(annotationTo)
+            txtFieldStopTable()
+            coordinateFrom.latitude = (stations?[indexPath.row].latitude)!
+            coordinateFrom.longitude = (stations?[indexPath.row].longitude)!
+            annotationCounter += 1
+        } else if tableView == tableViewTo{
+            toLocation = location
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegion(center: toLocation.coordinate, span: span)
+            mapView.setRegion(region, animated: true)
+            // MARK: To Annotation
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = toLocation.coordinate
+            annotation.title = "To"
+            mapView.addAnnotation(annotation)
+            // MARK: From Location
+            let annotationFrom = MKPointAnnotation()
+            annotationFrom.coordinate = fromLocation.coordinate
+            annotationFrom.title = "From"
+            mapView.addAnnotation(annotationFrom)
+            txtFieldStopTable()
+            coordinateTo.latitude = (stations?[indexPath.row].latitude)!
+            coordinateTo.longitude = (stations?[indexPath.row].longitude)!
+            annotationCounter += 1
+        }
+        if annotationCounter == 2{
+            btnDirection.isHidden = false
+        }
+    }
+    
     // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
         let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
@@ -447,15 +507,15 @@ public extension UIView{
         trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
     
-    func btnClearConstraints(_ view: UIView){
+    func btnClearConstraints(_ view: UIView, mapView: MKMapView){
         view.addSubview(self)
         leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
-        topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        topAnchor.constraint(equalTo: mapView.topAnchor, constant: 15).isActive = true
     }
     
-    func btnDirectionConstraints(_ view: UIView){
+    func btnDirectionConstraints(_ view: UIView, mapView: MKMapView){
         view.addSubview(self)
-        topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15).isActive = true
+        topAnchor.constraint(equalTo: mapView.topAnchor, constant: 15).isActive = true
         trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
     }
     
