@@ -78,7 +78,6 @@ class BottomSheetViewController: UIViewController, UITableViewDelegate, UITableV
             }
             pathDescription = UILabel()
             pathDescription?.text = route![i].html_instructions
-            print(route![i].html_instructions)
             path.append(Path(icon: UIImageView(image: pathIcon), meter: pathDescription))
         }
     }

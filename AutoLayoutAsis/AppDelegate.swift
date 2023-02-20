@@ -70,8 +70,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
     // ...
 
-    // Print full message.
-    print(userInfo)
 
     // Change this to your preferred presentation option
     return [[.sound]]

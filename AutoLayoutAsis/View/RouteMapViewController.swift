@@ -81,9 +81,6 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
             longitude = step.endLocation.lng
             coordinates.append(CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
         }
-        for coordinate in coordinates{
-            print(coordinate)
-        }
         DispatchQueue.main.async {
             self.routeOverlay = MKPolyline(coordinates: self.coordinates, count: self.coordinates.count)
             self.mapView.addOverlay(self.routeOverlay!, level: .aboveRoads)
