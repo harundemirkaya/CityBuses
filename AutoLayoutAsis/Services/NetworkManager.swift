@@ -19,6 +19,10 @@ class NetworkManager {
     
     public var origin: String?
     
+    public var latitude: Double?
+    
+    public var longitude: Double?
+    
     // MARK: -Fetch Stations
     public func fetchStations(completion: @escaping (_ result: DataResponse<StationModel, AFError>) -> Void) {
         AF.request("https://tfe-opendata.com/api/v1/stops").responseDecodable(of: StationModel.self) { response in
@@ -48,8 +52,15 @@ class NetworkManager {
     }
     
     // MARK: -Fetch RouteMaps
-    public func feetchRouteMaps(completion: @escaping (_ result: DataResponse<RouteMaps, AFError>) -> Void) {
+    public func fetchRouteMaps(completion: @escaping (_ result: DataResponse<RouteMaps, AFError>) -> Void) {
         AF.request("https://maps.googleapis.com/maps/api/directions/json?alternatives=true&key=\(apiKey!)&destination=\(destination!)&origin=\(origin!)&mode=transit&transit_routing_preference=fewer_transfers&transit_mode=bus&language=tr").responseDecodable(of: RouteMaps.self) { response in
+            completion(response)
+        }
+    }
+    
+    // MARK: -Fetch PlaceID
+    public func fetchPlaceID(completion: @escaping (_ result: DataResponse<PlaceIDRequest, AFError>) -> Void) {
+        AF.request("https://maps.googleapis.com/maps/api/geocode/json?key=\(apiKey!)&latlng=\(latitude!),\(longitude!)&language=tr&region=tr").responseDecodable(of: PlaceIDRequest.self) { response in
             completion(response)
         }
     }

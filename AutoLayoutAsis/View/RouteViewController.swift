@@ -53,7 +53,7 @@ class RouteViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "RouteTableViewCell", for: indexPath) as! RouteTableViewCell
         let route = routes![indexPath.row].legs[0]
         cell.steps = route.steps
-        cell.lblTotalDistance.text = "Duration: \(route.duration.text)"
+        cell.lblTotalDistance.text = "duration".localized() + route.duration.text
         return cell
     }
     

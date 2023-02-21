@@ -55,3 +55,6 @@
 "from" = "From";
 "to" = "To";
 "directions" = "  Directions  ";
+"clear" = "  Clear  ";
+"closeKeyboard" = "Close Keyboard";
+"duration" = "Duration: ";
