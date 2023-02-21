@@ -23,4 +23,26 @@ class HowIGoViewModel{
             }
         }
     }
+    
+    func getPlaceID(apiKey: String, latitude: Double, longitude: Double, fromOrTo: Int){
+        networkManager.apiKey = apiKey
+        networkManager.latitude = latitude
+        networkManager.longitude = longitude
+        networkManager.fetchPlaceID { result in
+            if fromOrTo == 0{
+                self.howIGoVC?.fromPlaceID = result.value?.results[0].placeID
+            } else{
+                self.howIGoVC?.toPlaceID = result.value?.results[0].placeID
+            }
+        }
+    }
+    
+    func getDirections(apiKey: String, origin: String, destination: String){
+        networkManager.apiKey = apiKey
+        networkManager.origin = origin
+        networkManager.destination = destination
+        networkManager.fetchRouteMaps { result in
+            self.howIGoVC?.routeMaps = result.value
+        }
+    }
 }

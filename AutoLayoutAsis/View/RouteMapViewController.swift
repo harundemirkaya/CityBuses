@@ -98,4 +98,8 @@ class RouteMapViewController: UIViewController, CLLocationManagerDelegate, MKMap
         renderer.lineWidth = 3.0
         return renderer
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        bottomSheetVC.dismiss(animated: true, completion: nil)
+    }
 }

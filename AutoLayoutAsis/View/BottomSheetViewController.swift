@@ -62,7 +62,7 @@ class BottomSheetViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RouteMapTableViewCell", for: indexPath) as! RouteMapTableViewCell
-        var htmlText = UILabel()
+        let htmlText = UILabel()
         htmlText.attributedText = path[indexPath.row].meter?.text?.htmlToAttributedString
         cell.text.text = htmlText.text
         cell.iconImageView.image = path[indexPath.row].icon?.image

@@ -45,8 +45,6 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
-    var networkManager = NetworkManager()
-    
     var routeMaps: RouteMaps? {
         didSet{
             if routeMaps?.routes.count != nil{
@@ -59,7 +57,7 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .purple
-        btn.setTitle("   Clear   ", for: UIControl.State.normal)
+        btn.setTitle("clear".localized(), for: UIControl.State.normal)
         btn.layer.cornerRadius = 10
         return btn
     }()
@@ -68,7 +66,7 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .purple
-        btn.setTitle("   Direction   ", for: UIControl.State.normal)
+        btn.setTitle("directions".localized(), for: UIControl.State.normal)
         btn.layer.cornerRadius = 10
         return btn
     }()
@@ -137,17 +135,13 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var stations: [Stop]? {
         didSet{
             if stations!.count != 0 {
-                for i in 0...stations!.count-1{
-                    stationsName.append(stations![i].name!)
-                }
+                filteredStations = stations!
             }
-            filteredStations = stationsName
             tableViewFrom.reloadData()
             tableViewTo.reloadData()
         }
     }
-    var stationsName: [String] = []
-    var filteredStations: [String] = []
+    var filteredStations: [Stop] = []
     
     // MARK: StackView
     var stackView: UIStackView = {
@@ -163,7 +157,7 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     // MARK: Close Keyboard Button
     var btnCloseKeyboard: UIButton = {
         let btn = UIButton()
-        btn.setTitle("Close Keyboard", for: UIControl.State.normal)
+        btn.setTitle("closeKeyboard".localized(), for: UIControl.State.normal)
         btn.setTitleColor(.black, for: UIControl.State.normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .white
@@ -199,6 +193,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     var rememberClear = 0
     var rememberDirection = 0
+    
+    let loadingScreen = LoadingScreen()
     
     let howIGoViewModel = HowIGoViewModel()
     
@@ -273,16 +269,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     @objc func btnDirectionTarget(){
-        convertCoordinatesToPlaceID(latitude: coordinateFrom.latitude, longitude: coordinateFrom.longitude) { (placeID) in
-            if let placeID = placeID {
-                self.fromPlaceID = placeID
-            }
-        }
-        convertCoordinatesToPlaceID(latitude: coordinateTo.latitude, longitude: coordinateTo.longitude) { (placeID) in
-            if let placeID = placeID {
-                self.toPlaceID = placeID
-            }
-        }
+        howIGoViewModel.getPlaceID(apiKey: apiKey, latitude: coordinateFrom.latitude, longitude: coordinateFrom.longitude, fromOrTo: 0)
+        howIGoViewModel.getPlaceID(apiKey: apiKey, latitude: coordinateTo.latitude, longitude: coordinateTo.longitude, fromOrTo: 1)
     }
     
     @objc func handleLongPress(sender: UILongPressGestureRecognizer){
@@ -319,37 +307,7 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     func getDirections(from: String, to: String) {
         let origin = "place_id:\(from)"
         let destination = "place_id:\(to)"
-        
-        networkManager.apiKey = apiKey
-        networkManager.origin = origin
-        networkManager.destination = destination
-        networkManager.feetchRouteMaps { result in
-            self.routeMaps = result.value
-        }
-        
-    }
-    
-    func convertCoordinatesToPlaceID(latitude: Double, longitude: Double, completion: @escaping (String?) -> Void) {
-        let urlString = "https://maps.googleapis.com/maps/api/geocode/json?key=\(apiKey)&latlng=\(latitude),\(longitude)&language=tr&region=tr"
-        guard let url = URL(string: urlString) else {
-            completion(nil)
-            return
-        }
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data, error == nil else {
-                completion(nil)
-                return
-            }
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                if let results = json?["results"] as? [[String: Any]], let placeID = results.first?["place_id"] as? String {
-                    completion(placeID)
-                }
-            } catch {
-                completion(nil)
-            }
-        }
-        task.resume()
+        howIGoViewModel.getDirections(apiKey: apiKey, origin: origin, destination: destination)
     }
     
     func pushScreen(){
@@ -362,10 +320,10 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @objc func textFieldFromDidChange(){
         filteredStations = []
         if txtFieldFrom.text == ""{
-            filteredStations = stationsName
+            filteredStations = stations!
         } else{
-            for station in stationsName{
-                if station.lowercased().contains(txtFieldFrom.text!.lowercased()){
+            for station in stations!{
+                if station.name!.lowercased().contains(txtFieldFrom.text!.lowercased()){
                     filteredStations.append(station)
                 }
             }
@@ -376,10 +334,10 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @objc func textFieldToDidChange(){
         filteredStations = []
         if txtFieldTo.text == ""{
-            filteredStations = stationsName
+            filteredStations = stations!
         } else{
-            for station in stationsName{
-                if station.lowercased().contains(txtFieldTo.text!.lowercased()){
+            for station in stations!{
+                if station.name!.lowercased().contains(txtFieldTo.text!.lowercased()){
                     filteredStations.append(station)
                 }
             }
@@ -448,13 +406,14 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        loadingScreen.stopIndicator(view: view)
         if tableView == tableViewFrom{
             let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
-            cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row])
+            cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row].name!)
         return cell
             } else{
             let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
-            cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row])
+                cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row].name!)
             return cell
         }
     }
@@ -463,9 +422,9 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         btnClear.isHidden = false
         // MARK: Set TextField Text
         if tableView == tableViewFrom{
-            txtFieldFrom.text = filteredStations[indexPath.row]
+            txtFieldFrom.text = filteredStations[indexPath.row].name!
         } else if tableView == tableViewTo{
-            txtFieldTo.text = filteredStations[indexPath.row]
+            txtFieldTo.text = filteredStations[indexPath.row].name!
         }
         // MARK: Remove All Annotations
         let allAnnotations = self.mapView.annotations
@@ -489,8 +448,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             annotationTo.title = "To"
             mapView.addAnnotation(annotationTo)
             txtFieldStopTable()
-            coordinateFrom.latitude = (stations?[indexPath.row].latitude)!
-            coordinateFrom.longitude = (stations?[indexPath.row].longitude)!
+            coordinateFrom.latitude = (filteredStations[indexPath.row].latitude)!
+            coordinateFrom.longitude = (filteredStations[indexPath.row].longitude)!
             annotationCounter += 1
         } else if tableView == tableViewTo{
             toLocation = location
@@ -508,8 +467,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             annotationFrom.title = "From"
             mapView.addAnnotation(annotationFrom)
             txtFieldStopTable()
-            coordinateTo.latitude = (stations?[indexPath.row].latitude)!
-            coordinateTo.longitude = (stations?[indexPath.row].longitude)!
+            coordinateTo.latitude = (filteredStations[indexPath.row].latitude)!
+            coordinateTo.longitude = (filteredStations[indexPath.row].longitude)!
             annotationCounter += 1
         }
         if annotationCounter == 2{
