@@ -21,7 +21,6 @@ class BottomSheetViewController: UIViewController, UITableViewDelegate, UITableV
     
     var path: [Path] = []
     
-    var pathIcon: UIImage?
     var pathDescription: UILabel?
     
     // MARK: TableView Defined
@@ -71,14 +70,15 @@ class BottomSheetViewController: UIViewController, UITableViewDelegate, UITableV
     
     func getStep(){
         for i in 0...route!.count-1{
-            if route![i].travelMode == "WALKING"{
-                pathIcon = UIImage(systemName: "figure.walk")
-            } else{
-                pathIcon = UIImage(systemName: "bus.fill")
-            }
             pathDescription = UILabel()
             pathDescription?.text = route![i].html_instructions
-            path.append(Path(icon: UIImageView(image: pathIcon), meter: pathDescription))
+            if route![i].travelMode == "WALKING"{
+                let pathIcon = UIImageView(image: UIImage(systemName: "figure.walk")?.withRenderingMode(.alwaysTemplate))
+                path.append(Path(icon: pathIcon, meter: pathDescription))
+            } else{
+                let pathIcon = UIImageView(image: UIImage(systemName: "bus.fill")?.withRenderingMode(.alwaysTemplate))
+                path.append(Path(icon: pathIcon, meter: pathDescription))
+            }
         }
     }
     
