@@ -9,11 +9,15 @@ import UIKit
 import MapKit
 import CoreLocation
 import Firebase
+import FirebaseRemoteConfig
 
 // MARK: -Home Class
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate{
     
     // MARK: -Define
+    
+    // MARK: -FirebaseRemoteConfig Example Variable
+    var message = ""
     
     // MARK: Map Defined
     let mapView: MKMapView = {
@@ -115,6 +119,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         menuView.pinMenuTo(view, with: slideInMenuPadding)
         containerView.edgeTo(view)
         setMapConstrainst()
+        
+        Task{
+            try await startFetching()
+        }
     }
     
     @objc func notificationReceive(){
@@ -226,6 +234,32 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             alertMessage.addAction(okButton)
             self.present(alertMessage, animated: true)
     }
+    
+    private func startFetching() async throws {
+           let rc = RemoteConfig.remoteConfig()
+           let settings = RemoteConfigSettings()
+           settings.minimumFetchInterval = 0
+           rc.configSettings = settings
+           
+           do {
+               let config = try await rc.fetchAndActivate()
+               switch config {
+               case .successFetchedFromRemote:
+                   self.message = rc.configValue(forKey: "fetchRemoteConfig").stringValue ?? "Failed"
+                   print("Message: ", self.message)
+                   return
+               case .successUsingPreFetchedData:
+                   self.message = rc.configValue(forKey: "fetchRemoteConfig").stringValue ?? "Failed"
+                   print("Message: ", self.message)
+                   return
+               default:
+                   print("Error activating")
+                   return
+               }
+           } catch let error {
+               print("Error fetching: \(error.localizedDescription)")
+           }
+       }
 }
 
 // MARK: Constraints
