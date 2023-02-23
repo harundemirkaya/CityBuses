@@ -29,6 +29,7 @@
 		4F7FA199299B97B000C7135D /* HowIGoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA198299B97B000C7135D /* HowIGoViewController.swift */; };
 		4F879D7829A348C500B9B1CB /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F879D7729A348C500B9B1CB /* BottomSheetViewController.swift */; };
 		4F879D7A29A35A7700B9B1CB /* RouteMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F879D7929A35A7700B9B1CB /* RouteMapTableViewCell.swift */; };
+		4F96F22929A74ADF007E3FBB /* open-data.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4F96F22829A74ADF007E3FBB /* open-data.cer */; };
 		4F988CE62986893100E74198 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CE52986893100E74198 /* LoadingScreen.swift */; };
 		4F988CF129879ABB00E74198 /* ServiceMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF029879ABB00E74198 /* ServiceMapViewModel.swift */; };
 		4F988CF329879FDB00E74198 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF229879FDB00E74198 /* LoginViewModel.swift */; };
@@ -76,6 +77,7 @@
 		4F7FA198299B97B000C7135D /* HowIGoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowIGoViewController.swift; sourceTree = "<group>"; };
 		4F879D7729A348C500B9B1CB /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		4F879D7929A35A7700B9B1CB /* RouteMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapTableViewCell.swift; sourceTree = "<group>"; };
+		4F96F22829A74ADF007E3FBB /* open-data.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "open-data.cer"; sourceTree = "<group>"; };
 		4F988CE52986893100E74198 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		4F988CF029879ABB00E74198 /* ServiceMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMapViewModel.swift; sourceTree = "<group>"; };
 		4F988CF229879FDB00E74198 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		4F6BA12A298005A00010C8C2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4F96F22829A74ADF007E3FBB /* open-data.cer */,
 				4F6BA12B298006830010C8C2 /* NetworkManager.swift */,
 			);
 			path = Services;
@@ -316,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FF4A371298A3A780078FC28 /* intro.mp4 in Resources */,
+				4F96F22929A74ADF007E3FBB /* open-data.cer in Resources */,
 				4FC119BB2983A087002BD302 /* Localizable.strings in Resources */,
 				4FFB9203297E6B1B00B19260 /* Assets.xcassets in Resources */,
 				4FFB9235297E7E0B00B19260 /* GoogleService-Info.plist in Resources */,
