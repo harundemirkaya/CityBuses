@@ -37,6 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging Delegate
         Messaging.messaging().delegate = self
         
+        if LocalizationSystem.sharedInstance.getLanguage() == "en" {
+            application.accessibilityLanguage = "en"
+        } else{
+            application.accessibilityLanguage = "tr"
+        }
+        
         // MARK: Accessibility Change Language
         NotificationCenter.default.addObserver(forName: Notification.Name("accessibilityLanguageTR"), object: nil, queue: nil) { _ in
             application.accessibilityLanguage = "tr"
@@ -69,7 +75,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   func userNotificationCenter(_ center: UNUserNotificationCenter,
                               willPresent notification: UNNotification) async
     -> UNNotificationPresentationOptions {
-    let userInfo = notification.request.content.userInfo
+        _ = notification.request.content.userInfo
 
     // With swizzling disabled you must let Messaging know about the message, for Analytics
     // Messaging.messaging().appDidReceiveMessage(userInfo)
