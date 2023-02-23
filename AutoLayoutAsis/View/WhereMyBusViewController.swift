@@ -45,12 +45,19 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: Search Bar Defined
     let searchController = UISearchController()
-    var searchBar: UISearchBar = UISearchBar()
+    var searchBar: UISearchBar = {
+        let bar = UISearchBar()
+        bar.isAccessibilityElement = true
+        bar.accessibilityHint = "searchBar".localized()
+        return bar
+    }()
     
     // MARK: Page Title Defined
     var pageTitle: UILabel {
         let label = UILabel()
         label.text = NSLocalizedString("whereMyBusPageTitle", comment: "Where My Bus Page Title")
+        label.isAccessibilityElement = true
+        label.accessibilityHint = NSLocalizedString("whereMyBusPageTitle", comment: "Where My Bus Page Title")
         return label
     }
     
@@ -77,6 +84,8 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
         searchBar.delegate = self
         searchBar.sizeToFit()
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.done, target: self, action: #selector(openSearch))
+        searchButton.isAccessibilityElement = true
+        searchButton.accessibilityHint = "search".localized()
         navigationItem.rightBarButtonItem = searchButton
         
         // MARK: View Model
@@ -146,6 +155,8 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
         cell.textLabel?.text = filteredServices[indexPath.row]
+        cell.textLabel?.isAccessibilityElement = true
+        cell.textLabel?.accessibilityHint = filteredServices[indexPath.row]
         return cell
     }
     
@@ -162,9 +173,11 @@ class WhereMyBusViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
-            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
-            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
-            alertMessage.addAction(okButton)
-            self.present(alertMessage, animated: true)
+        let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
+        alertMessage.addAction(okButton)
+        alertMessage.isAccessibilityElement = true
+        alertMessage.accessibilityHint = description
+        self.present(alertMessage, animated: true)
     }
 }

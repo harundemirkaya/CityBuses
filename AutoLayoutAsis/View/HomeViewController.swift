@@ -160,6 +160,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
         cell.textLabel?.text = menuItems[indexPath.row].name
+        cell.textLabel?.isAccessibilityElement = true
+        cell.textLabel?.accessibilityHint = menuItems[indexPath.row].name
         return cell
     }
     
@@ -229,37 +231,39 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
-            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
-            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
-            alertMessage.addAction(okButton)
-            self.present(alertMessage, animated: true)
+        let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
+        alertMessage.addAction(okButton)
+        alertMessage.isAccessibilityElement = true
+        alertMessage.accessibilityHint = description
+        self.present(alertMessage, animated: true)
     }
     
     private func startFetching() async throws {
-           let rc = RemoteConfig.remoteConfig()
-           let settings = RemoteConfigSettings()
-           settings.minimumFetchInterval = 0
-           rc.configSettings = settings
-           
-           do {
-               let config = try await rc.fetchAndActivate()
-               switch config {
-               case .successFetchedFromRemote:
-                   self.message = rc.configValue(forKey: "fetchRemoteConfig").stringValue ?? "Failed"
-                   print("Message: ", self.message)
-                   return
-               case .successUsingPreFetchedData:
-                   self.message = rc.configValue(forKey: "fetchRemoteConfig").stringValue ?? "Failed"
-                   print("Message: ", self.message)
-                   return
-               default:
-                   print("Error activating")
-                   return
-               }
-           } catch let error {
-               print("Error fetching: \(error.localizedDescription)")
-           }
-       }
+        let rc = RemoteConfig.remoteConfig()
+        let settings = RemoteConfigSettings()
+        settings.minimumFetchInterval = 0
+        rc.configSettings = settings
+        
+        do {
+            let config = try await rc.fetchAndActivate()
+            switch config {
+            case .successFetchedFromRemote:
+                self.message = rc.configValue(forKey: "fetchRemoteConfig").stringValue ?? "Failed"
+                print(self.message)
+                return
+            case .successUsingPreFetchedData:
+                self.message = rc.configValue(forKey: "fetchRemoteConfig").stringValue ?? "Failed"
+                print(self.message)
+                return
+            default:
+                print("Error activating")
+                return
+            }
+        } catch let error {
+            print("Error fetching: \(error.localizedDescription)")
+        }
+    }
 }
 
 // MARK: Constraints

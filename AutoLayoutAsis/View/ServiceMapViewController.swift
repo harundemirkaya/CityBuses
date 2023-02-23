@@ -54,18 +54,12 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     // MARK: ServiceMapViewModel Defined
     let serviceMapViewModel = ServiceMapViewModel()
     
-    var pageTitle: UILabel {
-        let label = UILabel()
-        return label
-    }
-    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // MARK: Screen
         view.backgroundColor = .white
-        navigationItem.titleView = pageTitle
         // MARK: Map Config
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -105,6 +99,9 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
         
         // MARK: Change Direction Button Define and Add Right Bar
         let btnChangeDirection = UIBarButtonItem(barButtonSystemItem: .reply, target: self, action: #selector(changeDirection))
+        btnChangeDirection.isAccessibilityElement = true
+        btnChangeDirection.accessibilityHint = "changeDirection".localized()
+        
         navigationItem.rightBarButtonItems = [btnChangeDirection]
         
         // MARK: Refresh Annotations Every 15 Seconds
@@ -180,6 +177,8 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
             if(annotation.title == routes?[direction].points?[i].stopID){
                 annotationView?.image = UIImage(systemName: "rectangle")
                 annotationView?.displayPriority = .defaultHigh
+                annotationView?.isAccessibilityElement = true
+                annotationView?.accessibilityHint = routes?[direction].points?[i].stopID
                 annotationView?.backgroundColor = .yellow
             }
         }
@@ -188,6 +187,8 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
             for i in 0...busCount-1{
                 if(annotation.title == vehicles?[i].vehicleID){
                     annotationView?.image = UIImage(systemName: "location")
+                    annotationView?.isAccessibilityElement = true
+                    annotationView?.accessibilityHint = vehicles?[i].serviceName
                     annotationView?.backgroundColor = .white
                 }
             }
@@ -259,10 +260,12 @@ class ServiceMapViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
-            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
-            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
-            alertMessage.addAction(okButton)
-            self.present(alertMessage, animated: true)
+        let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
+        alertMessage.addAction(okButton)
+        alertMessage.isAccessibilityElement = true
+        alertMessage.accessibilityHint = description
+        self.present(alertMessage, animated: true)
     }
 }
 

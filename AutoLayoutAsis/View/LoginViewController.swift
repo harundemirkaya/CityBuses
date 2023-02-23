@@ -19,6 +19,8 @@ class LoginViewController: UIViewController {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
         txtField.placeholder = "emailPlaceHolder".localized()
+        txtField.isAccessibilityElement = true
+        txtField.accessibilityHint = "emailPlaceHolder".localized()
         txtField.layer.cornerRadius = 4.0
         txtField.layer.borderWidth = 1.0
         txtField.layer.borderColor = UIColor.gray.cgColor
@@ -35,6 +37,8 @@ class LoginViewController: UIViewController {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
         txtField.placeholder = "passwordPlaceHolder".localized()
+        txtField.isAccessibilityElement = true
+        txtField.accessibilityHint = "passwordPlaceHolder".localized()
         txtField.layer.cornerRadius = 4.0
         txtField.layer.borderWidth = 1.0
         txtField.layer.borderColor = UIColor.gray.cgColor
@@ -52,6 +56,8 @@ class LoginViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("btnLogin".localized(), for: .normal)
+        btn.isAccessibilityElement = true
+        btn.accessibilityHint = "btnLogin".localized()
         btn.layer.cornerRadius = 6.0
         btn.backgroundColor = .purple
         return btn
@@ -61,6 +67,8 @@ class LoginViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("btnRegister".localized(), for: .normal)
+        btn.isAccessibilityElement = true
+        btn.accessibilityHint = "btnRegister".localized()
         btn.layer.cornerRadius = 6.0
         btn.backgroundColor = .purple
         return btn
@@ -70,6 +78,8 @@ class LoginViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("btnBackHome".localized(), for: .normal)
+        btn.isAccessibilityElement = true
+        btn.accessibilityHint = "btnBackHome".localized()
         btn.layer.cornerRadius = 6.0
         btn.backgroundColor = .purple
         return btn
@@ -81,6 +91,8 @@ class LoginViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.text = "login".localized()
+        label.isAccessibilityElement = true
+        label.accessibilityHint = "login".localized()
         label.font = UIFont.boldSystemFont(ofSize: 28.0)
         label.textColor = .white
         return label
@@ -90,6 +102,8 @@ class LoginViewController: UIViewController {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "username".localized()
+        label.isAccessibilityElement = true
+        label.accessibilityHint = "username".localized()
         label.textAlignment = .left
         label.font = label.font.withSize(14)
         label.textColor = .white
@@ -101,6 +115,8 @@ class LoginViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.text = "password".localized()
+        label.isAccessibilityElement = true
+        label.accessibilityHint = "password".localized()
         label.font = label.font.withSize(14)
         label.textColor = .white
         return label
@@ -173,10 +189,12 @@ class LoginViewController: UIViewController {
     
     // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
-            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
-            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
-            alertMessage.addAction(okButton)
-            self.present(alertMessage, animated: true)
+        let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
+        alertMessage.addAction(okButton)
+        alertMessage.isAccessibilityElement = true
+        alertMessage.accessibilityHint = description
+        self.present(alertMessage, animated: true)
     }
     
     // MARK: -Close Keyboard Function

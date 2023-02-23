@@ -21,6 +21,8 @@ final class BalanceViewController: UIViewController, NFCTagReaderSessionDelegate
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
         txtField.placeholder = "UUD".localized()
+        txtField.isAccessibilityElement = true
+        txtField.accessibilityHint = "UUD".localized()
         txtField.layer.cornerRadius = 4.0
         txtField.layer.borderWidth = 1.0
         txtField.layer.borderColor = UIColor.gray.cgColor
@@ -38,6 +40,8 @@ final class BalanceViewController: UIViewController, NFCTagReaderSessionDelegate
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("btnBalanceQuery".localized(), for: .normal)
+        btn.isAccessibilityElement = true
+        btn.accessibilityHint = "btnBalanceQuery".localized()
         btn.layer.cornerRadius = 6.0
         btn.backgroundColor = .purple
         return btn
@@ -49,6 +53,8 @@ final class BalanceViewController: UIViewController, NFCTagReaderSessionDelegate
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.text = "balanceQueryTitle".localized()
+        label.isAccessibilityElement = true
+        label.accessibilityHint = "balanceQueryTitle".localized()
         label.font = UIFont.boldSystemFont(ofSize: 28.0)
         return label
     }()

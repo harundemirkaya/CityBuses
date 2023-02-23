@@ -43,8 +43,6 @@ class NetworkManager {
     }
         
     static func certificate() -> SecCertificate {
-        // Burada kullanacağınız sertifikanın dosya yolunu belirleyin.
-        // Örneğin, bundle içinde bir sertifika dosyası varsa, aşağıdaki gibi kullanılabilir:
         guard let certificatePath = Bundle.main.path(forResource: "open-data", ofType: "cer") else {
             fatalError("Sertifika bulunamadı.")
         }

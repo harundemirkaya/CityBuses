@@ -17,6 +17,8 @@ class ChangeLanguageViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("btnChangeLanguage".localized(), for: .normal)
+        btn.isAccessibilityElement = true
+        btn.accessibilityHint = "btnChangeLanguage".localized()
         btn.layer.cornerRadius = 6.0
         btn.backgroundColor = .purple
         return btn
@@ -28,6 +30,8 @@ class ChangeLanguageViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.text = "changeLanguageTitle".localized()
+        label.isAccessibilityElement = true
+        label.accessibilityHint = "changeLanguageTitle".localized()
         label.font = UIFont.boldSystemFont(ofSize: 28.0)
         return label
     }()
@@ -57,10 +61,12 @@ class ChangeLanguageViewController: UIViewController {
     
     // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
-            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
-            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
-            alertMessage.addAction(okButton)
-            self.present(alertMessage, animated: true)
+        let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
+        alertMessage.addAction(okButton)
+        alertMessage.isAccessibilityElement = true
+        alertMessage.accessibilityHint = description
+        self.present(alertMessage, animated: true)
     }
 }
 

@@ -18,6 +18,8 @@ final class SettingsViewController: UIViewController {
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
         txtField.placeholder = Auth.auth().currentUser?.email
+        txtField.isAccessibilityElement = true
+        txtField.accessibilityHint = "E-Mail"
         txtField.layer.cornerRadius = 4.0
         txtField.layer.borderWidth = 1.0
         txtField.layer.borderColor = UIColor.gray.cgColor
@@ -35,6 +37,8 @@ final class SettingsViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("btnUpdate".localized(), for: .normal)
+        btn.isAccessibilityElement = true
+        btn.accessibilityHint = "btnUpdate".localized()
         btn.layer.cornerRadius = 6.0
         btn.backgroundColor = .purple
         return btn
@@ -46,6 +50,8 @@ final class SettingsViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.text = "settingsTitle".localized()
+        label.isAccessibilityElement = true
+        label.accessibilityHint = "settingsTitle".localized()
         label.font = UIFont.boldSystemFont(ofSize: 28.0)
         return label
     }()
@@ -54,6 +60,8 @@ final class SettingsViewController: UIViewController {
     var pageTitle: UILabel {
         let label = UILabel()
         label.text = NSLocalizedString("settingPageTitle", comment: "Settings Page Title")
+        label.isAccessibilityElement = true
+        label.accessibilityHint = NSLocalizedString("settingPageTitle", comment: "Settings Page Title")
         return label
     }
     
@@ -83,10 +91,12 @@ final class SettingsViewController: UIViewController {
     
     // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
-            let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
-            let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Okey Button"), style: UIAlertAction.Style.default)
-            alertMessage.addAction(okButton)
-            self.present(alertMessage, animated: true)
+        let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Okey Button"), style: UIAlertAction.Style.default)
+        alertMessage.addAction(okButton)
+        alertMessage.isAccessibilityElement = true
+        alertMessage.accessibilityHint = description
+        self.present(alertMessage, animated: true)
     }
 }
 

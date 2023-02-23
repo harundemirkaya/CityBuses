@@ -47,12 +47,19 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: Search Bar Defined
     let searchController = UISearchController()
-    var searchBar: UISearchBar = UISearchBar()
+    var searchBar: UISearchBar = {
+        let bar = UISearchBar()
+        bar.isAccessibilityElement = true
+        bar.accessibilityHint = "searchBar".localized()
+        return bar
+    }()
    
     // MARK: Page Title Defined
     var pageTitle: UILabel {
         let label = UILabel()
         label.text = NSLocalizedString("stationsPageTitle", comment: "Stations Page Title")
+        label.isAccessibilityElement = true
+        label.accessibilityHint = NSLocalizedString("stationsPageTitle", comment: "Stations Page Title")
         return label
     }
     
@@ -80,6 +87,8 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         searchBar.delegate = self
         searchBar.sizeToFit()
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: UIBarButtonItem.Style.done, target: self, action: #selector(openSearch))
+        searchButton.isAccessibilityElement = true
+        searchButton.accessibilityHint = "search".localized()
         navigationItem.rightBarButtonItem = searchButton
         
         // MARK: Stations View Model Connect
@@ -151,6 +160,8 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
         cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row])
+        cell.textLabel?.isAccessibilityElement = true
+        cell.textLabel?.accessibilityHint = filteredStations[indexPath.row]
         return cell
     }
     
@@ -171,6 +182,8 @@ class StationsViewController: UIViewController, UITableViewDelegate, UITableView
         let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
         let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
         alertMessage.addAction(okButton)
+        alertMessage.isAccessibilityElement = true
+        alertMessage.accessibilityHint = description
         self.present(alertMessage, animated: true)
     }
 }

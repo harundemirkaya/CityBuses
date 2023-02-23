@@ -65,7 +65,11 @@ class BottomSheetViewController: UIViewController, UITableViewDelegate, UITableV
         let htmlText = UILabel()
         htmlText.attributedText = path[indexPath.row].meter?.text?.htmlToAttributedString
         cell.text.text = htmlText.text
+        cell.text.isAccessibilityElement = true
+        cell.text.accessibilityHint = htmlText.text
         cell.iconImageView.image = path[indexPath.row].icon?.image
+        cell.iconImageView.isAccessibilityElement = true
+        cell.iconImageView.accessibilityHint = path[indexPath.row].icon?.image?.description
         return cell
     }
     

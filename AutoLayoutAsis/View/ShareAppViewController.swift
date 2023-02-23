@@ -17,6 +17,8 @@ class ShareAppViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("btnShareApp".localized(), for: .normal)
+        btn.isAccessibilityElement = true
+        btn.accessibilityHint = "btnShareApp".localized()
         btn.layer.cornerRadius = 6.0
         btn.backgroundColor = .purple
         return btn
@@ -28,6 +30,8 @@ class ShareAppViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.text = "shareAppTitle".localized()
+        label.isAccessibilityElement = true
+        label.accessibilityHint = "shareAppTitle".localized()
         label.font = UIFont.boldSystemFont(ofSize: 28.0)
         return label
     }()

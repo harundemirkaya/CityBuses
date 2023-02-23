@@ -33,6 +33,8 @@ class DealersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var pageTitle: UILabel {
         let label = UILabel()
         label.text = NSLocalizedString("dealersPageTitle", comment: "Dealers Page Title")
+        label.isAccessibilityElement = true
+        label.accessibilityHint = NSLocalizedString("dealersPageTitle", comment: "Dealers Page Title")
         return label
     }
     
@@ -62,6 +64,8 @@ class DealersViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = dealers[indexPath.row]
+        cell.textLabel?.isAccessibilityElement = true
+        cell.textLabel?.accessibilityHint = dealers[indexPath.row]
         return cell
     }
 }

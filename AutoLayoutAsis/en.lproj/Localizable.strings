@@ -58,3 +58,6 @@
 "clear" = "  Clear  ";
 "closeKeyboard" = "Close Keyboard";
 "duration" = "Duration: ";
+"searchBar" = "Search Bar";
+"search" = "Search";
+"changeDirection" = "Change Direction";

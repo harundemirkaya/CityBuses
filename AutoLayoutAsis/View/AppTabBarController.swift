@@ -24,6 +24,8 @@ class AppTabBarController: UITabBarController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .purple
         label.text = "checkNetwork".localized()
+        label.isAccessibilityElement = true
+        label.accessibilityHint = "checkNetwork".localized()
         return label
     }()
     
@@ -50,12 +52,19 @@ class AppTabBarController: UITabBarController {
         // MARK: Define VC and Add Tab Bar
         let homeVC = UINavigationController(rootViewController: HomeViewController())
         homeVC.tabBarItem = UITabBarItem.init(title: NSLocalizedString("tabBarHome", comment: "Tab Bar Home Page"), image: UIImage(systemName: "house"), tag: 0)
+        homeVC.tabBarItem.isAccessibilityElement = true
+        homeVC.accessibilityHint = NSLocalizedString("tabBarHome", comment: "Tab Bar Home Page")
         
         let whereVC = UINavigationController(rootViewController: WhereMyBusViewController())
         whereVC.tabBarItem = UITabBarItem.init(title: NSLocalizedString("tabBarWhereMyBus", comment: "Tab Bar Where My Bus Page"), image: UIImage(systemName: "bus.fill"), tag: 1)
+        homeVC.tabBarItem.isAccessibilityElement = true
+        homeVC.accessibilityHint = NSLocalizedString("tabBarWhereMyBus", comment: "Tab Bar Where My Bus Page")
         
         let stationsVC = UINavigationController(rootViewController: StationsViewController())
         stationsVC.tabBarItem = UITabBarItem.init(title: NSLocalizedString("tabBarStations", comment: "Tab Bar Stations Page"), image: UIImage(systemName: "mappin.circle"), tag: 3)
+        homeVC.tabBarItem.isAccessibilityElement = true
+        homeVC.accessibilityHint = NSLocalizedString("tabBarStations", comment: "Tab Bar Stations Page")
+        
         views = [homeVC, whereVC, stationsVC]
         
         loadingScreen.startIndicator(view: view)
@@ -111,6 +120,8 @@ class AppTabBarController: UITabBarController {
         let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
         let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
         alertMessage.addAction(okButton)
+        alertMessage.isAccessibilityElement = true
+        alertMessage.accessibilityHint = description
         present(alertMessage, animated: true)
     }
 }

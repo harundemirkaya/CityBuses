@@ -54,6 +54,8 @@ class RouteViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let route = routes![indexPath.row].legs[0]
         cell.steps = route.steps
         cell.lblTotalDistance.text = "duration".localized() + route.duration.text
+        cell.lblTotalDistance.isAccessibilityElement = true
+        cell.lblTotalDistance.accessibilityHint = "duration".localized()
         return cell
     }
     

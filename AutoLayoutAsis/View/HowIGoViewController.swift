@@ -58,6 +58,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .purple
         btn.setTitle("clear".localized(), for: UIControl.State.normal)
+        btn.isAccessibilityElement = true
+        btn.accessibilityHint = "clear".localized()
         btn.layer.cornerRadius = 10
         return btn
     }()
@@ -67,6 +69,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .purple
         btn.setTitle("directions".localized(), for: UIControl.State.normal)
+        btn.isAccessibilityElement = true
+        btn.accessibilityHint = "directions".localized()
         btn.layer.cornerRadius = 10
         return btn
     }()
@@ -76,6 +80,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
         txtField.placeholder = "from".localized()
+        txtField.isAccessibilityElement = true
+        txtField.accessibilityHint = "from".localized()
         txtField.layer.cornerRadius = 4.0
         txtField.layer.borderWidth = 1.0
         txtField.layer.borderColor = UIColor.gray.cgColor
@@ -91,6 +97,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let txtField = UITextField()
         txtField.translatesAutoresizingMaskIntoConstraints = false
         txtField.placeholder = "to".localized()
+        txtField.isAccessibilityElement = true
+        txtField.accessibilityHint = "to".localized()
         txtField.layer.cornerRadius = 4.0
         txtField.layer.borderWidth = 1.0
         txtField.layer.borderColor = UIColor.gray.cgColor
@@ -158,6 +166,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     var btnCloseKeyboard: UIButton = {
         let btn = UIButton()
         btn.setTitle("closeKeyboard".localized(), for: UIControl.State.normal)
+        btn.isAccessibilityElement = true
+        btn.accessibilityHint = "closeKeyboard".localized()
         btn.setTitleColor(.black, for: UIControl.State.normal)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = .white
@@ -410,10 +420,14 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if tableView == tableViewFrom{
             let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
             cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row].name!)
+            cell.textLabel?.isAccessibilityElement = true
+            cell.textLabel?.accessibilityHint = filteredStations[indexPath.row].name!
         return cell
             } else{
             let cell = tableView.dequeueReusableCell(withIdentifier: MenuTableViewCell.identifier, for: indexPath)
                 cell.textLabel?.text = String(indexPath.row + 1) + "- " + (filteredStations[indexPath.row].name!)
+                cell.textLabel?.isAccessibilityElement = true
+                cell.textLabel?.accessibilityHint = filteredStations[indexPath.row].name!
             return cell
         }
     }
@@ -481,6 +495,8 @@ class HowIGoViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         let alertMessage = UIAlertController(title: title, message: description, preferredStyle: UIAlertController.Style.alert)
         let okButton = UIAlertAction(title: NSLocalizedString("btnOkey", comment: "Alert Okey Button"), style: UIAlertAction.Style.default)
         alertMessage.addAction(okButton)
+        alertMessage.isAccessibilityElement = true
+        alertMessage.accessibilityHint = description
         self.present(alertMessage, animated: true)
     }
 }
