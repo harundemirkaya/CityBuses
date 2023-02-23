@@ -37,6 +37,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging Delegate
         Messaging.messaging().delegate = self
         
+        // MARK: Accessibility Change Language
+        NotificationCenter.default.addObserver(forName: Notification.Name("accessibilityLanguageTR"), object: nil, queue: nil) { _ in
+            application.accessibilityLanguage = "tr"
+        }
+        NotificationCenter.default.addObserver(forName: Notification.Name("accessibilityLanguageEN"), object: nil, queue: nil) { _ in
+            application.accessibilityLanguage = "en"
+        }
+        
         return true
     }
 
@@ -53,8 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
 
 // MARK: -UNUserNotificationCenterDelegate
@@ -106,8 +112,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       // Print full message.
       return UIBackgroundFetchResult.newData
     }
-    
-    
 }
 
 // MARK: -MessagingDelegate

@@ -52,9 +52,12 @@ class ChangeLanguageViewController: UIViewController {
     @objc func changeLanguage(){
         if LocalizationSystem.sharedInstance.getLanguage() == "en" {
             LocalizationSystem.sharedInstance.setLanguage(languageCode: "tr")
+            NotificationCenter.default.post(name: Notification.Name("accessibilityLanguageTR"), object: nil)
             alertMessage(title: NSLocalizedString("successTitle", comment: "Success Title"), description: NSLocalizedString("successChangeLanguage", comment: "Success Change Language"))
         } else{
             LocalizationSystem.sharedInstance.setLanguage(languageCode: "en")
+            NotificationCenter.default.post(name: Notification.Name("accessibilityLanguageEN"), object: nil)
+            UIAccessibility.post(notification: .announcement, argument: NSLocalizedString("AXLanguageSwitcher:en", comment: ""))
             alertMessage(title: NSLocalizedString("successTitle", comment: "Success Title"), description: NSLocalizedString("successChangeLanguage", comment: "Success Change Language"))
         }
     }
