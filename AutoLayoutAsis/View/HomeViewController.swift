@@ -4,7 +4,7 @@
 //
 //  Created by Harun Demirkaya on 23.01.2023.
 //
-// MARK: -Import Libaries
+// MARK: -Import Libraries
 import UIKit
 import MapKit
 import CoreLocation

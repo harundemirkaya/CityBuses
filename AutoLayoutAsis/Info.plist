@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.harundemirkaya.settings</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Ayarlar</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>Hesap Ayarlarınız</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>&quot;gear&quot;</string>
+		</dict>
+	</array>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict/>

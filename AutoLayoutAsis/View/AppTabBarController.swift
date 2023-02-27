@@ -34,12 +34,12 @@ class AppTabBarController: UITabBarController {
     var latitude = 0.0
     var longitude = 0.0
     
+    var changeVC: UIViewController?
+    
     // MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        
         
         // MARK: Navigation Bar Style
         UINavigationBar.appearance().barTintColor = .white
@@ -79,6 +79,11 @@ class AppTabBarController: UITabBarController {
         }
         let queue = DispatchQueue(label: "Monitor")
         self.monitor.start(queue: queue)
+        
+        if changeVC != nil{
+            changeVC?.modalPresentationStyle = .fullScreen
+            present(changeVC!, animated: true)
+        }
     }
     
     @objc func notificationReceive(){

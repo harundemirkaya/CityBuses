@@ -163,10 +163,10 @@ class LoginViewController: UIViewController {
     
     // MARK: -Back Home Button Clicked
     @objc func btnBackHomeTarget(){
-        let homeVC = HomeViewController()
-        navigationController?.pushViewController(homeVC, animated: true)
-        tabBarController?.tabBar.isHidden = false
-        navigationController?.isNavigationBarHidden = false
+        let appTabBar = AppTabBarController()
+        appTabBar.modalPresentationStyle = .fullScreen
+        navigationController?.navigationBar.isHidden = false
+        present(appTabBar, animated: true)
     }
 
     // MARK: -Register Button Clicked

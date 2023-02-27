@@ -22,9 +22,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = AppTabBarController()
         window?.makeKeyAndVisible()
-
-       
+    }
     
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        switch shortcutItem.type {
+        case "com.harundemirkaya.settings":
+            if Auth.auth().currentUser != nil{
+                let settingsVC = SettingsViewController()
+                if let tabController = self.window?.rootViewController as? UITabBarController {
+                    settingsVC.modalPresentationStyle = .fullScreen
+                    tabController.present(settingsVC, animated: true)
+                }
+            } else{
+                let loginVC = LoginViewController()
+                if let tabController = self.window?.rootViewController as? UITabBarController {
+                    loginVC.modalPresentationStyle = .fullScreen
+                    tabController.present(loginVC, animated: true)
+                }
+            }
+        default:
+            break
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -54,7 +72,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 

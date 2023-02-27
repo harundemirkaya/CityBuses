@@ -65,6 +65,16 @@ final class SettingsViewController: UIViewController {
         return label
     }
     
+    let btnBack: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        btn.setTitle("btnBack".localized(), for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.tintColor = .black
+        return btn
+    }()
+    
     let settingsViewModel = SettingsViewModel()
     
     // MARK: -ViewDidLoad
@@ -74,6 +84,8 @@ final class SettingsViewController: UIViewController {
         // MARK: Screen
         view.backgroundColor = .white
         navigationItem.titleView = pageTitle
+        navigationController?.navigationBar.isHidden = true
+        pageTitle.pageTitleConstraints(view)
         
         // MARK: Settings View Model Connect
         settingsViewModel.settingsVC = self
@@ -84,10 +96,21 @@ final class SettingsViewController: UIViewController {
         // MARK: TextFields and Button
         txtFieldEmail.txtFieldEmail(view)
         btnUpdate.btnUpdate(view, with: txtFieldEmail)
+        btnBack.btnBackConstraints(view)
         btnUpdate.addTarget(self, action: #selector(settingsViewModel.btnUpdateTarget), for: .touchUpInside)
+        btnBack.addTarget(self, action: #selector(btnBackTarget), for: .touchUpInside)
     }
     
-
+    @objc func btnBackTarget(){
+        let appTabBar = AppTabBarController()
+        appTabBar.modalPresentationStyle = .fullScreen
+        navigationController?.navigationBar.isHidden = false
+        present(appTabBar, animated: true)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
     
     // MARK: -Show Alert Message
     func alertMessage(title: String, description: String){
@@ -115,5 +138,17 @@ public extension UIView {
         topAnchor.constraint(equalTo: txtFieldEmail.bottomAnchor, constant: 10).isActive = true
         centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         widthAnchor.constraint(equalToConstant: view.frame.size.width * 0.85).isActive = true
+    }
+    
+    func pageTitleConstraints(_ view: UIView){
+        view.addSubview(self)
+        topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    func btnBackConstraints(_ view: UIView){
+        view.addSubview(self)
+        topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
     }
 }
