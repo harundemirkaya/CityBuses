@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  AutoLayoutAsis
+
+  Created by Harun Demirkaya on 27.02.2023.
+  
+*/
+
+"SETTINGS_TITLE_LOCAL" = "Settings";
+"SETTINGS_SUBTITLE_LOCAL" = "Account Settings";

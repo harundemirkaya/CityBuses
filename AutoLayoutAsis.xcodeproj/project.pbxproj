@@ -43,6 +43,7 @@
 		4FC4288229811453004BED52 /* ServiceMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4288129811453004BED52 /* ServiceMapViewController.swift */; };
 		4FC4288429815740004BED52 /* VehicleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4288329815740004BED52 /* VehicleModel.swift */; };
 		4FD00B75299FB5D800E2DB3C /* HowIGoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD00B74299FB5D800E2DB3C /* HowIGoViewModel.swift */; };
+		4FE2689A29ACC4B4008904F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4FE2689C29ACC4B4008904F5 /* InfoPlist.strings */; };
 		4FEF8E892985723100BF6B86 /* LocalizationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */; };
 		4FF4A371298A3A780078FC28 /* intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4FF4A370298A3A780078FC28 /* intro.mp4 */; };
 		4FFB91FA297E6B1900B19260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFB91F9297E6B1900B19260 /* AppDelegate.swift */; };
@@ -94,6 +95,8 @@
 		4FC4288129811453004BED52 /* ServiceMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMapViewController.swift; sourceTree = "<group>"; };
 		4FC4288329815740004BED52 /* VehicleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleModel.swift; sourceTree = "<group>"; };
 		4FD00B74299FB5D800E2DB3C /* HowIGoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowIGoViewModel.swift; sourceTree = "<group>"; };
+		4FE2689B29ACC4B4008904F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4FE2689D29ACC4B5008904F5 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4FEF8E882985723100BF6B86 /* LocalizationSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationSystem.swift; sourceTree = "<group>"; };
 		4FF4A370298A3A780078FC28 /* intro.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = intro.mp4; sourceTree = "<group>"; };
 		4FFB91F6297E6B1900B19260 /* AutoLayoutAsis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoLayoutAsis.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,6 +247,7 @@
 				4F6BA113297FB1150010C8C2 /* View */,
 				4FC119C42983FA25002BD302 /* ViewModel */,
 				4FC119BD2983A087002BD302 /* Localizable.strings */,
+				4FE2689C29ACC4B4008904F5 /* InfoPlist.strings */,
 			);
 			path = AutoLayoutAsis;
 			sourceTree = "<group>";
@@ -319,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FF4A371298A3A780078FC28 /* intro.mp4 in Resources */,
+				4FE2689A29ACC4B4008904F5 /* InfoPlist.strings in Resources */,
 				4F96F22F29A75AF2007E3FBB /* open-data.cer in Resources */,
 				4FC119BB2983A087002BD302 /* Localizable.strings in Resources */,
 				4FFB9203297E6B1B00B19260 /* Assets.xcassets in Resources */,
@@ -443,6 +448,15 @@
 				4FC119BE2983A62A002BD302 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		4FE2689C29ACC4B4008904F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4FE2689B29ACC4B4008904F5 /* en */,
+				4FE2689D29ACC4B5008904F5 /* tr */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		4FFB9204297E6B1B00B19260 /* LaunchScreen.storyboard */ = {

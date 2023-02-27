@@ -8,9 +8,9 @@
 			<key>UIApplicationShortcutItemType</key>
 			<string>com.harundemirkaya.settings</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Ayarlar</string>
+			<string>SETTINGS_TITLE_LOCAL</string>
 			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>Hesap Ayarlarınız</string>
+			<string>SETTINGS_SUBTITLE_LOCAL</string>
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>&quot;gear&quot;</string>
 		</dict>
