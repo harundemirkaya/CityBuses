@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		21A68B9078A3BD2166A7EDAC /* Pods_AutoLayoutAsis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34FB332453DDF9B4BC8FD309 /* Pods_AutoLayoutAsis.framework */; };
 		4F12A28B29A49F120000AB05 /* PlaceIDRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F12A28A29A49F120000AB05 /* PlaceIDRequest.swift */; };
-		4F1A540B297ED18F003566F1 /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A540A297ED18F003566F1 /* MenuItems.swift */; };
 		4F38B97C299CB58D008783B7 /* RoadMaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38B97B299CB58D008783B7 /* RoadMaps.swift */; };
 		4F38B97E299CBA45008783B7 /* RouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38B97D299CBA45008783B7 /* RouteViewController.swift */; };
 		4F38B980299CBDFF008783B7 /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38B97F299CBDFF008783B7 /* RouteTableViewCell.swift */; };
@@ -29,7 +28,6 @@
 		4F7FA199299B97B000C7135D /* HowIGoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7FA198299B97B000C7135D /* HowIGoViewController.swift */; };
 		4F879D7829A348C500B9B1CB /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F879D7729A348C500B9B1CB /* BottomSheetViewController.swift */; };
 		4F879D7A29A35A7700B9B1CB /* RouteMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F879D7929A35A7700B9B1CB /* RouteMapTableViewCell.swift */; };
-		4F96F22F29A75AF2007E3FBB /* open-data.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4F96F22E29A75AF2007E3FBB /* open-data.cer */; };
 		4F988CE62986893100E74198 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CE52986893100E74198 /* LoadingScreen.swift */; };
 		4F988CF129879ABB00E74198 /* ServiceMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF029879ABB00E74198 /* ServiceMapViewModel.swift */; };
 		4F988CF329879FDB00E74198 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF229879FDB00E74198 /* LoginViewModel.swift */; };
@@ -37,6 +35,7 @@
 		4F988CF92987A3BC00E74198 /* StationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CF82987A3BC00E74198 /* StationsViewModel.swift */; };
 		4F988CFB2987A4C700E74198 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F988CFA2987A4C700E74198 /* SettingsViewModel.swift */; };
 		4FA3ADBC299A0FB300F15DDD /* StopServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3ADBB299A0FB300F15DDD /* StopServices.swift */; };
+		4FB92D5A2A3B4A36000C3B9E /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB92D592A3B4A36000C3B9E /* MenuItems.swift */; };
 		4FC119BB2983A087002BD302 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4FC119BD2983A087002BD302 /* Localizable.strings */; };
 		4FC4287E29810792004BED52 /* StationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4287D29810792004BED52 /* StationMapViewController.swift */; };
 		4FC4288029811257004BED52 /* ServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4287F29811257004BED52 /* ServiceModel.swift */; };
@@ -58,7 +57,6 @@
 		34FB332453DDF9B4BC8FD309 /* Pods_AutoLayoutAsis.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AutoLayoutAsis.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F8A9ECD26A88D9F8FCA97FA /* Pods-AutoLayoutAsis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AutoLayoutAsis.release.xcconfig"; path = "Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis.release.xcconfig"; sourceTree = "<group>"; };
 		4F12A28A29A49F120000AB05 /* PlaceIDRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIDRequest.swift; sourceTree = "<group>"; };
-		4F1A540A297ED18F003566F1 /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuItems.swift; path = "../../../../../Creative Cloud Files/MenuItems.swift"; sourceTree = "<group>"; };
 		4F38B97B299CB58D008783B7 /* RoadMaps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadMaps.swift; sourceTree = "<group>"; };
 		4F38B97D299CBA45008783B7 /* RouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewController.swift; sourceTree = "<group>"; };
 		4F38B97F299CBDFF008783B7 /* RouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
@@ -78,7 +76,6 @@
 		4F7FA198299B97B000C7135D /* HowIGoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowIGoViewController.swift; sourceTree = "<group>"; };
 		4F879D7729A348C500B9B1CB /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		4F879D7929A35A7700B9B1CB /* RouteMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapTableViewCell.swift; sourceTree = "<group>"; };
-		4F96F22E29A75AF2007E3FBB /* open-data.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = "open-data.cer"; sourceTree = "<group>"; };
 		4F988CE52986893100E74198 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		4F988CF029879ABB00E74198 /* ServiceMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMapViewModel.swift; sourceTree = "<group>"; };
 		4F988CF229879FDB00E74198 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -86,6 +83,7 @@
 		4F988CF82987A3BC00E74198 /* StationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsViewModel.swift; sourceTree = "<group>"; };
 		4F988CFA2987A4C700E74198 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4FA3ADBB299A0FB300F15DDD /* StopServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopServices.swift; sourceTree = "<group>"; };
+		4FB92D592A3B4A36000C3B9E /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItems.swift; sourceTree = "<group>"; };
 		4FC119B82983A01C002BD302 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4FC119BC2983A087002BD302 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4FC119BE2983A62A002BD302 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 		4F1A5407297ECBDE003566F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4F1A540A297ED18F003566F1 /* MenuItems.swift */,
 				4F6BA12D29800B6C0010C8C2 /* StationModel.swift */,
 				4FC4287F29811257004BED52 /* ServiceModel.swift */,
 				4FC4288329815740004BED52 /* VehicleModel.swift */,
@@ -143,6 +140,7 @@
 				4F38B97B299CB58D008783B7 /* RoadMaps.swift */,
 				4F38B981299CE12C008783B7 /* Path.swift */,
 				4F12A28A29A49F120000AB05 /* PlaceIDRequest.swift */,
+				4FB92D592A3B4A36000C3B9E /* MenuItems.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,7 +173,6 @@
 		4F6BA12A298005A00010C8C2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				4F96F22E29A75AF2007E3FBB /* open-data.cer */,
 				4F6BA12B298006830010C8C2 /* NetworkManager.swift */,
 			);
 			path = Services;
@@ -272,7 +269,7 @@
 				4FFB91F3297E6B1900B19260 /* Frameworks */,
 				4FFB91F4297E6B1900B19260 /* Resources */,
 				50E14F9C6955EEF07406B7D2 /* [CP] Embed Pods Frameworks */,
-				5B6F1084D6418637AB619F44 /* [CP] Copy Pods Resources */,
+				85F052284D7F7C4AF529AF14 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -324,7 +321,6 @@
 			files = (
 				4FF4A371298A3A780078FC28 /* intro.mp4 in Resources */,
 				4FE2689A29ACC4B4008904F5 /* InfoPlist.strings in Resources */,
-				4F96F22F29A75AF2007E3FBB /* open-data.cer in Resources */,
 				4FC119BB2983A087002BD302 /* Localizable.strings in Resources */,
 				4FFB9203297E6B1B00B19260 /* Assets.xcassets in Resources */,
 				4FFB9235297E7E0B00B19260 /* GoogleService-Info.plist in Resources */,
@@ -351,7 +347,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AutoLayoutAsis/Pods-AutoLayoutAsis-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5B6F1084D6418637AB619F44 /* [CP] Copy Pods Resources */ = {
+		85F052284D7F7C4AF529AF14 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -422,7 +418,6 @@
 				4F6BA127297FB7CC0010C8C2 /* ChangeLanguageViewController.swift in Sources */,
 				4F6BA11B297FB60F0010C8C2 /* WhereMyBusViewController.swift in Sources */,
 				4FFB91FA297E6B1900B19260 /* AppDelegate.swift in Sources */,
-				4F1A540B297ED18F003566F1 /* MenuItems.swift in Sources */,
 				4FFB91FC297E6B1900B19260 /* SceneDelegate.swift in Sources */,
 				4F988CF72987A22D00E74198 /* WhereMyBusViewModel.swift in Sources */,
 				4FD00B75299FB5D800E2DB3C /* HowIGoViewModel.swift in Sources */,
@@ -431,6 +426,7 @@
 				4FFB9237297E94BC00B19260 /* HomeViewController.swift in Sources */,
 				4F879D7A29A35A7700B9B1CB /* RouteMapTableViewCell.swift in Sources */,
 				4F6BA12E29800B6C0010C8C2 /* StationModel.swift in Sources */,
+				4FB92D5A2A3B4A36000C3B9E /* MenuItems.swift in Sources */,
 				4F12A28B29A49F120000AB05 /* PlaceIDRequest.swift in Sources */,
 				4F6BA123297FB7750010C8C2 /* SettingsViewController.swift in Sources */,
 				4F988CFB2987A4C700E74198 /* SettingsViewModel.swift in Sources */,
